@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MYAMI — Manifesto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:     #09090A;
+  --warm-dark: #141210;
+  --ash:       #252220;
+  --gold:      #C8A84B;
+  --gold-dk:   #7A6225;
+  --linen:     #F2EDE4;
+  --cream:     #DDD5C3;
+  --muted:     #6B6357;
+  --muted-lt:  #8A8077;
+
+  --f-display: 'Syne', sans-serif;
+  --f-serif:   'Cormorant Garamond', serif;
+  --f-mono:    'DM Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--linen);
+  font-family: var(--f-serif);
+  overflow-x: hidden;
+}
+
+/* ── GRAIN ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 64px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ash);
+}
+
+.cover-glow {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,168,75,0.07) 0%, transparent 65%);
+  top: -200px; right: -100px;
+  pointer-events: none;
+}
+.cover-glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,168,75,0.04) 0%, transparent 65%);
+  bottom: 100px; left: -100px;
+  pointer-events: none;
+}
+
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative; z-index: 1;
+}
+.cover-logo {
+  font-family: var(--f-display);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--linen);
+}
+.cover-logo span { color: var(--gold); }
+.cover-meta {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-align: right;
+  line-height: 2;
+  text-transform: uppercase;
+}
+
+.cover-center {
+  position: relative; z-index: 1;
+  max-width: 820px;
+}
+.cover-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.cover-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px; height: 1px;
+  background: var(--gold);
+}
+
+.cover-headline {
+  font-family: var(--f-serif);
+  font-size: clamp(44px, 6vw, 84px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--linen);
+  margin-bottom: 48px;
+}
+.cover-headline em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.cover-opening {
+  font-family: var(--f-serif);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted-lt);
+  max-width: 640px;
+  border-left: 2px solid var(--gold-dk);
+  padding-left: 24px;
+}
+
+.cover-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative; z-index: 1;
+}
+.cover-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.scroll-line {
+  width: 1px; height: 56px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+.cover-wordmark-bg {
+  font-family: var(--f-display);
+  font-size: clamp(60px, 10vw, 120px);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  position: absolute;
+  right: 64px; bottom: 64px;
+  -webkit-text-stroke: 1px rgba(200,168,75,0.1);
+  color: transparent;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── BODY ── */
+.manifesto-body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+/* ── SECTION ── */
+.section {
+  padding: 96px 0;
+  border-bottom: 1px solid var(--ash);
+  position: relative;
+}
+.section:last-child { border-bottom: none; }
+
+.section-num {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 56px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.section-num::before {
+  content: '';
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--gold);
+}
+
+/* ── TYPOGRAPHY ── */
+.statement {
+  font-family: var(--f-serif);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--linen);
+  margin-bottom: 48px;
+}
+.statement em {
+  font-style: normal;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.body-text {
+  font-family: var(--f-serif);
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1.95;
+  color: var(--muted-lt);
+  margin-bottom: 28px;
+}
+.body-text strong {
+  color: var(--linen);
+  font-weight: 500;
+}
+.body-text em {
+  font-style: italic;
+  color: var(--cream);
+}
+
+.pull {
+  font-family: var(--f-serif);
+  font-size: clamp(24px, 3vw, 36px);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.35;
+  color: var(--linen);
+  border-left: 3px solid var(--gold);
+  padding: 8px 0 8px 32px;
+  margin: 56px 0;
+}
+.pull em {
+  font-style: normal;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.display-line {
+  font-family: var(--f-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: var(--linen);
+  line-height: 1;
+  margin: 48px 0;
+}
+.display-line .gold { color: var(--gold); }
+.display-line .outline {
+  -webkit-text-stroke: 1px rgba(242,237,228,0.2);
+  color: transparent;
+}
+
+/* ── BELIEF LIST ── */
+.belief-list {
+  margin: 48px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.belief-item {
+  display: flex;
+  gap: 28px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--ash);
+  align-items: flex-start;
+}
+.belief-item:first-child { border-top: 1px solid var(--ash); }
+.belief-mark {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+.belief-text {
+  font-family: var(--f-serif);
+  font-size: 19px;
+  font-style: italic;
+  color: var(--linen);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.belief-text strong { font-style: normal; font-weight: 500; }
+
+/* ── ENEMY LINES ── */
+.enemy-lines {
+  margin: 48px 0;
+}
+.enemy-line {
+  font-family: var(--f-serif);
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--muted);
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ash);
+  position: relative;
+  padding-left: 28px;
+  transition: color 0.3s;
+}
+.enemy-line:first-child { border-top: 1px solid var(--ash); }
+.enemy-line::before {
+  content: '✕';
+  position: absolute;
+  left: 0;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: rgba(168,80,80,0.6);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.enemy-line strong { color: var(--linen); font-weight: 400; }
+
+/* ── CLOSING ── */
+.closing {
+  padding: 120px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.closing-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200,168,75,0.05) 0%, transparent 70%);
+}
+.closing-watermark {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--f-display);
+  font-size: clamp(80px, 15vw, 200px);
+  font-weight: 800;
+  color: rgba(200,168,75,0.03);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.closing-statement {
+  font-family: var(--f-serif);
+  font-size: clamp(28px, 4vw, 52px);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--linen);
+  max-width: 700px;
+  margin: 0 auto 48px;
+  position: relative; z-index: 1;
+}
+.closing-statement em {
+  font-style: normal;
+  color: var(--gold);
+  font-weight: 500;
+}
+.closing-logo {
+  font-family: var(--f-display);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--linen);
+  position: relative; z-index: 1;
+  margin-bottom: 12px;
+}
+.closing-logo span { color: var(--gold); }
+.closing-sub {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  position: relative; z-index: 1;
+}
+
+/* ── REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .cover { padding: 40px 32px; }
+  .manifesto-body { padding: 0 32px; }
+  .closing { padding: 80px 32px; }
+  .section { padding: 72px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-glow"></div>
+  <div class="cover-glow2"></div>
+
+  <div class="cover-top">
+    <div class="cover-logo">MY<span>A</span>MI</div>
+    <div class="cover-meta">
+      The Manifesto<br/>
+      2025
+    </div>
+  </div>
+
+  <div class="cover-center">
+    <div class="cover-eyebrow">The MYAMI Manifesto</div>
+    <h1 class="cover-headline">
+      We see what<br/>
+      the world <em>could be.</em><br/>
+      And we're building it.
+    </h1>
+    <p class="cover-opening">
+      This is not a mission statement. This is not a pitch deck. This is what we believe — stated plainly, without apology, for anyone willing to listen.
+    </p>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-scroll">
+      <div class="scroll-line"></div>
+      Read
+    </div>
+  </div>
+
+  <div class="cover-wordmark-bg">MYAMI</div>
+</div>
+
+
+<!-- BODY -->
+<div class="manifesto-body">
+
+  <!-- 01 — THE SEEING -->
+  <div class="section reveal">
+    <div class="section-num">01 — The Seeing</div>
+
+    <div class="statement">
+      We see talent everywhere.<br/>
+      We see infrastructure <em>almost nowhere.</em>
+    </div>
+
+    <p class="body-text">
+      Look around. The world is full of people with something real to offer — artists who move culture, builders who solve real problems, creatives who see things others can't, entrepreneurs who back themselves when nobody else will. The talent is not the problem. The talent has never been the problem.
+    </p>
+
+    <p class="body-text">
+      The problem is everything around it. The brand that doesn't communicate the value inside it. The website that makes a serious business look like an afterthought. The strategy that doesn't exist. The story that never gets told because nobody built the infrastructure to tell it.
+    </p>
+
+    <div class="pull">
+      "Talent without infrastructure is a idea that never became a brand. A movement that never became a company. <em>A voice that never got heard.</em>"
+    </div>
+
+    <p class="body-text">
+      We see this. Clearly. And once you see it, you cannot unsee it. You see it in the artist whose work deserves a global audience but whose digital presence looks like it was built in an afternoon. You see it in the entrepreneur whose product is genuinely exceptional but whose brand doesn't communicate any of that. You see it in the event that moved a room of hundreds but left no lasting mark because nobody built around it.
+    </p>
+
+    <p class="body-text">
+      <strong>That gap — between what something is and how the world sees it — is where MYAMI lives. And it is the gap we have committed our work to closing.</strong>
+    </p>
+  </div>
+
+
+  <!-- 02 — THE BELIEF -->
+  <div class="section reveal">
+    <div class="section-num">02 — The Belief</div>
+
+    <div class="display-line">
+      TALENT DESERVES<br/>
+      <span class="gold">INFRASTRUCTURE.</span>
+    </div>
+
+    <p class="body-text">
+      This is not a slogan. It is a diagnosis of a real problem and a commitment to solving it. We repeat it here not for effect, but because it is the sentence that every decision MYAMI makes will be held against.
+    </p>
+
+    <p class="body-text">
+      We believe this without qualification. Not <em>some</em> talent. Not talent that already has the right connections, the right backing, the right postcode. <strong>Talent.</strong> Full stop. The person building something real in a city nobody is watching. The creative working across disciplines that don't yet have a box. The brand that exists fully formed in someone's mind but hasn't found its way into the world yet.
+    </p>
+
+    <div class="belief-list">
+      <div class="belief-item">
+        <div class="belief-mark">We believe</div>
+        <div class="belief-text">That <strong>quality is not a luxury.</strong> Premium creative execution should not be gatekept by budget or connection. Anyone building something real deserves infrastructure that matches their ambition.</div>
+      </div>
+      <div class="belief-item">
+        <div class="belief-mark">We believe</div>
+        <div class="belief-text">That <strong>culture is worth taking seriously.</strong> What comes from the streets, the underground, the youth — carries value. We treat it with the same conviction as anything that comes from an established institution.</div>
+      </div>
+      <div class="belief-item">
+        <div class="belief-mark">We believe</div>
+        <div class="belief-text">That <strong>versatility is a strength, not a liability.</strong> The future belongs to brands that can move across spaces — technology, media, entertainment, identity — without losing coherence. Single-lane thinking is a ceiling.</div>
+      </div>
+      <div class="belief-item">
+        <div class="belief-mark">We believe</div>
+        <div class="belief-text">That <strong>execution is everything.</strong> Vision without infrastructure is just a thought. The distance between a great idea and a great brand is built with skill, consistency, and relentless execution. We are in the business of that distance.</div>
+      </div>
+      <div class="belief-item">
+        <div class="belief-mark">We believe</div>
+        <div class="belief-text">That <strong>the work speaks loudest.</strong> Not the announcement. Not the branding. Not the strategy deck. The actual work — what gets built, what gets delivered, what gets felt by the people it reaches. That is what MYAMI will always be judged by, and we welcome that judgment.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 03 — THE ENEMY -->
+  <div class="section reveal">
+    <div class="section-num">03 — The Enemy</div>
+
+    <div class="statement">
+      MYAMI is against<br/>
+      specific things. <em>Let us name them.</em>
+    </div>
+
+    <p class="body-text">
+      Most brands avoid naming what they're against. It feels risky. It narrows the audience. We disagree. Naming the enemy is an act of clarity — and clarity is the foundation of everything we build.
+    </p>
+
+    <div class="enemy-lines">
+      <div class="enemy-line"><strong>Invisibility by default.</strong> The condition where real talent goes unseen not because the world rejected it, but because the infrastructure to surface it was never built.</div>
+      <div class="enemy-line"><strong>Mediocrity wearing the mask of good enough.</strong> The template flyer. The generic website. The brand that could belong to anyone. Work produced without conviction.</div>
+      <div class="enemy-line"><strong>The gatekeeping of quality.</strong> The assumption that world-class execution is reserved for those with the biggest budgets or the most established names. MYAMI's existence is a refusal of this assumption.</div>
+      <div class="enemy-line"><strong>Single-lane thinking.</strong> Brands that pick one thing and call it a vision. One event series. One clothing drop. One trick. Culture is multidimensional — the brands that shape it must be too.</div>
+      <div class="enemy-line"><strong>Potential that stays potential.</strong> The idea that lives forever in a notes app. The brand that exists only in its founder's head. The talent that never became infrastructure. We are against the gap between what something could be and what it is.</div>
+    </div>
+
+    <p class="body-text">
+      These are not abstract enemies. They are conditions we see every day, in the spaces we move through, among the people we know. <strong>MYAMI exists as a direct and deliberate argument against each of them.</strong>
+    </p>
+  </div>
+
+
+  <!-- 04 — THE WORLD WE'RE BUILDING -->
+  <div class="section reveal">
+    <div class="section-num">04 — The World We're Building</div>
+
+    <div class="statement">
+      Four divisions.<br/>
+      One <em>world.</em>
+    </div>
+
+    <p class="body-text">
+      MYAMI is not a single-service company. It is not an events brand, or a clothing label, or a web agency. It is a <strong>creative and cultural company</strong> — built across four distinct arms that each express the same conviction in a different industry.
+    </p>
+
+    <p class="body-text">
+      <strong>MYAMI Tech</strong> is the infrastructure arm. We build the digital systems that modern brands run on — websites, software, and platforms built with precision and intention. Technology is not a tool we use. It is a language we speak.
+    </p>
+
+    <p class="body-text">
+      <strong>MYAMI Media</strong> is the voice arm. We craft stories that move culture — brand identities, content strategies, and digital narratives that make people feel something before they've even interacted with a product. Stories are not decoration. They are infrastructure.
+    </p>
+
+    <p class="body-text">
+      <strong>MYAMI Entertainment</strong> is the experience arm. We create moments that live in memory — events, activations, and culture-driven projects that bring people together and build the kind of shared experience that no algorithm can manufacture.
+    </p>
+
+    <p class="body-text">
+      <strong>MYAMI Wear</strong> is the identity arm. Culture made wearable. Lifestyle branding that extends the MYAMI world into the physical — into the everyday, the tangible, the thing you reach for when you want to say something about who you are without words.
+    </p>
+
+    <div class="pull">
+      "Four doors into the same world. Whichever one you enter through — <em>you arrive at MYAMI.</em>"
+    </div>
+
+    <p class="body-text">
+      The four divisions are not unrelated products sold under the same name. They are <em>expressions of the same worldview</em> — technology and culture, precision and soul, the built and the felt — operating simultaneously across the spaces where modern brands live and grow.
+    </p>
+  </div>
+
+
+  <!-- 05 — TO THOSE WE'RE BUILDING FOR -->
+  <div class="section reveal">
+    <div class="section-num">05 — To Those We're Building For</div>
+
+    <div class="statement">
+      If you are building<br/>
+      something that matters —<br/>
+      <em>this is for you.</em>
+    </div>
+
+    <p class="body-text">
+      You are not waiting to be discovered. You are building. Every day, with whatever you have, toward something you believe in — even when the infrastructure around you doesn't yet reflect the scale of what you're trying to create.
+    </p>
+
+    <p class="body-text">
+      You have been told — explicitly or implicitly — that quality branding is for later. That a proper digital presence is for when you have more money. That strategy is a luxury. That the work should speak for itself, so stop worrying about how it looks.
+    </p>
+
+    <p class="body-text">
+      We are here to tell you that was wrong. <strong>The work and the infrastructure around it are not separate.</strong> The brand is not decoration on top of the business — it is part of the business. The way something looks and sounds and feels is part of what it is. You do not have to choose between building something real and having it look like something real.
+    </p>
+
+    <div class="pull">
+      "You deserve infrastructure that matches your ambition. <em>That is exactly what we're here to build.</em>"
+    </div>
+
+    <p class="body-text">
+      MYAMI is for the ones building in spaces nobody is watching yet. For the creatives who move across disciplines that don't have a single clean label. For the entrepreneurs who back themselves before anyone else does. For the brands that exist fully formed in someone's mind and need a partner who can bring that vision into the world with the craft and conviction it deserves.
+    </p>
+
+    <p class="body-text">
+      We are not here to do average work for brands chasing average results. We are here for the ones who are building something that matters — and who refuse to let the gap between their vision and their infrastructure be the thing that stops them.
+    </p>
+  </div>
+
+
+  <!-- 06 — THE COMMITMENT -->
+  <div class="section reveal">
+    <div class="section-num">06 — The Commitment</div>
+
+    <div class="display-line">
+      THIS IS WHAT<br/>
+      <span class="outline">WE OWE</span><br/>
+      <span class="gold">THE WORK.</span>
+    </div>
+
+    <p class="body-text">
+      MYAMI will be judged by what it builds. Not by what it says about itself. Not by how premium the brand feels or how sharp the wordmark is. By the actual work. By whether the brands that come to MYAMI leave better than they arrived. By whether the experiences we create matter to the people who were there. By whether the systems we build still run cleanly a year later.
+    </p>
+
+    <p class="body-text">
+      That is the standard. And we commit to it publicly, here, at the beginning — so that everything that comes after this is held against it.
+    </p>
+
+    <div class="belief-list">
+      <div class="belief-item">
+        <div class="belief-mark">We commit</div>
+        <div class="belief-text">To never producing work we are not proud of. If it is not good enough, we rebuild it until it is.</div>
+      </div>
+      <div class="belief-item">
+        <div class="belief-mark">We commit</div>
+        <div class="belief-text">To being selective. We will not take every project. We will take the ones where we can do something worth doing.</div>
+      </div>
+      <div class="belief-item">
+        <div class="belief-mark">We commit</div>
+        <div class="belief-text">To building in public. Showing the work. Documenting the process. Being honest about what we're learning as we build.</div>
+      </div>
+      <div class="belief-item">
+        <div class="belief-mark">We commit</div>
+        <div class="belief-text">To taking culture seriously. Not performing it. Not borrowing from it for aesthetic points. Living in it, contributing to it, building for the people who are part of it.</div>
+      </div>
+      <div class="belief-item">
+        <div class="belief-mark">We commit</div>
+        <div class="belief-text">To never confusing the brand with the work. MYAMI's identity exists to serve what we build — not the other way around. When the two are in conflict, the work wins.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- CLOSING -->
+<div class="closing reveal">
+  <div class="closing-bg"></div>
+  <div class="closing-watermark">MYAMI</div>
+
+  <p class="closing-statement">
+    "Established. Disruptive. Premium. Cultural.<br/>
+    <em>All four. Always. Without apology.</em>"
+  </p>
+
+  <div class="closing-logo">MY<span>A</span>MI</div>
+  <div class="closing-sub">Technology · Media · Culture · 2025</div>
+</div>
+
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
