@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MYAMI Brand Bible — v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:     #09090A;
+  --warm-dark: #141210;
+  --ash:       #252220;
+  --ash-mid:   #332F2A;
+  --gold:      #C8A84B;
+  --gold-lt:   #E8C96A;
+  --gold-dk:   #7A6225;
+  --linen:     #F2EDE4;
+  --cream:     #DDD5C3;
+  --muted:     #6B6357;
+  --muted-lt:  #8A8077;
+  --danger:    #A85050;
+
+  --f-display: 'Syne', sans-serif;
+  --f-serif:   'Cormorant Garamond', serif;
+  --f-mono:    'DM Mono', monospace;
+
+  --page-w: 900px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--linen);
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.85;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* ── SIDEBAR NAV ── */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 220px;
+  background: var(--warm-dark);
+  border-right: 1px solid var(--ash);
+  padding: 48px 0;
+  z-index: 100;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-logo {
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--linen);
+  padding: 0 32px 40px;
+  border-bottom: 1px solid var(--ash);
+  margin-bottom: 32px;
+}
+.sidebar-logo .a { color: var(--gold); }
+.sidebar-doc {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-top: 6px;
+}
+.nav-section-label {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  padding: 0 32px 12px;
+  margin-top: 8px;
+}
+.sidebar a {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 9px 32px;
+  transition: color 0.2s, background 0.2s;
+  border-left: 2px solid transparent;
+}
+.sidebar a:hover,
+.sidebar a.active {
+  color: var(--linen);
+  background: rgba(200,168,75,0.05);
+  border-left-color: var(--gold);
+}
+.sidebar-footer {
+  margin-top: auto;
+  padding: 24px 32px 0;
+  border-top: 1px solid var(--ash);
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ── MAIN ── */
+.main {
+  margin-left: 220px;
+  min-height: 100vh;
+}
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 80px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ash);
+}
+.cover-glow {
+  position: absolute;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,168,75,0.07) 0%, transparent 65%);
+  top: -300px; right: -200px;
+  pointer-events: none;
+}
+.cover-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(200,168,75,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,168,75,0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 90% 90% at 60% 40%, black 0%, transparent 80%);
+}
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative; z-index: 1;
+}
+.cover-tag {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-dk);
+  padding: 6px 16px;
+}
+.cover-ref {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.9;
+}
+.cover-center {
+  position: relative; z-index: 1;
+}
+.cover-wordmark {
+  font-family: var(--f-display);
+  font-size: clamp(80px, 11vw, 150px);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+  margin-bottom: 40px;
+}
+.cover-wordmark .a { color: var(--gold); }
+.cover-wordmark .outline {
+  -webkit-text-stroke: 1.5px rgba(242,237,228,0.2);
+  color: transparent;
+}
+.cover-title {
+  font-family: var(--f-serif);
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted-lt);
+  margin-bottom: 16px;
+}
+.cover-title em { color: var(--gold); font-style: normal; font-weight: 500; }
+.cover-subtitle {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cover-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative; z-index: 1;
+}
+.cover-belief {
+  max-width: 480px;
+  font-family: var(--f-serif);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.7;
+  border-left: 2px solid var(--gold-dk);
+  padding-left: 20px;
+}
+.cover-version {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-align: right;
+  line-height: 2;
+}
+
+/* ── CHAPTER DIVIDER ── */
+.chapter {
+  background: var(--warm-dark);
+  border-bottom: 1px solid var(--ash);
+  padding: 56px 80px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.chapter-num {
+  font-family: var(--f-display);
+  font-size: 100px;
+  font-weight: 800;
+  color: rgba(200,168,75,0.07);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.chapter-body {}
+.chapter-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.chapter-title {
+  font-family: var(--f-display);
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: var(--linen);
+  line-height: 1;
+}
+.chapter-desc {
+  font-family: var(--f-serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--muted-lt);
+  margin-top: 10px;
+}
+
+/* ── CONTENT SECTIONS ── */
+.content {
+  padding: 72px 80px;
+  border-bottom: 1px solid var(--ash);
+}
+.content:last-child { border-bottom: none; }
+
+/* ── TYPOGRAPHY ── */
+h2 {
+  font-family: var(--f-display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--linen);
+  margin-bottom: 24px;
+  margin-top: 56px;
+}
+h2:first-child { margin-top: 0; }
+
+h3 {
+  font-family: var(--f-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  margin-top: 40px;
+}
+h3:first-child { margin-top: 0; }
+
+p {
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--muted-lt);
+  margin-bottom: 20px;
+  max-width: 680px;
+}
+p strong { color: var(--linen); font-weight: 500; }
+p em { font-style: italic; color: var(--cream); }
+p:last-child { margin-bottom: 0; }
+
+.label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.label::before {
+  content: '';
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--gold);
+}
+
+/* ── CALLOUT ── */
+.callout {
+  background: var(--warm-dark);
+  border-left: 3px solid var(--gold);
+  padding: 28px 36px;
+  margin: 36px 0;
+  max-width: 680px;
+}
+.callout p {
+  font-family: var(--f-serif);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--linen);
+  margin: 0;
+}
+.callout p em { color: var(--gold); font-style: normal; }
+.callout-attr {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+
+/* ── STATEMENT ── */
+.statement {
+  font-family: var(--f-serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--linen);
+  margin: 48px 0;
+  max-width: 700px;
+}
+.statement em { color: var(--gold); font-style: normal; font-weight: 600; }
+
+/* ── GRID ── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin: 36px 0;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 36px 0;
+}
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 36px 0;
+}
+.card {
+  background: var(--warm-dark);
+  padding: 32px;
+}
+.card-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.card-title {
+  font-family: var(--f-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--linen);
+  margin-bottom: 12px;
+}
+.card p {
+  font-size: 14px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ── RULE TABLE ── */
+.rule-table { margin: 32px 0; max-width: 680px; }
+.rule-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+.rule-cell {
+  padding: 20px 24px;
+  font-family: var(--f-serif);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.5;
+}
+.rule-cell.yes {
+  background: rgba(200,168,75,0.07);
+  border-left: 2px solid var(--gold);
+  color: var(--linen);
+}
+.rule-cell.no {
+  background: rgba(168,80,80,0.07);
+  border-left: 2px solid var(--danger);
+  color: var(--muted-lt);
+  text-decoration: line-through;
+  text-decoration-color: rgba(168,80,80,0.4);
+}
+.rule-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+.rule-header-cell {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0 0 8px;
+}
+.rule-header-cell.yes { color: var(--gold); }
+.rule-header-cell.no  { color: var(--danger); }
+
+/* ── COLOR SWATCHES ── */
+.swatch-row {
+  display: flex;
+  gap: 2px;
+  margin: 32px 0;
+}
+.swatch {
+  flex: 1;
+  height: 100px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px;
+}
+.swatch-name {
+  font-family: var(--f-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.swatch-hex {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  opacity: 0.6;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+}
+
+/* ── TYPE SPECIMEN ── */
+.type-specimen {
+  background: var(--warm-dark);
+  padding: 40px;
+  margin: 8px 0;
+}
+.type-meta {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ash);
+}
+
+/* ── DIVISION CARDS ── */
+.division-block {
+  background: var(--warm-dark);
+  border-left: 3px solid var(--ash);
+  padding: 40px;
+  margin: 4px 0;
+  transition: border-color 0.3s;
+  position: relative;
+}
+.division-block:hover { border-left-color: var(--gold); }
+.division-block-num {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--gold-dk);
+  margin-bottom: 12px;
+}
+.division-block-name {
+  font-family: var(--f-display);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--linen);
+  margin-bottom: 4px;
+}
+.division-block-name .a { color: var(--gold); }
+.division-block-sub {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.division-block-role {
+  font-family: var(--f-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted-lt);
+  margin-bottom: 16px;
+}
+.division-block p {
+  font-size: 15px;
+  max-width: 560px;
+}
+.division-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.service-tag {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--ash);
+  padding: 5px 12px;
+}
+
+/* ── CONTRAST PAIRS ── */
+.contrast-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 32px 0;
+}
+.contrast-pair {
+  background: var(--warm-dark);
+  padding: 28px 24px;
+  text-align: center;
+}
+.contrast-yes {
+  font-family: var(--f-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--linen);
+}
+.contrast-sep {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin: 10px 0;
+}
+.contrast-no {
+  font-family: var(--f-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--danger);
+}
+
+/* ── LOGO DISPLAY ── */
+.logo-display {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 32px 0;
+}
+.logo-cell {
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+}
+.logo-cell-tag {
+  position: absolute;
+  bottom: 14px; left: 16px;
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.lm { font-family: var(--f-display); font-weight: 800; letter-spacing: 0.18em; }
+
+/* ── ENEMY SECTION ── */
+.enemy-list { margin: 28px 0; max-width: 680px; }
+.enemy-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ash);
+  align-items: flex-start;
+}
+.enemy-item:last-child { border-bottom: none; }
+.enemy-marker {
+  font-family: var(--f-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--danger);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.enemy-text {
+  font-family: var(--f-serif);
+  font-size: 16px;
+  color: var(--muted-lt);
+  line-height: 1.7;
+}
+.enemy-text strong { color: var(--linen); font-weight: 500; }
+
+/* ── DO / DON'T ── */
+.do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin: 32px 0;
+}
+.do-col, .dont-col { }
+.do-header {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  margin-bottom: 2px;
+}
+.do-header.yes { background: rgba(200,168,75,0.1); color: var(--gold); }
+.do-header.no  { background: rgba(168,80,80,0.1); color: var(--danger); }
+.do-item {
+  padding: 16px 24px;
+  font-family: var(--f-serif);
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 2px;
+}
+.do-item.yes { background: var(--warm-dark); color: var(--linen); border-left: 2px solid var(--gold-dk); }
+.do-item.no  { background: var(--warm-dark); color: var(--muted-lt); border-left: 2px solid var(--danger); }
+
+/* ── PAGE BREAK (print) ── */
+@media print {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .chapter, .content { break-inside: avoid; }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .cover, .chapter, .content { padding: 48px 32px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .rule-row, .do-dont { grid-template-columns: 1fr; }
+  .contrast-grid { grid-template-columns: repeat(2,1fr); }
+  .logo-display { grid-template-columns: 1fr 1fr; }
+  .swatch-row { flex-wrap: wrap; }
+  .swatch { min-width: 100px; flex: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    MY<span class="a">A</span>MI
+    <span class="sidebar-doc">Brand Bible v1.0</span>
+  </div>
+
+  <div class="nav-section-label">Foundation</div>
+  <a href="#overview">Overview</a>
+  <a href="#belief">Core Belief</a>
+  <a href="#mission">Mission & Vision</a>
+  <a href="#enemy">The Enemy</a>
+  <a href="#audience">Our Audience</a>
+
+  <div class="nav-section-label">Brand</div>
+  <a href="#personality">Personality</a>
+  <a href="#voice">Voice & Tone</a>
+  <a href="#positioning">Positioning</a>
+
+  <div class="nav-section-label">Identity</div>
+  <a href="#logo">Logo System</a>
+  <a href="#color">Color Palette</a>
+  <a href="#typography">Typography</a>
+  <a href="#visual">Visual Language</a>
+
+  <div class="nav-section-label">Structure</div>
+  <a href="#divisions">Divisions</a>
+  <a href="#usage">Brand in Use</a>
+  <a href="#rules">Rules</a>
+
+  <div class="sidebar-footer">
+    MYAMI Brand Bible<br/>
+    Version 1.0 — 2025<br/>
+    Confidential
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-glow"></div>
+  <div class="cover-grid"></div>
+
+  <div class="cover-top">
+    <div class="cover-tag">Confidential — Internal Use</div>
+    <div class="cover-ref">
+      Document: MYAMI-BB-001<br/>
+      Version: 1.0<br/>
+      Year: 2025
+    </div>
+  </div>
+
+  <div class="cover-center">
+    <div class="cover-wordmark">
+      MY<span class="a">A</span><span class="outline">MI</span>
+    </div>
+    <div class="cover-title">The <em>Brand Bible</em> — Complete Identity & Guidelines</div>
+    <div class="cover-subtitle">Technology · Media · Culture · Entertainment</div>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-belief">
+      "Talent deserves infrastructure. MYAMI exists to build it — for the brands, creatives, and cultures that are shaping what's next."
+    </div>
+    <div class="cover-version">
+      MYAMI Brand Bible<br/>
+      Version 1.0<br/>
+      2025 — All Rights Reserved
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 01 — FOUNDATION
+═══════════════════════════════════════════ -->
+<div class="chapter" id="overview">
+  <div class="chapter-num">01</div>
+  <div class="chapter-body">
+    <div class="chapter-label">Chapter One</div>
+    <div class="chapter-title">Foundation</div>
+    <div class="chapter-desc">Who we are, what we believe, and why MYAMI exists.</div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="content">
+  <div class="label">Brand Overview</div>
+
+  <div class="statement">
+    MYAMI is a <em>modern digital and entertainment company</em> built at the intersection of technology, media, and culture.
+  </div>
+
+  <p>We build, promote, and elevate brands. We create experiences, tell stories, and develop systems — for businesses and creatives who are building something that matters but don't yet have the infrastructure to match their ambition.</p>
+
+  <p>MYAMI operates across four divisions — <strong>Tech, Media, Entertainment, and Wear</strong> — each a distinct expression of the same core worldview: that quality, strategy, and creative excellence should be accessible to anyone with the talent and drive to deserve it.</p>
+
+  <p>We are not an agency in the traditional sense. We are a <strong>creative and cultural company</strong> that happens to offer agency services. The distinction matters. Agencies serve clients. MYAMI builds worlds.</p>
+
+  <div class="callout">
+    <p>"Most brands in our space are underfunded, underdesigned, and invisible. <em>MYAMI exists to change that.</em>"</p>
+    <div class="callout-attr">— MYAMI Brand Manifesto</div>
+  </div>
+</div>
+
+<!-- BELIEF -->
+<div class="content" id="belief">
+  <div class="label">Core Belief</div>
+  <h2>Talent Deserves Infrastructure</h2>
+
+  <p>This is the sentence that drives every decision MYAMI makes. It is not a marketing line — it is a diagnosis of a real problem and a commitment to solving it.</p>
+
+  <p>There is no shortage of talent in the world. There are artists, entrepreneurs, creatives, and builders everywhere with the vision and drive to create something remarkable. What they often lack is the infrastructure to match: the branding that commands respect, the digital presence that converts, the strategy that scales, the storytelling that moves people.</p>
+
+  <p><strong>MYAMI bridges that gap.</strong> We are the infrastructure that talented people and ambitious brands deserve but rarely get access to.</p>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-label">We Believe</div>
+      <div class="card-title">Quality is not a luxury</div>
+      <p>Premium execution should not be gatekept by budget or connection. Everyone building something real deserves to look like it.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">We Believe</div>
+      <div class="card-title">Culture is currency</div>
+      <p>What comes from the streets, the youth, the underground — has value. MYAMI treats it with the same seriousness as any established institution.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">We Believe</div>
+      <div class="card-title">Execution is everything</div>
+      <p>Ideas are cheap. The distance between a great idea and a great brand is built with skill, consistency, and relentless execution.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION & VISION -->
+<div class="content" id="mission">
+  <div class="label">Mission & Vision</div>
+
+  <h2>Mission</h2>
+  <p>To build, promote, and elevate brands through technology, media, and culture — delivering creative and strategic solutions that drive visibility, engagement, and growth for businesses and creatives who are shaping what's next.</p>
+
+  <h2>Vision</h2>
+  <p>A world where talent is never invisible. Where the quality of your infrastructure matches the scale of your ambition, regardless of where you started.</p>
+
+  <p>In practical terms: MYAMI becomes the definitive creative and cultural company for the next generation of brands — known for the work, trusted for the strategy, and respected for the culture.</p>
+
+  <h2>Purpose</h2>
+  <p>MYAMI exists to close the gap between potential and presence. Between the brand someone has in their head and the brand the world actually sees.</p>
+</div>
+
+<!-- THE ENEMY -->
+<div class="content" id="enemy">
+  <div class="label">The Enemy</div>
+  <h2>What MYAMI Is Against</h2>
+
+  <p>Strong brands define themselves partly by what they oppose. MYAMI's enemy is not a competitor — it is a condition. A set of realities that MYAMI's existence argues against.</p>
+
+  <div class="statement">
+    MYAMI is against <em>invisibility</em> — specifically the kind that happens to real talent because the infrastructure wasn't there.
+  </div>
+
+  <div class="enemy-list">
+    <div class="enemy-item">
+      <div class="enemy-marker">✕ 01</div>
+      <div class="enemy-text">
+        <strong>Mediocre creative work masquerading as good enough.</strong> The flyers that look like templates. The websites that could belong to anyone. The brands that blend in because nobody cared enough — or knew enough — to make them stand out.
+      </div>
+    </div>
+    <div class="enemy-item">
+      <div class="enemy-marker">✕ 02</div>
+      <div class="enemy-text">
+        <strong>The gatekeeping of quality.</strong> The assumption that premium branding, serious strategy, and world-class execution are reserved for people with big budgets or the right connections. MYAMI's existence argues against this every day.
+      </div>
+    </div>
+    <div class="enemy-item">
+      <div class="enemy-marker">✕ 03</div>
+      <div class="enemy-text">
+        <strong>Culture being undervalued.</strong> The institutional bias that treats what comes from the street, the underground, and the youth as worth less than what comes from established industries. MYAMI stands firmly against this.
+      </div>
+    </div>
+    <div class="enemy-item">
+      <div class="enemy-marker">✕ 04</div>
+      <div class="enemy-text">
+        <strong>Potential that stays potential.</strong> Ideas that live in notes apps and conversations forever. Talent that never becomes a brand. Vision that never becomes infrastructure. Overthinking without building.
+      </div>
+    </div>
+    <div class="enemy-item">
+      <div class="enemy-marker">✕ 05</div>
+      <div class="enemy-text">
+        <strong>Generic creative output.</strong> Work that could have been made by anyone, for anyone, at any time. Work that has no point of view, no identity, no soul. MYAMI will not produce it, and will not accept it from anyone we work with.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUDIENCE -->
+<div class="content" id="audience">
+  <div class="label">Our Audience</div>
+  <h2>Who MYAMI Is For</h2>
+
+  <p>MYAMI is not for everyone. That is intentional. A brand that speaks to everyone speaks to no one. Here is who we are built for:</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">Primary</div>
+      <div class="card-title">The Ambitious Creative</div>
+      <p>Artists, musicians, designers, photographers, and content creators who have real talent and real output — but whose brand and digital presence doesn't yet match. They know they need to look the part. They don't know how.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Primary</div>
+      <div class="card-title">The Independent Builder</div>
+      <p>Founders, entrepreneurs, and small business owners who are building something with conviction. They need web presence, branding, and strategy — and they need a partner who takes their vision seriously.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Secondary</div>
+      <div class="card-title">The Event & Culture Operator</div>
+      <p>Promoters, event organizers, and entertainment brands who need design, digital marketing, and strategic promotion. They move fast and need a creative partner who can move with them.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Secondary</div>
+      <div class="card-title">The Emerging Brand</div>
+      <p>Young companies and brands in growth phase who need to establish credibility quickly. They have traction — they need the identity and infrastructure to scale it.</p>
+    </div>
+  </div>
+
+  <h3>Who We Are Not For</h3>
+  <p>Brands who want cheap and quick. Clients who don't value craft. Anyone who treats creative work as a commodity. MYAMI is a premium partner — we are selective because quality demands it.</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 02 — BRAND PERSONALITY
+═══════════════════════════════════════════ -->
+<div class="chapter" id="personality">
+  <div class="chapter-num">02</div>
+  <div class="chapter-body">
+    <div class="chapter-label">Chapter Two</div>
+    <div class="chapter-title">Brand Personality</div>
+    <div class="chapter-desc">The character of MYAMI — how it thinks, feels, and shows up.</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="label">The Four Feelings</div>
+  <h2>What MYAMI Feels Like</h2>
+
+  <p>MYAMI's visual identity and presence should simultaneously give off four distinct feelings. These are not contradictions — they are layers. Each feeds the others.</p>
+
+  <div class="grid-4">
+    <div class="card">
+      <div class="card-label">Layer One</div>
+      <div class="card-title">Established</div>
+      <p>Like we've been here. The confidence of an institution, even from day one. Certainty in how we show up.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Layer Two</div>
+      <div class="card-title">Disruptive</div>
+      <p>Like nothing else out there. An edge that makes it impossible to ignore. We are not the safe choice — we are the right one.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Layer Three</div>
+      <div class="card-title">Premium</div>
+      <p>Like it costs more than it does. Every touchpoint should feel considered, crafted, and intentional. No shortcuts.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Layer Four</div>
+      <div class="card-title">Cultural</div>
+      <p>Like it comes from somewhere real. MYAMI is not performing culture — it is rooted in it. Authentic, not appropriative.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>"<em>Cultural</em> is the root. <em>Disruptive</em> is the edge. <em>Premium</em> is the execution. <em>Established</em> is the attitude. All four. Always."</p>
+  </div>
+</div>
+
+<!-- VOICE -->
+<div class="content" id="voice">
+  <div class="label">Voice & Tone</div>
+  <h2>How MYAMI Speaks</h2>
+
+  <p>Voice is the invisible visual identity. It is how MYAMI sounds in every caption, proposal, email, and campaign. It should be consistent enough that someone who knows MYAMI can recognize it without seeing the logo.</p>
+
+  <div class="contrast-grid">
+    <div class="contrast-pair">
+      <div class="contrast-yes">Sharp</div>
+      <div class="contrast-sep">not</div>
+      <div class="contrast-no">Aggressive</div>
+    </div>
+    <div class="contrast-pair">
+      <div class="contrast-yes">Confident</div>
+      <div class="contrast-sep">not</div>
+      <div class="contrast-no">Arrogant</div>
+    </div>
+    <div class="contrast-pair">
+      <div class="contrast-yes">Cultural</div>
+      <div class="contrast-sep">not</div>
+      <div class="contrast-no">Performative</div>
+    </div>
+    <div class="contrast-pair">
+      <div class="contrast-yes">Premium</div>
+      <div class="contrast-sep">not</div>
+      <div class="contrast-no">Pretentious</div>
+    </div>
+  </div>
+
+  <h3>Voice Principles</h3>
+
+  <p><strong>State the belief, then the action.</strong> MYAMI doesn't hedge. We say what we think, then we say what we do about it. "Talent deserves infrastructure. We build it." Not "We believe that creative professionals deserve better support systems and we aim to provide that."</p>
+
+  <p><strong>Name the enemy.</strong> Good brand voice has stakes. MYAMI is against specific things. Say them. "Most brands in our space are underfunded, underdesigned, and invisible." This creates clarity and conviction.</p>
+
+  <p><strong>Speak to aspiration, not desperation.</strong> We position our clients as people shaping what's next — not people who need help. The difference is subtle but powerful. We elevate.</p>
+
+  <p><strong>Short sentences land harder.</strong> When in doubt, cut. "We build what the future runs on." Not "We specialize in creating robust digital infrastructure solutions for modern brands."</p>
+
+  <div class="rule-table">
+    <div class="rule-header">
+      <div class="rule-header-cell yes">MYAMI sounds like this</div>
+      <div class="rule-header-cell no">Not like this</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-cell yes">"Talent deserves infrastructure. We build it."</div>
+      <div class="rule-cell no">"We are a full-service agency dedicated to helping you achieve your goals."</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-cell yes">"Most brands are invisible. That ends here."</div>
+      <div class="rule-cell no">"Our passionate team is here to bring your vision to life!"</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-cell yes">"We don't do average work for brands chasing average results."</div>
+      <div class="rule-cell no">"We offer affordable solutions for businesses of all sizes."</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-cell yes">"The infrastructure arm. We build what modern brands run on."</div>
+      <div class="rule-cell no">"We provide comprehensive web development and digital services."</div>
+    </div>
+  </div>
+</div>
+
+<!-- POSITIONING -->
+<div class="content" id="positioning">
+  <div class="label">Market Positioning</div>
+  <h2>Where MYAMI Sits</h2>
+
+  <p>MYAMI operates at the intersection of <strong>technology and culture</strong> — in the space between a tech company and a creative agency, between a media house and an entertainment brand.</p>
+
+  <p>This intersection is not crowded. Most companies choose a lane. MYAMI's competitive advantage is precisely that it does not. The four-division architecture is not a liability — it is the moat.</p>
+
+  <div class="callout">
+    <p>"MYAMI is the <em>creative and cultural infrastructure company</em> for the brands shaping the next decade."</p>
+  </div>
+
+  <h3>The Positioning Statement</h3>
+  <p>For ambitious brands and independent creatives who are building something real but lack the strategic and creative infrastructure to match their vision — MYAMI is the partner that bridges that gap. Unlike traditional agencies that treat creative work as a service transaction, MYAMI operates as a cultural company that builds brands, creates experiences, and develops systems with genuine conviction about quality and craft.</p>
+
+  <h3>The Entry Point</h3>
+  <p>MYAMI enters the market through <strong>MYAMI Tech and MYAMI Media</strong> — the divisions that generate immediate, recurring revenue through web development, branding, and content. Entertainment and Wear scale as the brand grows. This sequencing is intentional.</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 03 — VISUAL IDENTITY
+═══════════════════════════════════════════ -->
+<div class="chapter" id="logo">
+  <div class="chapter-num">03</div>
+  <div class="chapter-body">
+    <div class="chapter-label">Chapter Three</div>
+    <div class="chapter-title">Visual Identity</div>
+    <div class="chapter-desc">The logo, colors, typography, and visual language of MYAMI.</div>
+  </div>
+</div>
+
+<!-- LOGO -->
+<div class="content">
+  <div class="label">Logo System</div>
+  <h2>The MYAMI Wordmark</h2>
+
+  <p>The MYAMI logo is a wordmark set in <strong>Syne ExtraBold</strong> at 800 weight. It is clean, geometric, and typographically precise. The single consistent rule across every logo variant:</p>
+
+  <div class="callout">
+    <p>The <em>A</em> is always gold. This is non-negotiable across every application, background, and context.</p>
+  </div>
+
+  <p>The gold A is the signature of the brand. It is the thing that makes MYAMI recognizable even in peripheral vision. It creates a visual anchor that the eye returns to. It must never be changed, muted, or removed.</p>
+
+  <div class="logo-display">
+    <div class="logo-cell" style="background:var(--black);">
+      <div class="lm" style="font-size:44px; color:var(--linen);">MY<span style="color:var(--gold)">A</span>MI</div>
+      <div class="logo-cell-tag" style="color:var(--muted);">Primary — On Black</div>
+    </div>
+    <div class="logo-cell" style="background:var(--warm-dark);">
+      <div class="lm" style="font-size:44px; color:var(--linen);">MY<span style="color:var(--gold)">A</span>MI</div>
+      <div class="logo-cell-tag" style="color:var(--muted);">Primary — On Dark</div>
+    </div>
+    <div class="logo-cell" style="background:var(--linen);">
+      <div class="lm" style="font-size:44px; color:var(--black);">MY<span style="color:var(--gold-dk)">A</span>MI</div>
+      <div class="logo-cell-tag" style="color:#aaa;">Primary — On Light</div>
+    </div>
+    <div class="logo-cell" style="background:var(--black);">
+      <div class="lm" style="font-size:44px; -webkit-text-stroke:1.5px var(--gold); color:transparent; letter-spacing:0.18em;">MYAMI</div>
+      <div class="logo-cell-tag" style="color:var(--muted);">Outline Variant</div>
+    </div>
+    <div class="logo-cell" style="background:var(--gold);">
+      <div class="lm" style="font-size:44px; color:var(--black);">MYAMI</div>
+      <div class="logo-cell-tag" style="color:rgba(9,9,10,0.35);">On Gold Background</div>
+    </div>
+    <div class="logo-cell" style="background:var(--black); flex-direction:column; gap:6px;">
+      <div class="lm" style="font-size:32px; color:var(--linen);">MY<span style="color:var(--gold)">A</span>MI</div>
+      <div style="width:100%; height:1px; background:rgba(200,168,75,0.3); max-width:120px;"></div>
+      <div style="font-family:var(--f-mono); font-size:7px; letter-spacing:0.3em; color:var(--muted); text-transform:uppercase;">Technology · Media · Culture</div>
+      <div class="logo-cell-tag" style="color:var(--muted);">Stacked Variant</div>
+    </div>
+  </div>
+
+  <h3>Logo Rules</h3>
+  <div class="do-dont">
+    <div class="do-col">
+      <div class="do-header yes">Always</div>
+      <div class="do-item yes">Keep the A gold in every context</div>
+      <div class="do-item yes">Use sufficient contrast on any background</div>
+      <div class="do-item yes">Maintain original proportions</div>
+      <div class="do-item yes">Use the outline variant on busy backgrounds</div>
+      <div class="do-item yes">Give the logo adequate clear space</div>
+    </div>
+    <div class="dont-col">
+      <div class="do-header no">Never</div>
+      <div class="do-item no">Change the color of the A to anything other than gold</div>
+      <div class="do-item no">Stretch, skew, or distort the wordmark</div>
+      <div class="do-item no">Add effects, shadows, or gradients to the logo</div>
+      <div class="do-item no">Use the logo smaller than 16px in height</div>
+      <div class="do-item no">Place the logo on backgrounds without sufficient contrast</div>
+    </div>
+  </div>
+</div>
+
+<!-- COLOR -->
+<div class="content" id="color">
+  <div class="label">Color System</div>
+  <h2>The MYAMI Palette</h2>
+
+  <p>The palette is built on three pillars: <strong>depth</strong> (the dark backgrounds), <strong>warmth</strong> (the off-white tones), and <strong>gold</strong> (the accent). It deliberately avoids pure black and pure white in favor of warmer, richer tones that feel premium rather than clinical.</p>
+
+  <h3>Primary Palette</h3>
+  <div class="swatch-row">
+    <div class="swatch" style="background:#09090A;">
+      <div class="swatch-name">Obsidian</div>
+      <div class="swatch-hex">#09090A</div>
+    </div>
+    <div class="swatch" style="background:#141210;">
+      <div class="swatch-name">Warm Dark</div>
+      <div class="swatch-hex">#141210</div>
+    </div>
+    <div class="swatch" style="background:#252220;">
+      <div class="swatch-name">Ash</div>
+      <div class="swatch-hex">#252220</div>
+    </div>
+    <div class="swatch" style="background:#C8A84B;">
+      <div class="swatch-name">Gold</div>
+      <div class="swatch-hex">#C8A84B</div>
+    </div>
+    <div class="swatch" style="background:#F2EDE4;">
+      <div class="swatch-name" style="color:var(--black);">Linen</div>
+      <div class="swatch-hex" style="color:rgba(9,9,10,0.5);">#F2EDE4</div>
+    </div>
+    <div class="swatch" style="background:#DDD5C3;">
+      <div class="swatch-name" style="color:var(--black);">Cream</div>
+      <div class="swatch-hex" style="color:rgba(9,9,10,0.5);">#DDD5C3</div>
+    </div>
+  </div>
+
+  <h3>Extended Palette</h3>
+  <div class="swatch-row">
+    <div class="swatch" style="background:#E8C96A; flex:1.5;">
+      <div class="swatch-name" style="color:var(--black);">Gold Light</div>
+      <div class="swatch-hex" style="color:rgba(9,9,10,0.4);">#E8C96A — Highlights</div>
+    </div>
+    <div class="swatch" style="background:#7A6225; flex:1.5;">
+      <div class="swatch-name">Gold Dark</div>
+      <div class="swatch-hex">#7A6225 — On Light</div>
+    </div>
+    <div class="swatch" style="background:#6B6357; flex:1.5;">
+      <div class="swatch-name">Muted</div>
+      <div class="swatch-hex">#6B6357 — Body Text</div>
+    </div>
+    <div class="swatch" style="background:#8A8077; flex:1.5;">
+      <div class="swatch-name">Muted Light</div>
+      <div class="swatch-hex">#8A8077 — Secondary</div>
+    </div>
+  </div>
+
+  <h3>Color Rules</h3>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-label">Gold Rule</div>
+      <div class="card-title">One focal point</div>
+      <p>Gold accents. It does not dominate. One element per composition leads in gold — the eye needs somewhere to land.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Background Rule</div>
+      <div class="card-title">Obsidian is the canvas</div>
+      <p>Warm Dark and Ash create depth. Pure white backgrounds are not part of the MYAMI world. We live in the dark.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Text Rule</div>
+      <div class="card-title">Hierarchy through warmth</div>
+      <p>Primary text in Linen. Secondary in Muted Light. Supporting in Muted. Gold for labels and accents only.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div class="content" id="typography">
+  <div class="label">Typography System</div>
+  <h2>Three Typefaces. One System.</h2>
+
+  <p>MYAMI's typographic system is built on a deliberate three-way conversation: <strong>Syne</strong> for authority and precision, <strong>Cormorant Garamond</strong> for warmth and cultural depth, and <strong>DM Mono</strong> for technical clarity and detail.</p>
+
+  <p>This combination achieves the core aesthetic goal: tech-forward meets legacy warmth. The geometric boldness of Syne alongside the refined character of Cormorant creates productive tension — modern and timeless simultaneously.</p>
+
+  <div class="type-specimen">
+    <div class="type-meta">01 — Syne ExtraBold · Display & Headlines</div>
+    <div style="font-family:var(--f-display); font-size:clamp(48px,6vw,80px); font-weight:800; line-height:0.9; letter-spacing:0.02em; color:var(--linen); margin-bottom:24px;">BUILD<br/><span style="color:var(--gold)">WHAT'S</span><br/>NEXT.</div>
+    <div style="font-family:var(--f-mono); font-size:10px; color:var(--muted); letter-spacing:0.1em;">Usage: Hero headlines, section titles, division names, UI elements, logo · Weight: 800 · Tracking: 0.02–0.1em · Leading: 0.9–1</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-meta">02 — Cormorant Garamond · Editorial & Body</div>
+    <div style="font-family:var(--f-serif); font-size:clamp(28px,3.5vw,46px); font-style:italic; font-weight:300; line-height:1.3; color:var(--linen); margin-bottom:16px;">"Where <span style="color:var(--gold); font-style:normal; font-weight:500;">technology</span> meets culture and creativity meets <span style="color:var(--gold); font-style:normal; font-weight:500;">strategy.</span>"</div>
+    <div style="font-family:var(--f-serif); font-size:16px; line-height:1.9; color:var(--muted-lt); margin-bottom:20px; max-width:580px;">Body copy lives here — readable, elegant, unhurried. Cormorant brings warmth to the page. It breathes. It doesn't rush. Set at 15–17px with generous leading (1.8–1.9) for long-form content.</div>
+    <div style="font-family:var(--f-mono); font-size:10px; color:var(--muted); letter-spacing:0.1em;">Usage: Subheadings, body copy, pullquotes, about sections, descriptions · Weight: 300–500 · Style: Regular & Italic · Leading: 1.2–1.9</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-meta">03 — DM Mono · Technical & Label</div>
+    <div style="font-family:var(--f-mono); font-size:20px; color:var(--linen); letter-spacing:0.1em; margin-bottom:8px;">hello@myami.co</div>
+    <div style="font-family:var(--f-mono); font-size:11px; color:var(--gold); letter-spacing:0.3em; text-transform:uppercase; margin-bottom:8px;">Who We Are</div>
+    <div style="font-family:var(--f-mono); font-size:10px; color:var(--muted); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:20px;">Technology · Media · Culture · 2025 · MYAMI-BB-001</div>
+    <div style="font-family:var(--f-mono); font-size:10px; color:var(--muted); letter-spacing:0.1em;">Usage: Section labels, nav links, tags, metadata, timestamps, technical references, captions · Weight: 300–400 · Always uppercase when used as labels</div>
+  </div>
+
+  <h3>Type Hierarchy</h3>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">Display Scale</div>
+      <div style="font-family:var(--f-display); font-size:52px; font-weight:800; line-height:0.9; margin-bottom:8px; color:var(--linen);">Hero</div>
+      <div style="font-family:var(--f-mono); font-size:9px; color:var(--muted); margin-bottom:20px;">Syne 800 / 72–160px</div>
+      <div style="font-family:var(--f-display); font-size:32px; font-weight:800; line-height:1; margin-bottom:8px; color:var(--linen);">Section Title</div>
+      <div style="font-family:var(--f-mono); font-size:9px; color:var(--muted); margin-bottom:20px;">Syne 800 / 36–56px</div>
+      <div style="font-family:var(--f-display); font-size:18px; font-weight:700; margin-bottom:8px; color:var(--linen);">Subheading</div>
+      <div style="font-family:var(--f-mono); font-size:9px; color:var(--muted); margin-bottom:20px;">Syne 700 / 16–24px</div>
+      <div style="font-family:var(--f-mono); font-size:11px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">OVERLINE</div>
+      <div style="font-family:var(--f-mono); font-size:9px; color:var(--muted);">DM Mono / 9–11px / Uppercase</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Editorial Scale</div>
+      <div style="font-family:var(--f-serif); font-size:36px; font-style:italic; line-height:1.2; margin-bottom:8px; color:var(--linen);">"Pullquote lives here with impact."</div>
+      <div style="font-family:var(--f-mono); font-size:9px; color:var(--muted); margin-bottom:20px;">Cormorant Italic / 28–48px</div>
+      <div style="font-family:var(--f-serif); font-size:20px; line-height:1.3; margin-bottom:8px; color:var(--linen);">Subheading in serif for warmth</div>
+      <div style="font-family:var(--f-mono); font-size:9px; color:var(--muted); margin-bottom:20px;">Cormorant Regular / 18–24px</div>
+      <div style="font-family:var(--f-serif); font-size:16px; line-height:1.9; color:var(--muted-lt); margin-bottom:8px;">Body copy is set generously. It breathes. The reader should never feel rushed or crowded by the text on the page.</div>
+      <div style="font-family:var(--f-mono); font-size:9px; color:var(--muted);">Cormorant 300 / 15–17px / Line height 1.8–1.9</div>
+    </div>
+  </div>
+</div>
+
+<!-- VISUAL LANGUAGE -->
+<div class="content" id="visual">
+  <div class="label">Visual Language</div>
+  <h2>Atmosphere & Texture</h2>
+
+  <p>MYAMI's visual language is built to feel like a world — not a template. Every design decision should create atmosphere. The goal is that someone who sees a MYAMI asset before reading the name should feel something recognizable.</p>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-label">Texture</div>
+      <div class="card-title">Grain</div>
+      <p>A subtle film grain overlay on all primary surfaces. Low opacity. It adds tactility and warmth — preventing the brand from feeling sterile or purely digital.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Texture</div>
+      <div class="card-title">Grid</div>
+      <p>A fine gold grid overlay used in tech-forward contexts. Very low opacity — it suggests precision and systems thinking without being loud about it.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Texture</div>
+      <div class="card-title">Gold Gradient</div>
+      <p>Used for accent surfaces, highlights, and moments of emphasis. The gradient runs from Gold Dark through Gold to Gold Light — never flat, always luminous.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Composition</div>
+      <div class="card-title">Generous Space</div>
+      <p>Premium brands breathe. MYAMI designs are never cluttered. Generous negative space is a deliberate signal of confidence and quality.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Composition</div>
+      <div class="card-title">Vertical Lines</div>
+      <p>Single-pixel vertical lines in gold at low opacity. Used to create structure and divide space — a recurring motif across web and print.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Composition</div>
+      <div class="card-title">Watermark Text</div>
+      <p>Large, very low-opacity typographic watermarks (MYAMI, division names) used as background texture on key sections. Creates depth without visual noise.</p>
+    </div>
+  </div>
+
+  <h3>Photography & Image Direction</h3>
+  <p>When MYAMI uses imagery: <strong>moody, high-contrast, warm-toned</strong>. Not bright and cheerful. Not oversaturated. Think editorial fashion photography — deliberate lighting, considered composition, a sense of mood. Images should feel like they belong in the same dark, premium world as the rest of the brand.</p>
+  <p>Avoid: stock-photo aesthetics, flat lighting, busy compositions, anything that could belong to a competing brand.</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 04 — DIVISIONS
+═══════════════════════════════════════════ -->
+<div class="chapter" id="divisions">
+  <div class="chapter-num">04</div>
+  <div class="chapter-body">
+    <div class="chapter-label">Chapter Four</div>
+    <div class="chapter-title">The Divisions</div>
+    <div class="chapter-desc">Four arms of one company. Each with a distinct role in the MYAMI world.</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="label">Division Architecture</div>
+  <p>MYAMI's four divisions are not just service lines — they are expressions of the same worldview in different industries. Each has a distinct role, a distinct personality sub-set, and a distinct primary audience. Together they form a complete ecosystem.</p>
+
+  <div class="callout">
+    <p>"<em>MYAMI</em> is the parent brand and worldview. The divisions are how that worldview shows up in the world."</p>
+  </div>
+
+  <div class="division-block">
+    <div class="division-block-num">Division 01</div>
+    <div class="division-block-name">MY<span class="a">A</span>MI</div>
+    <div class="division-block-sub">Tech</div>
+    <div class="division-block-role">The Infrastructure Arm — "We build what the future runs on."</div>
+    <p>MYAMI Tech is the technical foundation of the company. It builds the digital systems, websites, and software solutions that modern brands operate on. It is where precision meets creativity — where code becomes the invisible backbone of a brand's presence.</p>
+    <p>MYAMI Tech is the primary revenue engine in the early phase of the company's growth. It delivers tangible, measurable outputs with clear client value — and every Tech client is a potential Media, Entertainment, or Wear client.</p>
+    <div class="division-services">
+      <span class="service-tag">Web Development</span>
+      <span class="service-tag">Software Solutions</span>
+      <span class="service-tag">Digital Systems</span>
+      <span class="service-tag">UI/UX Design</span>
+      <span class="service-tag">E-commerce</span>
+      <span class="service-tag">Web Applications</span>
+    </div>
+  </div>
+
+  <div class="division-block">
+    <div class="division-block-num">Division 02</div>
+    <div class="division-block-name">MY<span class="a">A</span>MI</div>
+    <div class="division-block-sub">Media</div>
+    <div class="division-block-role">The Voice Arm — "We tell stories that move culture."</div>
+    <p>MYAMI Media is the storytelling engine. It is where brands find their voice, their narrative, and their digital presence. Content creation, brand identity, digital storytelling — the work of making people feel something about a brand before they even interact with it.</p>
+    <p>Media is the division most aligned with MYAMI's cultural positioning. The work here should feel editorial, deliberate, and culturally aware — not commercial or generic.</p>
+    <div class="division-services">
+      <span class="service-tag">Content Creation</span>
+      <span class="service-tag">Brand Identity</span>
+      <span class="service-tag">Digital Storytelling</span>
+      <span class="service-tag">Social Media Strategy</span>
+      <span class="service-tag">Photography Direction</span>
+      <span class="service-tag">Copywriting</span>
+    </div>
+  </div>
+
+  <div class="division-block">
+    <div class="division-block-num">Division 03</div>
+    <div class="division-block-name">MY<span class="a">A</span>MI</div>
+    <div class="division-block-sub">Entertainment</div>
+    <div class="division-block-role">The Experience Arm — "We create moments that live in memory."</div>
+    <p>MYAMI Entertainment is where the brand meets the physical world. Event promotion, creative experiences, culture-driven projects — the work of bringing people together and creating the kind of shared moments that build communities and move culture forward.</p>
+    <p>Entertainment is the division with the most direct connection to MYAMI's cultural roots. It is where the brand's authenticity is most visible and most tested.</p>
+    <div class="division-services">
+      <span class="service-tag">Event Promotion</span>
+      <span class="service-tag">Creative Experiences</span>
+      <span class="service-tag">Culture Projects</span>
+      <span class="service-tag">Event Branding</span>
+      <span class="service-tag">Venue Partnerships</span>
+      <span class="service-tag">Community Building</span>
+    </div>
+  </div>
+
+  <div class="division-block">
+    <div class="division-block-num">Division 04</div>
+    <div class="division-block-name">MY<span class="a">A</span>MI</div>
+    <div class="division-block-sub">Wear</div>
+    <div class="division-block-role">The Identity Arm — "We make culture wearable."</div>
+    <p>MYAMI Wear is the extension of the brand into the physical and the everyday. Lifestyle and fashion branding that carries the MYAMI world beyond the screen. It is a long-term play — a brand asset that grows in value as the parent brand grows in recognition.</p>
+    <p>Wear is built on restraint and quality. Not trend-chasing, not volume — but deliberate drops that mean something within the MYAMI community. Each piece should feel like an artifact of the culture MYAMI is building.</p>
+    <div class="division-services">
+      <span class="service-tag">Lifestyle Branding</span>
+      <span class="service-tag">Fashion Identity</span>
+      <span class="service-tag">Product Drops</span>
+      <span class="service-tag">Brand Merchandise</span>
+      <span class="service-tag">Collaboration Pieces</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 05 — BRAND IN USE & RULES
+═══════════════════════════════════════════ -->
+<div class="chapter" id="usage">
+  <div class="chapter-num">05</div>
+  <div class="chapter-body">
+    <div class="chapter-label">Chapter Five</div>
+    <div class="chapter-title">Brand in Use</div>
+    <div class="chapter-desc">How MYAMI shows up across touchpoints, and the rules that govern it.</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="label">Application Guidelines</div>
+  <h2>Every Touchpoint Is Brand</h2>
+
+  <p>MYAMI's brand is not just the logo and the website. It is every email sent, every proposal delivered, every flyer posted, every caption written, every call taken. At this stage of the company's growth, <strong>every client interaction is a brand interaction.</strong></p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">Digital Presence</div>
+      <div class="card-title">Website</div>
+      <p>The flagship touchpoint. It must feel like a top-tier studio built it. Dark aesthetic, full identity system applied, deliberate motion and animation. Never static, never generic. Updated as the portfolio grows.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Digital Presence</div>
+      <div class="card-title">Social Media</div>
+      <p>Consistent art direction across all platforms. Every post should belong to the same visual world. Captions in brand voice — sharp, confident, cultural. Quantity is secondary to quality and consistency.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Client Facing</div>
+      <div class="card-title">Proposals & Decks</div>
+      <p>Use the full identity system. Syne for headers, Cormorant for body, DM Mono for metadata. Obsidian backgrounds. Gold accents. A MYAMI proposal should feel like receiving something from a company three times the size.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Client Facing</div>
+      <div class="card-title">Email Communication</div>
+      <p>Professional, direct, and on-brand voice. No unnecessary fluff. Sign off as MYAMI, not as an individual. Every email is a brand interaction — treat it accordingly.</p>
+    </div>
+  </div>
+</div>
+
+<div class="content" id="rules">
+  <div class="label">Brand Rules</div>
+  <h2>The Non-Negotiables</h2>
+
+  <p>These rules are not guidelines. They are the minimum standard for anything that carries the MYAMI name.</p>
+
+  <div class="do-dont">
+    <div class="do-col">
+      <div class="do-header yes">Always</div>
+      <div class="do-item yes">Keep the A gold in every instance of the wordmark</div>
+      <div class="do-item yes">Use the three-typeface system — Syne, Cormorant, DM Mono</div>
+      <div class="do-item yes">Apply the full color palette — Obsidian, Gold, Linen</div>
+      <div class="do-item yes">Write in brand voice — sharp, confident, cultural, premium</div>
+      <div class="do-item yes">Over-deliver on every client project</div>
+      <div class="do-item yes">Document everything — process, results, case studies</div>
+      <div class="do-item yes">Be selective about who MYAMI works with</div>
+      <div class="do-item yes">Show the work — build in public, document the journey</div>
+    </div>
+    <div class="dont-col">
+      <div class="do-header no">Never</div>
+      <div class="do-item no">Change the color of the A to anything other than gold</div>
+      <div class="do-item no">Use generic fonts (Inter, Roboto, Arial) in any MYAMI context</div>
+      <div class="do-item no">Use pure white or pure black backgrounds — use Linen and Obsidian</div>
+      <div class="do-item no">Write in a generic, corporate, or overly casual voice</div>
+      <div class="do-item no">Accept a project that will compromise the quality of the work</div>
+      <div class="do-item no">Use purple gradients, rainbow colors, or trendy color schemes</div>
+      <div class="do-item no">Position MYAMI on price — we compete on quality and conviction</div>
+      <div class="do-item no">Let the brand go dark — silence is not a brand strategy</div>
+    </div>
+  </div>
+
+  <h3>The Single Most Important Rule</h3>
+  <div class="callout">
+    <p>Ask this before every brand decision: <em>"Does this make us look like we're arriving, or like we've already arrived?"</em></p>
+    <div class="callout-attr">The answer determines whether to proceed.</div>
+  </div>
+
+  <p>The best brands operate from a place of certainty about who they are — even when they are just starting out. Not fake confidence. <strong>Clarity.</strong> Clarity about what you stand for reads as authority. And authority is what makes people trust a brand enough to pay for it, talk about it, and believe in it.</p>
+</div>
+
+<!-- CLOSING -->
+<div class="content" style="text-align:center; padding:120px 80px; position:relative; overflow:hidden; border-bottom:none;">
+  <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-family:var(--f-display); font-size:clamp(80px,14vw,180px); font-weight:800; color:rgba(200,168,75,0.04); white-space:nowrap; pointer-events:none;">MYAMI</div>
+  <div style="font-family:var(--f-mono); font-size:9px; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); margin-bottom:32px; position:relative; z-index:1;">Brand Bible — End of Document</div>
+  <div style="font-family:var(--f-serif); font-size:clamp(24px,3.5vw,44px); font-style:italic; font-weight:300; color:var(--linen); max-width:700px; margin:0 auto 40px; line-height:1.3; position:relative; z-index:1;">
+    "Established. Disruptive. Premium. <span style="color:var(--gold); font-style:normal; font-weight:500;">Cultural.</span><br/>All four. Always."
+  </div>
+  <div style="font-family:var(--f-mono); font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted); position:relative; z-index:1; line-height:2;">
+    MYAMI · Technology. Media. Culture.<br/>
+    Brand Bible v1.0 · 2025 · Confidential
+  </div>
+</div>
+
+</main>
+
+<script>
+  // Active sidebar link on scroll
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.sidebar a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
