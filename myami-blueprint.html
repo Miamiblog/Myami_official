@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MYAMI — The Official Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:     #09090A;
+  --warm-dark: #141210;
+  --ash:       #252220;
+  --ash-mid:   #332F2A;
+  --gold:      #C8A84B;
+  --gold-lt:   #E8C96A;
+  --gold-dk:   #7A6225;
+  --linen:     #F2EDE4;
+  --cream:     #DDD5C3;
+  --muted:     #6B6357;
+  --muted-lt:  #8A8077;
+  --green:     #4A7C59;
+  --green-lt:  rgba(74,124,89,0.15);
+  --danger:    #A85050;
+
+  --f-display: 'Syne', sans-serif;
+  --f-serif:   'Cormorant Garamond', serif;
+  --f-mono:    'DM Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--linen);
+  font-family: var(--f-serif);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9000;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 240px;
+  background: var(--warm-dark);
+  border-right: 1px solid var(--ash);
+  padding: 48px 0;
+  z-index: 100;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-logo {
+  font-family: var(--f-display);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--linen);
+  padding: 0 32px 32px;
+  border-bottom: 1px solid var(--ash);
+  margin-bottom: 28px;
+}
+.sidebar-logo .a { color: var(--gold); }
+.sidebar-doc {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-top: 6px;
+}
+.nav-group { margin-bottom: 8px; }
+.nav-group-label {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  padding: 0 32px 10px;
+  margin-top: 16px;
+  display: block;
+}
+.sidebar a {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 8px 32px;
+  border-left: 2px solid transparent;
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.sidebar a:hover, .sidebar a.active {
+  color: var(--linen);
+  background: rgba(200,168,75,0.05);
+  border-left-color: var(--gold);
+}
+.sidebar-footer {
+  margin-top: auto;
+  padding: 24px 32px 0;
+  border-top: 1px solid var(--ash);
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  line-height: 2;
+}
+
+/* ── MAIN ── */
+.main { margin-left: 240px; }
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 72px 80px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ash);
+}
+.cover-glow {
+  position: absolute;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,168,75,0.07) 0%, transparent 65%);
+  top: -250px; right: -150px;
+  pointer-events: none;
+}
+.cover-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(200,168,75,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,168,75,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative; z-index: 1;
+}
+.cover-tag {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-dk);
+  padding: 7px 18px;
+}
+.cover-ref {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-align: right;
+  line-height: 2;
+}
+.cover-center { position: relative; z-index: 1; }
+.cover-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.cover-eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--gold); }
+.cover-title {
+  font-family: var(--f-display);
+  font-size: clamp(56px, 8vw, 110px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  margin-bottom: 48px;
+}
+.cover-title .gold { color: var(--gold); }
+.cover-title .outline { -webkit-text-stroke: 1.5px rgba(242,237,228,0.18); color: transparent; }
+.cover-desc {
+  font-family: var(--f-serif);
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted-lt);
+  max-width: 580px;
+  line-height: 1.75;
+  border-left: 2px solid var(--gold-dk);
+  padding-left: 24px;
+}
+.cover-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative; z-index: 1;
+}
+.cover-phases {
+  display: flex;
+  gap: 2px;
+}
+.cover-phase {
+  padding: 14px 20px;
+  background: var(--warm-dark);
+  border: 1px solid var(--ash);
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+.cover-phase span {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 0;
+  margin-bottom: 4px;
+}
+
+/* ── CHAPTER ── */
+.chapter {
+  background: var(--warm-dark);
+  border-bottom: 1px solid var(--ash);
+  border-top: 1px solid var(--ash);
+  padding: 56px 80px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.chapter-num {
+  font-family: var(--f-display);
+  font-size: 110px;
+  font-weight: 800;
+  color: rgba(200,168,75,0.06);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.chapter-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.chapter-title {
+  font-family: var(--f-display);
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--linen);
+  line-height: 1;
+}
+.chapter-desc {
+  font-family: var(--f-serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--muted-lt);
+  margin-top: 10px;
+}
+
+/* ── CONTENT ── */
+.content {
+  padding: 72px 80px;
+  border-bottom: 1px solid var(--ash);
+}
+.content:last-child { border-bottom: none; }
+
+.label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.label::before { content:''; display:block; width:22px; height:1px; background:var(--gold); }
+
+h2 {
+  font-family: var(--f-display);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--linen);
+  margin-bottom: 28px;
+  margin-top: 56px;
+}
+h2:first-child { margin-top: 0; }
+h3 {
+  font-family: var(--f-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  margin-top: 48px;
+}
+h3:first-child { margin-top: 0; }
+p {
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--muted-lt);
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+p strong { color: var(--linen); font-weight: 500; }
+p:last-child { margin-bottom: 0; }
+
+.statement {
+  font-family: var(--f-serif);
+  font-size: clamp(26px, 3.2vw, 42px);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--linen);
+  margin: 40px 0;
+  max-width: 720px;
+}
+.statement em { font-style: normal; color: var(--gold); font-weight: 500; }
+
+/* ── PHASE TIMELINE ── */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 40px 0;
+}
+.phase-card {
+  background: var(--warm-dark);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.phase-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.phase-card.p1::before { background: var(--gold-dk); }
+.phase-card.p2::before { background: var(--gold); }
+.phase-card.p3::before { background: var(--gold-lt); }
+
+.phase-tag {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.phase-name {
+  font-family: var(--f-display);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--linen);
+  margin-bottom: 4px;
+}
+.phase-period {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.phase-desc {
+  font-family: var(--f-serif);
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--muted-lt);
+}
+.phase-target {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ash);
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.phase-target span {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 0;
+  margin-top: 4px;
+}
+
+/* ── MILESTONE TABLE ── */
+.milestone-block {
+  margin: 40px 0;
+  border: 1px solid var(--ash);
+}
+.milestone-header {
+  background: var(--warm-dark);
+  padding: 16px 28px;
+  display: grid;
+  grid-template-columns: 140px 1fr 120px;
+  gap: 20px;
+  border-bottom: 1px solid var(--ash);
+}
+.milestone-header-cell {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.milestone-row {
+  padding: 18px 28px;
+  display: grid;
+  grid-template-columns: 140px 1fr 120px;
+  gap: 20px;
+  border-bottom: 1px solid rgba(37,34,32,0.6);
+  align-items: start;
+  transition: background 0.2s;
+}
+.milestone-row:last-child { border-bottom: none; }
+.milestone-row:hover { background: rgba(200,168,75,0.03); }
+.milestone-time {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.milestone-text {
+  font-family: var(--f-serif);
+  font-size: 15px;
+  color: var(--linen);
+  line-height: 1.5;
+}
+.milestone-text small {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+.milestone-div {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── REVENUE MODEL ── */
+.revenue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  margin: 40px 0;
+}
+.revenue-card {
+  background: var(--warm-dark);
+  padding: 36px;
+}
+.revenue-card-label {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.revenue-card-name {
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--linen);
+  margin-bottom: 16px;
+}
+.revenue-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--ash);
+  gap: 16px;
+}
+.revenue-item:last-child { border-bottom: none; }
+.revenue-service {
+  font-family: var(--f-serif);
+  font-size: 14px;
+  color: var(--muted-lt);
+  flex: 1;
+}
+.revenue-price {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── TARGET TABLE ── */
+.target-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 160px 160px;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+.target-cell {
+  background: var(--warm-dark);
+  padding: 18px 24px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.target-cell.head {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--ash);
+}
+.target-cell.phase { color: var(--gold); font-size: 11px; font-weight: 400; }
+.target-cell.num { color: var(--linen); font-size: 14px; }
+.target-cell.desc { font-family: var(--f-serif); font-size: 13px; font-style: italic; }
+
+/* ── TEAM STRUCTURE ── */
+.team-phase {
+  margin: 40px 0;
+}
+.team-phase-header {
+  background: var(--ash);
+  padding: 16px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+.team-phase-name {
+  font-family: var(--f-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--linen);
+}
+.team-phase-period {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.team-card {
+  background: var(--warm-dark);
+  padding: 24px;
+}
+.team-role {
+  font-family: var(--f-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--linen);
+  margin-bottom: 8px;
+}
+.team-who {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.team-desc {
+  font-family: var(--f-serif);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ── PLATFORM STRATEGY ── */
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 40px 0;
+}
+.platform-card {
+  background: var(--warm-dark);
+  padding: 32px 24px;
+  border-top: 3px solid var(--ash);
+}
+.platform-card.active { border-top-color: var(--gold); }
+.platform-name {
+  font-family: var(--f-display);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--linen);
+  margin-bottom: 8px;
+}
+.platform-role {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.platform-desc {
+  font-family: var(--f-serif);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.platform-freq {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--ash);
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.platform-freq span { color: var(--gold-lt); }
+
+/* ── DIVISION SEQUENCING ── */
+.div-seq {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 40px 0;
+}
+.div-seq-card {
+  background: var(--warm-dark);
+  padding: 32px 28px;
+  position: relative;
+}
+.div-seq-num {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--gold-dk);
+  margin-bottom: 12px;
+}
+.div-seq-name {
+  font-family: var(--f-display);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--linen);
+  margin-bottom: 4px;
+}
+.div-seq-name .a { color: var(--gold); }
+.div-seq-arm {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.div-seq-phase {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.div-seq-desc {
+  font-family: var(--f-serif);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.div-seq-status {
+  margin-top: 20px;
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border: 1px solid;
+}
+.status-now { color: var(--gold); border-color: var(--gold-dk); }
+.status-soon { color: var(--muted); border-color: var(--ash); }
+.status-later { color: var(--muted); border-color: var(--ash); opacity: 0.6; }
+
+/* ── RULES ── */
+.rule-list {
+  margin: 32px 0;
+  max-width: 700px;
+}
+.rule-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ash);
+  align-items: flex-start;
+}
+.rule-item:first-child { border-top: 1px solid var(--ash); }
+.rule-mark {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.rule-text {
+  font-family: var(--f-serif);
+  font-size: 16px;
+  color: var(--muted-lt);
+  line-height: 1.7;
+}
+.rule-text strong { color: var(--linen); font-weight: 500; }
+
+/* ── CALLOUT ── */
+.callout {
+  background: var(--warm-dark);
+  border-left: 3px solid var(--gold);
+  padding: 28px 36px;
+  margin: 36px 0;
+  max-width: 700px;
+}
+.callout p {
+  font-family: var(--f-serif);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--linen);
+  margin: 0;
+  max-width: none;
+}
+.callout p em { color: var(--gold); font-style: normal; font-weight: 500; }
+
+/* ── KPI GRID ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 40px 0;
+}
+.kpi-card {
+  background: var(--warm-dark);
+  padding: 32px;
+  text-align: center;
+}
+.kpi-num {
+  font-family: var(--f-display);
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.kpi-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.kpi-desc {
+  font-family: var(--f-serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ── CLOSING ── */
+.closing {
+  padding: 120px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--warm-dark);
+}
+.closing-wm {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--f-display);
+  font-size: clamp(80px, 14vw, 180px);
+  font-weight: 800;
+  color: rgba(200,168,75,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.08em;
+}
+.closing-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+  position: relative; z-index: 1;
+}
+.closing-statement {
+  font-family: var(--f-serif);
+  font-size: clamp(26px, 3.5vw, 46px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--linen);
+  max-width: 700px;
+  margin: 0 auto 40px;
+  line-height: 1.3;
+  position: relative; z-index: 1;
+}
+.closing-statement em { font-style: normal; color: var(--gold); font-weight: 500; }
+.closing-logo {
+  font-family: var(--f-display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--linen);
+  position: relative; z-index: 1;
+  margin-bottom: 10px;
+}
+.closing-logo span { color: var(--gold); }
+.closing-sub {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  position: relative; z-index: 1;
+}
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s ease, transform 0.85s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── MOBILE ── */
+@media (max-width: 1000px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .cover, .content, .chapter, .closing { padding: 48px 32px; }
+  .timeline, .revenue-grid, .div-seq, .platform-grid, .team-grid { grid-template-columns: 1fr 1fr; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .target-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .timeline, .revenue-grid, .div-seq, .platform-grid, .team-grid, .kpi-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-logo">MY<span class="a">A</span>MI<span class="sidebar-doc">Official Blueprint v1.0</span></div>
+
+  <span class="nav-group-label">Overview</span>
+  <a href="#vision">Vision & North Star</a>
+  <a href="#phases">Phase Overview</a>
+
+  <span class="nav-group-label">Phase 1 — Year 1</span>
+  <a href="#p1-foundation">Foundation</a>
+  <a href="#p1-revenue">Revenue Model</a>
+  <a href="#p1-milestones">Milestones</a>
+  <a href="#p1-brand">Brand & Social</a>
+
+  <span class="nav-group-label">Phase 2 — Years 1–3</span>
+  <a href="#p2-growth">Growth</a>
+  <a href="#p2-divisions">Division Sequencing</a>
+  <a href="#p2-team">Team Building</a>
+  <a href="#p2-revenue">Revenue Scaling</a>
+
+  <span class="nav-group-label">Phase 3 — Years 3–5</span>
+  <a href="#p3-scale">Scale</a>
+  <a href="#p3-structure">Structure</a>
+  <a href="#p3-targets">Targets</a>
+
+  <span class="nav-group-label">Operations</span>
+  <a href="#decision">Decision Framework</a>
+  <a href="#rules">Non-Negotiables</a>
+  <a href="#kpis">KPIs</a>
+
+  <div class="sidebar-footer">MYAMI Blueprint v1.0<br/>2025 — Confidential<br/>Internal Use Only</div>
+</nav>
+
+<main class="main">
+
+<!-- COVER -->
+<div class="cover" id="top">
+  <div class="cover-glow"></div>
+  <div class="cover-grid"></div>
+
+  <div class="cover-top">
+    <div class="cover-tag">Internal — Confidential</div>
+    <div class="cover-ref">MYAMI-BP-001<br/>Version 1.0<br/>2025</div>
+  </div>
+
+  <div class="cover-center">
+    <div class="cover-eyebrow">The Official Blueprint</div>
+    <div class="cover-title">
+      THE<br/>
+      <span class="gold">MYAMI</span><br/>
+      <span class="outline">BLUEPRINT</span>
+    </div>
+    <p class="cover-desc">
+      The complete operational and strategic roadmap for building MYAMI from zero to a multi-divisional creative and cultural company. Short term, mid term, long term — every phase mapped, every target defined, every decision anchored.
+    </p>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-phases">
+      <div class="cover-phase"><span>P1</span>Year 1<br/>Foundation</div>
+      <div class="cover-phase"><span>P2</span>Years 1–3<br/>Growth</div>
+      <div class="cover-phase"><span>P3</span>Years 3–5<br/>Scale</div>
+    </div>
+    <div style="font-family:var(--f-mono); font-size:9px; letter-spacing:0.15em; color:var(--muted); text-align:right; line-height:2;">
+      Founder: Miami<br/>
+      Company: MYAMI<br/>
+      Handle: @myami_official
+    </div>
+  </div>
+</div>
+
+
+<!-- VISION -->
+<div class="chapter" id="vision">
+  <div class="chapter-num">00</div>
+  <div class="chapter-body">
+    <div class="chapter-label">North Star</div>
+    <div class="chapter-title">The Vision</div>
+    <div class="chapter-desc">Where MYAMI is going and what it looks like when it gets there.</div>
+  </div>
+</div>
+
+<div class="content reveal">
+  <div class="label">The Destination</div>
+
+  <div class="statement">
+    MYAMI becomes the definitive creative and cultural company for the <em>next generation of brands.</em>
+  </div>
+
+  <p>Known for the work. Trusted for the strategy. Respected for the culture. Operating across technology, media, entertainment, and identity — with a presence that reaches from digital systems to physical experiences to wearable identity.</p>
+
+  <p>By Year 5, MYAMI is not just a company. It is a <strong>world</strong> — a brand with its own aesthetic universe, a proven track record of elevating other brands, a talent roster, a community, and a cultural footprint that extends well beyond any single service or product.</p>
+
+  <div class="callout">
+    <p>"The goal is not just to build a successful business. The goal is to become <em>indispensable to a generation of brands</em> — and let everything else follow from that."</p>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-num">4</div>
+      <div class="kpi-label">Active Divisions</div>
+      <div class="kpi-desc">Tech, Media, Entertainment and Wear all fully operational</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">$10M</div>
+      <div class="kpi-label">5-Year Revenue Target</div>
+      <div class="kpi-desc">Combined revenue or valuation across all divisions by Year 5</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">1</div>
+      <div class="kpi-label">Non-Negotiable</div>
+      <div class="kpi-desc">Every decision must pass: does this make us look like we've already arrived?</div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE OVERVIEW -->
+<div class="content reveal" id="phases">
+  <div class="label">Phase Overview</div>
+  <h2>Three Phases. One Direction.</h2>
+
+  <div class="timeline">
+    <div class="phase-card p1">
+      <div class="phase-tag">Phase One</div>
+      <div class="phase-name">Foundation</div>
+      <div class="phase-period">Year 1 — Now</div>
+      <p class="phase-desc">Build the infrastructure. Get the brand into the world. Land the first clients. Generate the first consistent revenue. Prove the concept before scaling it.</p>
+      <div class="phase-target">Monthly Revenue Target<span>$2–5K</span></div>
+    </div>
+    <div class="phase-card p2">
+      <div class="phase-tag">Phase Two</div>
+      <div class="phase-name">Growth</div>
+      <div class="phase-period">Years 1–3</div>
+      <p class="phase-desc">Scale what works. Activate the second and third divisions. Build the team. Grow the audience. Turn MYAMI from a name into a known entity in its market.</p>
+      <div class="phase-target">Annual Revenue Target<span>$100–500K</span></div>
+    </div>
+    <div class="phase-card p3">
+      <div class="phase-tag">Phase Three</div>
+      <div class="phase-name">Scale</div>
+      <div class="phase-period">Years 3–5</div>
+      <p class="phase-desc">Build the institution. All four divisions fully operational. Team in place. Revenue diversified. MYAMI is a brand people seek out — not a company that pitches itself.</p>
+      <div class="phase-target">5-Year Target<span>$10M</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- PHASE 1 CHAPTER -->
+<div class="chapter" id="p1-foundation">
+  <div class="chapter-num">01</div>
+  <div class="chapter-body">
+    <div class="chapter-label">Phase One — Year 1</div>
+    <div class="chapter-title">Foundation</div>
+    <div class="chapter-desc">Get MYAMI into the world. Land the first clients. Build the cash engine.</div>
+  </div>
+</div>
+
+<div class="content reveal">
+  <div class="label">The Foundation Priority</div>
+  <h2>Move MYAMI From Your Head Into the World</h2>
+
+  <p>Phase 1 has one primary goal: <strong>make MYAMI real.</strong> Not real in documents — real in the world. A live website. Active social accounts. Real clients. Real revenue. Real work in a portfolio that proves every claim the brand makes about itself.</p>
+
+  <p>Everything built so far — the brand identity, the website, the manifesto, the brand bible — is the infrastructure that makes Phase 1 possible. Now the work is execution. Consistent, relentless, public execution.</p>
+
+  <div class="callout">
+    <p>"Phase 1 is not about scale. It is about <em>proof.</em> Proof that MYAMI can deliver. Proof that clients will pay. Proof that the work is as good as the brand promises it will be."</p>
+  </div>
+
+  <h3>The Phase 1 Focus Divisions</h3>
+  <div class="div-seq">
+    <div class="div-seq-card">
+      <div class="div-seq-num">Primary</div>
+      <div class="div-seq-name">MY<span class="a">A</span>MI</div>
+      <div class="div-seq-arm">Tech</div>
+      <div class="div-seq-phase">Active — Phase 1</div>
+      <p class="div-seq-desc">The immediate revenue engine. Web development and digital systems. Clear deliverable, measurable value, repeat client potential.</p>
+      <div class="div-seq-status status-now">Active Now</div>
+    </div>
+    <div class="div-seq-card">
+      <div class="div-seq-num">Primary</div>
+      <div class="div-seq-name">MY<span class="a">A</span>MI</div>
+      <div class="div-seq-arm">Media</div>
+      <div class="div-seq-phase">Active — Phase 1</div>
+      <p class="div-seq-desc">Content, branding, and storytelling. Pairs directly with Tech. Every website client is a potential Media client. High-margin, recurring potential.</p>
+      <div class="div-seq-status status-now">Active Now</div>
+    </div>
+    <div class="div-seq-card">
+      <div class="div-seq-num">Building</div>
+      <div class="div-seq-name">MY<span class="a">A</span>MI</div>
+      <div class="div-seq-arm">Entertainment</div>
+      <div class="div-seq-phase">Informal — Phase 1</div>
+      <p class="div-seq-desc">Be present. Produce flyers and event assets. Build relationships in the event scene. Revenue secondary — relationships and reputation first.</p>
+      <div class="div-seq-status status-soon">Building</div>
+    </div>
+    <div class="div-seq-card">
+      <div class="div-seq-num">Seeding</div>
+      <div class="div-seq-name">MY<span class="a">A</span>MI</div>
+      <div class="div-seq-arm">Wear</div>
+      <div class="div-seq-phase">Concept — Phase 1–2</div>
+      <p class="div-seq-desc">Build the aesthetic identity. Tease the world. No product yet — but the idea is planted. Wear launches when the brand has enough weight to carry it.</p>
+      <div class="div-seq-status status-later">Seeding</div>
+    </div>
+  </div>
+</div>
+
+<!-- P1 REVENUE -->
+<div class="content reveal" id="p1-revenue">
+  <div class="label">Revenue Model — Phase 1</div>
+  <h2>How MYAMI Makes Money Now</h2>
+
+  <p>Phase 1 revenue comes from <strong>skill arbitrage</strong> — selling creative and technical skills at a price point that reflects professional quality, not student pricing. The goal is $2,000–$5,000 per month in consistent revenue from client work before the end of Year 1.</p>
+
+  <div class="revenue-grid">
+    <div class="revenue-card">
+      <div class="revenue-card-label">MYAMI Tech</div>
+      <div class="revenue-card-name">Web & Digital</div>
+      <div class="revenue-item"><span class="revenue-service">Starter Website (5 pages)</span><span class="revenue-price">$500–800</span></div>
+      <div class="revenue-item"><span class="revenue-service">Professional Website (custom)</span><span class="revenue-price">$1,000–2,500</span></div>
+      <div class="revenue-item"><span class="revenue-service">E-commerce / Web App</span><span class="revenue-price">$2,000–5,000</span></div>
+      <div class="revenue-item"><span class="revenue-service">Monthly Maintenance Retainer</span><span class="revenue-price">$200–500/mo</span></div>
+      <div class="revenue-item"><span class="revenue-service">Landing Page</span><span class="revenue-price">$300–600</span></div>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-card-label">MYAMI Media</div>
+      <div class="revenue-card-name">Brand & Content</div>
+      <div class="revenue-item"><span class="revenue-service">Brand Identity Package</span><span class="revenue-price">$400–900</span></div>
+      <div class="revenue-item"><span class="revenue-service">Event Flyer / Promo Assets</span><span class="revenue-price">$80–250</span></div>
+      <div class="revenue-item"><span class="revenue-service">Social Media Kit</span><span class="revenue-price">$200–500</span></div>
+      <div class="revenue-item"><span class="revenue-service">Monthly Content Retainer</span><span class="revenue-price">$500–1,000/mo</span></div>
+      <div class="revenue-item"><span class="revenue-service">Full Brand Package</span><span class="revenue-price">$800–1,800</span></div>
+    </div>
+  </div>
+
+  <h3>The Retainer Priority</h3>
+  <p>Project work pays once. Retainers pay every month. The Phase 1 revenue goal is to convert at least <strong>2–3 clients onto monthly retainers</strong> by Month 6. A base of $1,500–3,000 in recurring monthly revenue is more valuable than any single large project.</p>
+
+  <h3>The Upsell Ladder</h3>
+  <p>Every Tech client is a Media prospect. Every Media client is an Entertainment prospect. Every client who comes in through any door should be walking up the MYAMI ladder — from a single service to a full brand partnership. <strong>The goal is lifetime client value, not single-transaction revenue.</strong></p>
+</div>
+
+<!-- P1 MILESTONES -->
+<div class="content reveal" id="p1-milestones">
+  <div class="label">Milestones — Year 1</div>
+  <h2>What Gets Built and When</h2>
+
+  <div class="milestone-block">
+    <div class="milestone-header">
+      <div class="milestone-header-cell">Timeline</div>
+      <div class="milestone-header-cell">Milestone</div>
+      <div class="milestone-header-cell">Division</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Month 1</div>
+      <div class="milestone-text">Website live. All four social accounts active at @myami_official. Launch post published across all platforms.<small>The brand exists publicly for the first time.</small></div>
+      <div class="milestone-div">Brand</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Month 1–2</div>
+      <div class="milestone-text">First 5 outreach conversations with potential clients. Offer a reduced-rate project in exchange for a testimonial and referral rights.<small>The first client is the hardest. Get one.</small></div>
+      <div class="milestone-div">Tech / Media</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Month 2</div>
+      <div class="milestone-text">First paid project delivered. Documented, photographed, added to portfolio. Case study written for website.<small>Proof before scale.</small></div>
+      <div class="milestone-div">Tech / Media</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Month 3</div>
+      <div class="milestone-text">3 clients completed. First referral received from a previous client. Social following growing with consistent weekly content.<small>Word of mouth begins.</small></div>
+      <div class="milestone-div">All</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Month 4</div>
+      <div class="milestone-text">First monthly retainer signed. Consistent baseline revenue established. MYAMI Entertainment active informally — producing assets for events.<small>Recurring revenue changes everything.</small></div>
+      <div class="milestone-div">Tech / Media / Entertainment</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Month 6</div>
+      <div class="milestone-text">$2,000–3,000/month in revenue. 2–3 active retainer clients. Portfolio has 6–8 documented projects. Social presence established with consistent engagement.<small>Foundation is solid. Phase 2 begins.</small></div>
+      <div class="milestone-div">All</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Month 9</div>
+      <div class="milestone-text">First collaborator or contractor brought in for overflow work. MYAMI stops being a solo operation in practice even if not in name.<small>The team starts here.</small></div>
+      <div class="milestone-div">Operations</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Month 12</div>
+      <div class="milestone-text">$4,000–5,000/month in revenue. Strong portfolio. Clear brand reputation in the immediate market. Ready for Phase 2 activation.<small>Year 1 complete. The foundation is real.</small></div>
+      <div class="milestone-div">All</div>
+    </div>
+  </div>
+</div>
+
+<!-- P1 BRAND & SOCIAL -->
+<div class="content reveal" id="p1-brand">
+  <div class="label">Brand & Social — Phase 1</div>
+  <h2>Building the Audience While Building the Business</h2>
+
+  <p>Social media in Phase 1 has one job: <strong>make MYAMI look like it's already arrived.</strong> Every post, every piece of content, every interaction should communicate a brand that is serious, premium, and culturally aware — even before the revenue matches that positioning.</p>
+
+  <div class="platform-grid">
+    <div class="platform-card active">
+      <div class="platform-name">Instagram</div>
+      <div class="platform-role">The Brand World</div>
+      <p class="platform-desc">Visual home. Immaculate art direction. Every post belongs to the same world. Grid treated as a brand asset.</p>
+      <div class="platform-freq">Cadence: <span>3–4x per week</span></div>
+    </div>
+    <div class="platform-card active">
+      <div class="platform-name">TikTok</div>
+      <div class="platform-role">The Growth Engine</div>
+      <p class="platform-desc">Founder POV. Process videos. Direct-to-camera. Raw and real — where Miami the person builds MYAMI's following fastest.</p>
+      <div class="platform-freq">Cadence: <span>4–5x per week</span></div>
+    </div>
+    <div class="platform-card active">
+      <div class="platform-name">X</div>
+      <div class="platform-role">The Mind</div>
+      <p class="platform-desc">Sharp observations. Brand philosophy. Industry takes. Threads that demonstrate depth of thinking behind the brand.</p>
+      <div class="platform-freq">Cadence: <span>Daily</span></div>
+    </div>
+    <div class="platform-card active">
+      <div class="platform-name">LinkedIn</div>
+      <div class="platform-role">The Authority</div>
+      <p class="platform-desc">Founder story. Case studies. Strategic insight. Where business clients discover MYAMI and decide it's serious.</p>
+      <div class="platform-freq">Cadence: <span>2–3x per week</span></div>
+    </div>
+  </div>
+
+  <h3>The Content Rule</h3>
+  <p><strong>Create once. Distribute intelligently.</strong> Every project becomes content across all four platforms simultaneously — but tailored to each one. TikTok gets the process. Instagram gets the result. X gets the lesson. LinkedIn gets the case study. One piece of work becomes four pieces of content.</p>
+</div>
+
+
+<!-- PHASE 2 -->
+<div class="chapter" id="p2-growth">
+  <div class="chapter-num">02</div>
+  <div class="chapter-body">
+    <div class="chapter-label">Phase Two — Years 1–3</div>
+    <div class="chapter-title">Growth</div>
+    <div class="chapter-desc">Scale what works. Activate more divisions. Build the team. Grow the name.</div>
+  </div>
+</div>
+
+<div class="content reveal">
+  <div class="label">The Growth Shift</div>
+  <h2>From Proving It to Scaling It</h2>
+
+  <p>Phase 2 begins when the Phase 1 fundamentals are solid: consistent monthly revenue, a real portfolio, a growing audience, and at least 2–3 clients on retainer. The shift is from building the foundation to building on top of it.</p>
+
+  <p>The primary moves in Phase 2: <strong>activate Entertainment formally, begin building a team, raise prices as reputation grows, and turn MYAMI from a local name into a digital-first brand with reach beyond its immediate geography.</strong></p>
+
+  <div class="callout">
+    <p>"Phase 2 is where MYAMI stops being something only the people around you know about — and starts being <em>something people find.</em>"</p>
+  </div>
+
+  <h3>Phase 2 Revenue Targets</h3>
+  <div class="target-row">
+    <div class="target-cell head">Period</div>
+    <div class="target-cell head">Target</div>
+    <div class="target-cell head">Monthly</div>
+    <div class="target-cell head">Primary Source</div>
+  </div>
+  <div class="target-row">
+    <div class="target-cell phase">Year 1 End</div>
+    <div class="target-cell desc">Foundation locked, first retainers active</div>
+    <div class="target-cell num">$4–5K</div>
+    <div class="target-cell">Tech + Media retainers</div>
+  </div>
+  <div class="target-row">
+    <div class="target-cell phase">Year 2</div>
+    <div class="target-cell desc">Team growing, Entertainment active, reputation building</div>
+    <div class="target-cell num">$8–15K</div>
+    <div class="target-cell">All three active divisions</div>
+  </div>
+  <div class="target-row">
+    <div class="target-cell phase">Year 3</div>
+    <div class="target-cell desc">MYAMI is a known name. Inbound leads. Selective intake.</div>
+    <div class="target-cell num">$20–40K</div>
+    <div class="target-cell">Retainers + larger contracts</div>
+  </div>
+</div>
+
+<!-- P2 DIVISIONS -->
+<div class="content reveal" id="p2-divisions">
+  <div class="label">Division Activation — Phase 2</div>
+  <h2>Entertainment Goes Formal. Wear Gets Seeded.</h2>
+
+  <p>By Phase 2, MYAMI Tech and Media are proven and generating consistent revenue. The focus now is activating Entertainment as a formal revenue stream and laying the groundwork for Wear.</p>
+
+  <h3>MYAMI Entertainment — Phase 2 Activation</h3>
+  <p>Phase 2 is when Entertainment stops being informal and becomes a proper division with its own client structure and pricing. MYAMI becomes the go-to creative partner for event promoters, venue brands, and cultural organizers in its market.</p>
+
+  <div class="revenue-grid">
+    <div class="revenue-card">
+      <div class="revenue-card-label">Entertainment Revenue</div>
+      <div class="revenue-card-name">Events & Culture</div>
+      <div class="revenue-item"><span class="revenue-service">Event Brand Package (flyer, socials, identity)</span><span class="revenue-price">$300–800</span></div>
+      <div class="revenue-item"><span class="revenue-service">Event Promotion Strategy</span><span class="revenue-price">$500–1,500</span></div>
+      <div class="revenue-item"><span class="revenue-service">Full Event Production Partner</span><span class="revenue-price">$1,500–4,000</span></div>
+      <div class="revenue-item"><span class="revenue-service">Monthly Promoter Retainer</span><span class="revenue-price">$500–1,000/mo</span></div>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-card-label">MYAMI Wear — Seeding</div>
+      <div class="revenue-card-name">Identity & Lifestyle</div>
+      <div class="revenue-item"><span class="revenue-service">First limited drop (internal)</span><span class="revenue-price">Low volume</span></div>
+      <div class="revenue-item"><span class="revenue-service">Brand merchandise for events</span><span class="revenue-price">Cost + margin</span></div>
+      <div class="revenue-item"><span class="revenue-service">Collaborative pieces with talent</span><span class="revenue-price">Revenue share</span></div>
+      <div class="revenue-item"><span class="revenue-service">Full Wear launch</span><span class="revenue-price">Phase 3</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- P2 TEAM -->
+<div class="content reveal" id="p2-team">
+  <div class="label">Team Building — Phase 2</div>
+  <h2>MYAMI Stops Being One Person</h2>
+
+  <p>The transition from solo founder to a team is the most important operational shift in Phase 2. It does not happen all at once — it happens incrementally, starting with contractors, moving to part-time collaborators, and eventually to a core team.</p>
+
+  <div class="team-phase">
+    <div class="team-phase-header">
+      <div class="team-phase-name">Phase 1 Team</div>
+      <div class="team-phase-period">Year 1 — Solo</div>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-role">Founder / Everything</div>
+        <div class="team-who">Miami</div>
+        <p class="team-desc">Strategy, design, development, client relations, social, finance, operations. All of it. This is temporary.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-phase">
+    <div class="team-phase-header">
+      <div class="team-phase-name">Phase 2 Team</div>
+      <div class="team-phase-period">Years 1–3 — Contractors First</div>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-role">Founder / CEO</div>
+        <div class="team-who">Miami</div>
+        <p class="team-desc">Vision, strategy, client relationships, brand direction, key decisions. Stops doing everything — starts leading everything.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Dev Contractor</div>
+        <div class="team-who">Hire — Contract</div>
+        <p class="team-desc">Overflow web development. Brought in when project volume exceeds solo capacity. Paid per project.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Creative Contractor</div>
+        <div class="team-who">Hire — Contract</div>
+        <p class="team-desc">Design support for Media division. Flyers, social assets, brand collateral. Aligned to the MYAMI aesthetic.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Social / Community</div>
+        <div class="team-who">Hire — Part Time</div>
+        <p class="team-desc">Manages day-to-day social posting, engagement, community building. Frees the founder from platform management.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-phase">
+    <div class="team-phase-header">
+      <div class="team-phase-name">Phase 3 Team</div>
+      <div class="team-phase-period">Years 3–5 — Core Hires</div>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-role">CEO / Founder</div>
+        <div class="team-who">Miami</div>
+        <p class="team-desc">Company direction, brand vision, key partnerships, culture. Fully out of execution, fully into leadership.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Head of Tech</div>
+        <div class="team-who">Full-Time Hire</div>
+        <p class="team-desc">Leads MYAMI Tech division. Manages developers, owns client delivery, drives technical strategy.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Head of Media</div>
+        <div class="team-who">Full-Time Hire</div>
+        <p class="team-desc">Leads MYAMI Media. Creative direction, content strategy, brand work. Owns the MYAMI aesthetic voice.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Head of Entertainment</div>
+        <div class="team-who">Full-Time Hire</div>
+        <p class="team-desc">Leads events and culture division. Client relationships, event production, talent connections.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- PHASE 3 -->
+<div class="chapter" id="p3-scale">
+  <div class="chapter-num">03</div>
+  <div class="chapter-body">
+    <div class="chapter-label">Phase Three — Years 3–5</div>
+    <div class="chapter-title">Scale</div>
+    <div class="chapter-desc">Build the institution. All four divisions live. MYAMI becomes the name people seek out.</div>
+  </div>
+</div>
+
+<div class="content reveal">
+  <div class="label">The Scale Shift</div>
+  <h2>From a Brand People Know to a Brand People Seek</h2>
+
+  <p>Phase 3 is the difference between a company that markets itself and a company that gets found. By Year 3, MYAMI's reputation, portfolio, and cultural presence should be doing the work that cold outreach did in Phase 1.</p>
+
+  <p>The focus in Phase 3: <strong>all four divisions fully operational, a team that runs without the founder in every meeting, revenue diversified across retainers and larger contracts, and MYAMI Wear launched as a proper product brand.</strong></p>
+
+  <div class="callout">
+    <p>"Phase 3 is when MYAMI stops being a company that does things and becomes <em>a world that people want to be part of.</em>"</p>
+  </div>
+</div>
+
+<div class="content reveal" id="p3-structure">
+  <div class="label">Full Division Structure — Phase 3</div>
+  <h2>All Four Arms Fully Operational</h2>
+
+  <div class="div-seq">
+    <div class="div-seq-card">
+      <div class="div-seq-num">Division 01</div>
+      <div class="div-seq-name">MY<span class="a">A</span>MI</div>
+      <div class="div-seq-arm">Tech</div>
+      <div class="div-seq-phase">Scaled — Phase 3</div>
+      <p class="div-seq-desc">Full dev team. Larger contracts. SaaS products being built. MYAMI Tech operates as a standalone studio within the company.</p>
+      <div class="div-seq-status status-now">Lead Division</div>
+    </div>
+    <div class="div-seq-card">
+      <div class="div-seq-num">Division 02</div>
+      <div class="div-seq-name">MY<span class="a">A</span>MI</div>
+      <div class="div-seq-arm">Media</div>
+      <div class="div-seq-phase">Scaled — Phase 3</div>
+      <p class="div-seq-desc">Full creative team. Retainer clients across multiple industries. MYAMI Media known as a premium brand and content studio.</p>
+      <div class="div-seq-status status-now">Lead Division</div>
+    </div>
+    <div class="div-seq-card">
+      <div class="div-seq-num">Division 03</div>
+      <div class="div-seq-name">MY<span class="a">A</span>MI</div>
+      <div class="div-seq-arm">Entertainment</div>
+      <div class="div-seq-phase">Mature — Phase 3</div>
+      <p class="div-seq-desc">MYAMI Entertainment produces and promotes its own events in addition to client work. Talent arm active. Cultural presence undeniable.</p>
+      <div class="div-seq-status status-now">Full Operation</div>
+    </div>
+    <div class="div-seq-card">
+      <div class="div-seq-num">Division 04</div>
+      <div class="div-seq-name">MY<span class="a">A</span>MI</div>
+      <div class="div-seq-arm">Wear</div>
+      <div class="div-seq-phase">Launched — Phase 3</div>
+      <p class="div-seq-desc">First full product drops live. MYAMI Wear has its own identity, its own drops cadence, and is building a product community within the MYAMI world.</p>
+      <div class="div-seq-status status-now">Launched</div>
+    </div>
+  </div>
+</div>
+
+<div class="content reveal" id="p3-targets">
+  <div class="label">5-Year Targets</div>
+  <h2>What MYAMI Looks Like at Year 5</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-num">$10M</div>
+      <div class="kpi-label">Revenue / Valuation</div>
+      <div class="kpi-desc">Combined across all four divisions</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">4</div>
+      <div class="kpi-label">Active Divisions</div>
+      <div class="kpi-desc">All fully operational with dedicated leadership</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">10+</div>
+      <div class="kpi-label">Core Team Members</div>
+      <div class="kpi-desc">Division heads and supporting team in place</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">100K+</div>
+      <div class="kpi-label">Social Audience</div>
+      <div class="kpi-desc">Combined following across all platforms</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">50+</div>
+      <div class="kpi-label">Portfolio Projects</div>
+      <div class="kpi-desc">Documented, high-quality case studies</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">1</div>
+      <div class="kpi-label">Category Owned</div>
+      <div class="kpi-desc">MYAMI is the definitive name in its chosen lane</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- DECISION FRAMEWORK -->
+<div class="chapter" id="decision">
+  <div class="chapter-num">04</div>
+  <div class="chapter-body">
+    <div class="chapter-label">Operations</div>
+    <div class="chapter-title">Decision Framework</div>
+    <div class="chapter-desc">How MYAMI makes decisions at every stage of growth.</div>
+  </div>
+</div>
+
+<div class="content reveal">
+  <div class="label">The Framework</div>
+  <h2>Four Questions. Every Decision.</h2>
+
+  <p>Every significant decision MYAMI makes — a new client, a new service, a hire, a partnership, a product — gets run through these four questions. If it can't pass all four, the answer is no.</p>
+
+  <div class="rule-list">
+    <div class="rule-item">
+      <div class="rule-mark">Q1</div>
+      <div class="rule-text"><strong>Does this make us look like we've already arrived?</strong> Every touchpoint is brand. If a decision makes MYAMI look like it's trying too hard, compromising quality, or chasing revenue at the expense of reputation — the answer is no.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-mark">Q2</div>
+      <div class="rule-text"><strong>Does this serve the phase we're in?</strong> Phase 1 needs clients and cash. Phase 2 needs scale and team. Phase 3 needs brand and systems. An opportunity that's right for Phase 3 but wrong for Phase 1 is still wrong for Phase 1.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-mark">Q3</div>
+      <div class="rule-text"><strong>Can we deliver this excellently?</strong> MYAMI will not take work it cannot do at the level the brand promises. Average delivery is worse than no delivery — it leaves a client with evidence that the brand is wrong about itself.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-mark">Q4</div>
+      <div class="rule-text"><strong>Does this move something forward?</strong> Revenue, reputation, relationships, or skills. If a decision doesn't clearly advance at least one of these four, it is a distraction. MYAMI's most limited resource in Phase 1 is time — spend it on things that compound.</div>
+    </div>
+  </div>
+</div>
+
+<!-- NON-NEGOTIABLES -->
+<div class="content reveal" id="rules">
+  <div class="label">Non-Negotiables</div>
+  <h2>The Rules That Never Change</h2>
+  <p>These apply in Phase 1, Phase 2, Phase 3, and every phase after. They are not guidelines — they are the floor below which MYAMI does not go, regardless of circumstances or pressure.</p>
+
+  <div class="rule-list">
+    <div class="rule-item">
+      <div class="rule-mark">01</div>
+      <div class="rule-text"><strong>The work comes first.</strong> MYAMI's brand exists to serve what it builds — not the other way around. When the brand and the work are in conflict, the work wins. Always.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-mark">02</div>
+      <div class="rule-text"><strong>Deliver what you promise.</strong> Underpromise and overdeliver. Never the reverse. A client who gets more than they expected becomes a referral. A client who gets less becomes a warning.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-mark">03</div>
+      <div class="rule-text"><strong>Be selective.</strong> MYAMI does not take every project. It takes the ones where it can do something worth doing. Saying no to the wrong clients protects the capacity to say yes to the right ones.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-mark">04</div>
+      <div class="rule-text"><strong>Ship consistently.</strong> Every week there is a deliverable. A piece of content, a client project, a new capability built. Consistency compounds. Silence does not.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-mark">05</div>
+      <div class="rule-text"><strong>Document everything.</strong> Every project, every lesson, every result. The portfolio is not just a sales tool — it is the evidence that MYAMI is what it says it is. Build it deliberately from day one.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-mark">06</div>
+      <div class="rule-text"><strong>Never compete on price.</strong> MYAMI competes on quality, conviction, and cultural credibility. The moment MYAMI starts positioning on price, it stops being a premium brand. Price communicates value — protect it.</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-mark">07</div>
+      <div class="rule-text"><strong>Bias toward action.</strong> Analysis is useful. Planning is useful. But MYAMI moves — it builds, ships, and learns from real output. The plan serves the execution, not the other way around.</div>
+    </div>
+  </div>
+</div>
+
+<!-- KPIs -->
+<div class="content reveal" id="kpis">
+  <div class="label">Key Performance Indicators</div>
+  <h2>How MYAMI Measures Progress</h2>
+  <p>These are the numbers that matter at each phase. Not vanity metrics — real indicators of whether the business is moving in the right direction.</p>
+
+  <div class="milestone-block">
+    <div class="milestone-header">
+      <div class="milestone-header-cell">Metric</div>
+      <div class="milestone-header-cell">Phase 1 Target</div>
+      <div class="milestone-header-cell">Phase 2 Target</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Monthly Revenue</div>
+      <div class="milestone-text">$2,000–5,000/month by end of Year 1</div>
+      <div class="milestone-div">$20,000–40,000/mo</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Active Retainers</div>
+      <div class="milestone-text">2–3 clients on monthly retainer by Month 6</div>
+      <div class="milestone-div">8–12 retainers</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Portfolio Projects</div>
+      <div class="milestone-text">6–8 documented case studies by Month 6</div>
+      <div class="milestone-div">25–50 projects</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Social Following</div>
+      <div class="milestone-text">1,000+ combined followers by Month 3</div>
+      <div class="milestone-div">10,000–50,000</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Referral Rate</div>
+      <div class="milestone-text">First referral from a client by Month 3</div>
+      <div class="milestone-div">40%+ of new clients via referral</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone-time">Content Cadence</div>
+      <div class="milestone-text">Minimum 3 posts/week across platforms</div>
+      <div class="milestone-div">Daily across all platforms</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CLOSING -->
+<div class="closing reveal">
+  <div class="closing-wm">MYAMI</div>
+  <div class="closing-label">The Official Blueprint — End of Document</div>
+  <p class="closing-statement">
+    "The plan is clear. The brand is built. The infrastructure exists.<br/>
+    <em>Now the only variable is execution.</em>"
+  </p>
+  <div class="closing-logo">MY<span>A</span>MI</div>
+  <div class="closing-sub">Technology · Media · Culture · Blueprint v1.0 · 2025</div>
+</div>
+
+</main>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('[id]');
+  const links = document.querySelectorAll('.sidebar a');
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => sectionObserver.observe(s));
+</script>
+
+</body>
+</html>
