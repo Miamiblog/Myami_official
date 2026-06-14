@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MYAMI — Technology. Media. Culture.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --black:#09090A;--warm:#141210;--ash:#252220;--ash-mid:#332F2A;
+  --gold:#C8A84B;--gold-lt:#E8C96A;--gold-dk:#7A6225;
+  --linen:#F2EDE4;--cream:#DDD5C3;--muted:#6B6357;--muted-lt:#8A8077;
+  --fd:'Syne',sans-serif;--fs:'Cormorant Garamond',serif;--fm:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--linen);font-family:var(--fs);overflow-x:hidden;cursor:none;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");pointer-events:none;z-index:9000;}
+
+/* CURSOR */
+.cur{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;}
+.cur-r{position:fixed;width:36px;height:36px;border:1px solid rgba(200,168,75,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:26px 56px;}
+nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(9,9,10,.97) 0%,transparent 100%);pointer-events:none;}
+.nav-logo{font-family:var(--fd);font-size:20px;font-weight:800;letter-spacing:.18em;color:var(--linen);text-decoration:none;position:relative;z-index:1;cursor:none;}
+.nav-logo .a{color:var(--gold);}
+.nav-links{display:flex;gap:36px;list-style:none;position:relative;z-index:1;}
+.nav-links a{font-family:var(--fm);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;cursor:none;}
+.nav-links a:hover,.nav-links a.active{color:var(--linen);}
+.nav-links a.active{color:var(--gold);}
+.nav-cta{position:relative;z-index:1;font-family:var(--fm);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:11px 26px;text-decoration:none;transition:background .3s;cursor:none;}
+.nav-cta:hover{background:var(--linen);}
+.nav-mobile-btn{display:none;position:relative;z-index:1;background:none;border:none;cursor:none;padding:4px;}
+.nav-mobile-btn span{display:block;width:22px;height:1px;background:var(--linen);margin:5px 0;transition:all .3s;}
+
+/* PAGES */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* PAGE TRANSITION */
+.page{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+.page.active{opacity:1;transform:translateY(0);}
+
+/* COMMON */
+section{padding:112px 56px;}
+.sec-label{font-family:var(--fm);font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:56px;display:flex;align-items:center;gap:14px;}
+.sec-label::before{content:'';display:block;width:24px;height:1px;background:var(--gold);}
+.page-link{display:inline-flex;align-items:center;gap:12px;font-family:var(--fm);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:gap .3s;cursor:none;margin-top:40px;}
+.page-link:hover{gap:20px;}
+.page-link::after{content:'↗';}
+h2{font-family:var(--fd);font-size:clamp(28px,3.5vw,44px);font-weight:800;letter-spacing:.03em;color:var(--linen);margin-bottom:24px;}
+h3{font-family:var(--fd);font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;margin-top:40px;}
+p.body{font-family:var(--fs);font-size:17px;line-height:1.9;color:var(--muted-lt);margin-bottom:20px;max-width:680px;}
+p.body strong{color:var(--linen);font-weight:500;}
+p.body:last-child{margin-bottom:0;}
+.statement{font-family:var(--fs);font-size:clamp(26px,3.2vw,44px);font-style:italic;font-weight:300;line-height:1.25;color:var(--linen);margin:36px 0;max-width:720px;}
+.statement em{font-style:normal;color:var(--gold);font-weight:500;}
+.callout{background:var(--warm);border-left:3px solid var(--gold);padding:28px 36px;margin:36px 0;max-width:680px;}
+.callout p{font-family:var(--fs);font-size:19px;font-style:italic;color:var(--linen);margin:0;max-width:none;}
+.callout p em{color:var(--gold);font-style:normal;font-weight:500;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:36px 0;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:36px 0;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:36px 0;}
+.card{background:var(--warm);padding:36px;}
+.card-label{font-family:var(--fm);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.card-title{font-family:var(--fd);font-size:18px;font-weight:700;letter-spacing:.05em;color:var(--linen);margin-bottom:12px;}
+.card p{font-family:var(--fs);font-size:14px;line-height:1.75;color:var(--muted);margin:0;}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .85s ease,transform .85s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.divider{width:100%;height:1px;background:var(--ash);margin:0;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HOME PAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 56px 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 68% 38%,rgba(200,168,75,.08) 0%,transparent 70%),radial-gradient(ellipse 35% 45% at 18% 78%,rgba(200,168,75,.04) 0%,transparent 60%),var(--black);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,168,75,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,.035) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 80%);}
+.hero-line{position:absolute;top:0;right:200px;width:1px;height:100%;background:linear-gradient(to bottom,transparent 0%,rgba(200,168,75,.13) 30%,rgba(200,168,75,.13) 70%,transparent 100%);}
+.hero-eyebrow{font-family:var(--fm);font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;position:relative;z-index:1;display:flex;align-items:center;gap:16px;opacity:0;animation:fadeUp .8s ease forwards .3s;}
+.hero-eyebrow::before{content:'';display:block;width:36px;height:1px;background:var(--gold);}
+.hero-title{font-family:var(--fd);font-size:clamp(72px,12vw,170px);font-weight:800;line-height:.9;letter-spacing:.02em;position:relative;z-index:1;opacity:0;animation:fadeUp 1s ease forwards .5s;}
+.hero-title .outline{-webkit-text-stroke:1px rgba(242,237,228,.2);color:transparent;}
+.hero-title .gold{color:var(--gold);}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;margin-top:48px;position:relative;z-index:1;opacity:0;animation:fadeUp .8s ease forwards .9s;}
+.hero-desc{max-width:380px;font-family:var(--fs);font-size:17px;line-height:1.85;color:var(--muted-lt);font-weight:300;}
+.hero-desc em{font-style:italic;color:var(--linen);}
+.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:12px;font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);}
+.scroll-line{width:1px;height:56px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollP 2s ease infinite;}
+.hero-stats{position:absolute;right:56px;bottom:200px;z-index:1;opacity:0;animation:fadeUp .8s ease forwards 1.1s;}
+.hero-stat{text-align:right;margin-bottom:28px;}
+.hero-stat-n{font-family:var(--fd);font-size:36px;font-weight:800;color:var(--linen);line-height:1;}
+.hero-stat-l{font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+
+/* MARQUEE */
+.marquee-wrap{border-top:1px solid var(--ash);border-bottom:1px solid var(--ash);overflow:hidden;padding:14px 0;background:var(--warm);}
+.marquee-track{display:flex;animation:marquee 22s linear infinite;white-space:nowrap;}
+.marquee-item{display:flex;align-items:center;gap:28px;padding:0 28px;font-family:var(--fm);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);}
+.marquee-item span{color:var(--gold);font-size:7px;}
+
+/* HOME PREVIEW SECTIONS */
+.home-preview{padding:96px 56px;border-bottom:1px solid var(--ash);}
+.home-preview:last-of-type{border-bottom:none;}
+.preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.preview-grid.reverse{direction:rtl;}
+.preview-grid.reverse>*{direction:ltr;}
+.preview-num{font-family:var(--fd);font-size:clamp(80px,12vw,150px);font-weight:800;color:rgba(200,168,75,.06);line-height:1;margin-bottom:-20px;}
+.preview-heading{font-family:var(--fd);font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:.02em;line-height:1;color:var(--linen);margin-bottom:20px;}
+.preview-heading .gold{color:var(--gold);}
+.preview-text{font-family:var(--fs);font-size:16px;line-height:1.9;color:var(--muted-lt);}
+.preview-text strong{color:var(--linen);font-weight:500;}
+.preview-visual{background:var(--warm);position:relative;overflow:hidden;}
+.preview-visual-inner{padding:56px 48px;min-height:320px;display:flex;flex-direction:column;justify-content:space-between;}
+.div-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.div-mini{background:var(--black);padding:24px 20px;}
+.div-mini-num{font-family:var(--fm);font-size:8px;letter-spacing:.2em;color:var(--gold-dk);margin-bottom:8px;}
+.div-mini-name{font-family:var(--fd);font-size:20px;font-weight:800;letter-spacing:.08em;color:var(--linen);line-height:1;}
+.div-mini-name .a{color:var(--gold);}
+.div-mini-sub{font-family:var(--fm);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:4px;}
+.manifesto-preview-visual{min-height:320px;display:flex;align-items:center;justify-content:center;background:var(--warm);position:relative;overflow:hidden;padding:48px;}
+.manifesto-preview-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(200,168,75,.05) 0%,transparent 70%);}
+.manifesto-quote-preview{font-family:var(--fs);font-size:clamp(18px,2.5vw,28px);font-style:italic;font-weight:300;color:var(--linen);line-height:1.4;text-align:center;position:relative;z-index:1;}
+.manifesto-quote-preview em{font-style:normal;color:var(--gold);font-weight:500;}
+.work-preview-visual{min-height:320px;background:var(--warm);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;overflow:hidden;}
+.work-coming{font-family:var(--fd);font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:.05em;color:var(--linen);}
+.work-sub{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);}
+.work-dots{display:flex;gap:8px;margin-top:8px;}
+.work-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.3;}
+.work-dot:nth-child(2){opacity:.6;}
+.work-dot:nth-child(3){opacity:1;}
+
+/* HOME CTA */
+.home-cta{padding:140px 56px;text-align:center;position:relative;overflow:hidden;}
+.home-cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(200,168,75,.06) 0%,transparent 70%);}
+.home-cta-wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--fd);font-size:clamp(80px,16vw,220px);font-weight:800;color:rgba(200,168,75,.03);white-space:nowrap;pointer-events:none;letter-spacing:.05em;}
+.home-cta-label{font-family:var(--fm);font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;position:relative;z-index:1;}
+.home-cta-heading{font-family:var(--fd);font-size:clamp(48px,8vw,110px);font-weight:800;line-height:.95;letter-spacing:.02em;margin-bottom:48px;position:relative;z-index:1;}
+.home-cta-heading .outline{-webkit-text-stroke:1px rgba(242,237,228,.18);color:transparent;}
+.cta-actions{display:flex;justify-content:center;align-items:center;gap:20px;position:relative;z-index:1;}
+.btn-p{font-family:var(--fm);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:17px 50px;text-decoration:none;font-weight:400;transition:background .3s,transform .2s;display:inline-block;cursor:none;}
+.btn-p:hover{background:var(--linen);transform:translateY(-2px);}
+.btn-s{font-family:var(--fm);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--linen);border:1px solid var(--ash);padding:17px 50px;text-decoration:none;font-weight:400;transition:border-color .3s,color .3s;display:inline-block;cursor:none;}
+.btn-s:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ABOUT PAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.page-hero{min-height:60vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 56px 72px;position:relative;overflow:hidden;}
+.page-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 70% 30%,rgba(200,168,75,.07) 0%,transparent 70%),var(--black);}
+.page-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,168,75,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,.03) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 70% 70% at 60% 40%,black 0%,transparent 80%);}
+.page-hero-eyebrow{font-family:var(--fm);font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:14px;position:relative;z-index:1;}
+.page-hero-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--gold);}
+.page-hero-title{font-family:var(--fd);font-size:clamp(52px,9vw,120px);font-weight:800;line-height:.9;letter-spacing:.02em;position:relative;z-index:1;}
+.page-hero-title .gold{color:var(--gold);}
+.page-hero-title .outline{-webkit-text-stroke:1px rgba(242,237,228,.2);color:transparent;}
+.page-hero-desc{font-family:var(--fs);font-size:18px;font-style:italic;font-weight:300;color:var(--muted-lt);max-width:560px;margin-top:28px;line-height:1.75;position:relative;z-index:1;}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-heading{font-family:var(--fs);font-size:clamp(30px,3.8vw,52px);font-weight:400;line-height:1.2;}
+.about-heading em{font-style:italic;color:var(--gold);}
+.four-feelings{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin:40px 0;}
+.feeling-card{background:var(--warm);padding:32px;}
+.feeling-num{font-family:var(--fm);font-size:9px;letter-spacing:.25em;color:var(--gold);margin-bottom:10px;}
+.feeling-name{font-family:var(--fd);font-size:20px;font-weight:800;letter-spacing:.05em;color:var(--linen);margin-bottom:10px;}
+.feeling-desc{font-family:var(--fs);font-size:14px;line-height:1.75;color:var(--muted);}
+.belief-item{display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--ash);align-items:flex-start;}
+.belief-item:first-child{border-top:1px solid var(--ash);}
+.belief-mark{font-family:var(--fm);font-size:9px;letter-spacing:.15em;color:var(--gold);flex-shrink:0;margin-top:4px;text-transform:uppercase;}
+.belief-text{font-family:var(--fs);font-size:16px;font-style:italic;color:var(--linen);line-height:1.65;font-weight:300;}
+.belief-text strong{font-style:normal;font-weight:500;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DIVISIONS PAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.div-card{background:var(--warm);padding:56px 48px;position:relative;overflow:hidden;border-bottom:1px solid var(--ash);transition:background .4s;}
+.div-card:last-child{border-bottom:none;}
+.div-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,168,75,.06) 0%,transparent 55%);opacity:0;transition:opacity .4s;}
+.div-card:hover::before{opacity:1;}
+.div-card:hover{background:#0e0c0b;}
+.div-card-inner{display:grid;grid-template-columns:240px 1fr 1fr;gap:56px;align-items:start;}
+.div-card-left{}
+.div-card-num{font-family:var(--fm);font-size:9px;letter-spacing:.3em;color:var(--gold-dk);margin-bottom:16px;}
+.div-card-name{font-family:var(--fd);font-size:44px;font-weight:800;letter-spacing:.08em;line-height:1;color:var(--linen);}
+.div-card-name .a{color:var(--gold);}
+.div-card-arm{font-family:var(--fm);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-top:8px;}
+.div-card-role{font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted-lt);margin-top:20px;margin-bottom:0;}
+.div-card-desc{font-family:var(--fs);font-size:16px;line-height:1.9;color:var(--muted-lt);}
+.div-card-services{display:flex;flex-direction:column;gap:0;}
+.div-service{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--ash);font-family:var(--fs);font-size:15px;color:var(--muted-lt);}
+.div-service:first-child{border-top:1px solid var(--ash);}
+.div-service::before{content:'';display:block;width:4px;height:4px;border-radius:50%;background:var(--gold-dk);flex-shrink:0;}
+.div-card-big-num{position:absolute;right:48px;bottom:24px;font-family:var(--fd);font-size:120px;font-weight:800;color:rgba(200,168,75,.04);line-height:1;pointer-events:none;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   WORK PAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.work-hero-section{padding:120px 56px 80px;}
+.work-hero-top{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:80px;}
+.work-status{background:var(--warm);padding:40px;border-left:3px solid var(--gold);}
+.work-status-label{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.work-status-text{font-family:var(--fs);font-size:18px;font-style:italic;color:var(--linen);line-height:1.6;}
+.work-status-sub{font-family:var(--fm);font-size:10px;letter-spacing:.15em;color:var(--muted);margin-top:16px;}
+.work-concept-label{font-family:var(--fm);font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:48px;display:flex;align-items:center;gap:14px;}
+.work-concept-label::before{content:'';display:block;width:24px;height:1px;background:var(--gold);}
+.concepts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.concept-card{background:var(--warm);padding:40px 36px;position:relative;overflow:hidden;transition:background .4s;}
+.concept-card:hover{background:#181512;}
+.concept-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.concept-card:hover::before{transform:scaleX(1);}
+.concept-tag{font-family:var(--fm);font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:16px;}
+.concept-name{font-family:var(--fd);font-size:22px;font-weight:800;letter-spacing:.04em;color:var(--linen);line-height:1.1;margin-bottom:8px;}
+.concept-div{font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.concept-desc{font-family:var(--fs);font-size:14px;line-height:1.75;color:var(--muted);}
+.concept-status{margin-top:24px;display:inline-block;font-family:var(--fm);font-size:8px;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--ash);color:var(--muted);}
+.work-cta-section{padding:96px 56px;background:var(--warm);margin-top:2px;text-align:center;}
+.work-cta-text{font-family:var(--fs);font-size:clamp(24px,3vw,40px);font-style:italic;font-weight:300;color:var(--linen);margin-bottom:32px;}
+.work-cta-text em{font-style:normal;color:var(--gold);font-weight:500;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MANIFESTO PAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.manifesto-section{padding:80px 56px;border-bottom:1px solid var(--ash);max-width:860px;}
+.manifesto-section:last-child{border-bottom:none;}
+.m-num{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:48px;display:flex;align-items:center;gap:14px;}
+.m-num::before{content:'';display:block;width:22px;height:1px;background:var(--gold);}
+.m-statement{font-family:var(--fs);font-size:clamp(28px,3.8vw,48px);font-weight:300;font-style:italic;line-height:1.2;color:var(--linen);margin-bottom:40px;}
+.m-statement em{font-style:normal;color:var(--gold);font-weight:500;}
+.m-body{font-family:var(--fs);font-size:17px;line-height:1.95;color:var(--muted-lt);margin-bottom:24px;max-width:680px;}
+.m-body strong{color:var(--linen);font-weight:500;}
+.m-pull{font-family:var(--fs);font-size:clamp(20px,2.5vw,30px);font-style:italic;font-weight:300;line-height:1.35;color:var(--linen);border-left:3px solid var(--gold);padding:6px 0 6px 28px;margin:40px 0;}
+.m-pull em{font-style:normal;color:var(--gold);font-weight:500;}
+.enemy-item{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--ash);align-items:flex-start;}
+.enemy-item:first-child{border-top:1px solid var(--ash);}
+.enemy-x{font-family:var(--fm);font-size:9px;letter-spacing:.12em;color:rgba(168,80,80,.7);flex-shrink:0;margin-top:4px;}
+.enemy-text{font-family:var(--fs);font-size:16px;color:var(--muted-lt);line-height:1.7;}
+.enemy-text strong{color:var(--linen);font-weight:500;}
+.m-display{font-family:var(--fd);font-size:clamp(32px,5vw,64px);font-weight:800;letter-spacing:.02em;color:var(--linen);line-height:1;margin:36px 0;}
+.m-display .gold{color:var(--gold);}
+.manifesto-close{padding:100px 56px;text-align:center;position:relative;overflow:hidden;background:var(--warm);}
+.manifesto-close-wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--fd);font-size:clamp(80px,14vw,180px);font-weight:800;color:rgba(200,168,75,.04);white-space:nowrap;pointer-events:none;}
+.manifesto-close-q{font-family:var(--fs);font-size:clamp(24px,3.2vw,44px);font-style:italic;font-weight:300;color:var(--linen);max-width:680px;margin:0 auto 32px;line-height:1.3;position:relative;z-index:1;}
+.manifesto-close-q em{font-style:normal;color:var(--gold);font-weight:500;}
+.manifesto-close-logo{font-family:var(--fd);font-size:28px;font-weight:800;letter-spacing:.2em;color:var(--linen);position:relative;z-index:1;}
+.manifesto-close-logo span{color:var(--gold);}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CONTACT PAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:0;}
+.contact-left{padding:80px 56px;background:var(--warm);}
+.contact-right{padding:80px 56px;background:var(--black);}
+.contact-info{margin-top:48px;}
+.contact-info-item{padding:24px 0;border-bottom:1px solid var(--ash);}
+.contact-info-item:first-child{border-top:1px solid var(--ash);}
+.contact-info-label{font-family:var(--fm);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.contact-info-val{font-family:var(--fs);font-size:17px;color:var(--linen);}
+.contact-info-val a{color:var(--linen);text-decoration:none;transition:color .3s;}
+.contact-info-val a:hover{color:var(--gold);}
+.contact-socials{display:flex;gap:20px;margin-top:40px;flex-wrap:wrap;}
+.contact-social{font-family:var(--fm);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;cursor:none;}
+.contact-social:hover{color:var(--gold);}
+.form-group{margin-bottom:20px;}
+.form-label{font-family:var(--fm);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px;}
+.form-input,.form-textarea,.form-select{width:100%;background:var(--warm);border:1px solid var(--ash);color:var(--linen);font-family:var(--fs);font-size:16px;padding:14px 18px;outline:none;transition:border-color .3s;cursor:none;-webkit-appearance:none;}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--muted);}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--gold);}
+.form-textarea{resize:vertical;min-height:140px;}
+.form-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6357' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
+.form-select option{background:var(--warm);color:var(--linen);}
+.form-btn{width:100%;font-family:var(--fm);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--black);background:var(--gold);border:none;padding:18px;cursor:none;font-weight:400;transition:background .3s;margin-top:8px;}
+.form-btn:hover{background:var(--linen);}
+.divisions-contact{margin-top:48px;}
+.div-contact-item{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--ash);font-family:var(--fm);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+.div-contact-item:first-child{border-top:1px solid var(--ash);}
+.div-contact-item::before{content:'';display:block;width:6px;height:6px;background:var(--gold-dk);flex-shrink:0;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--ash);padding:56px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;align-items:end;background:var(--warm);}
+.footer-logo{font-family:var(--fd);font-size:28px;font-weight:800;letter-spacing:.18em;color:var(--linen);margin-bottom:10px;}
+.footer-logo .a{color:var(--gold);}
+.footer-tag{font-family:var(--fs);font-size:13px;font-style:italic;color:var(--muted);line-height:1.7;}
+.footer-links{display:flex;flex-direction:column;gap:14px;}
+.footer-links a{font-family:var(--fm);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;cursor:none;}
+.footer-links a:hover{color:var(--gold);}
+.footer-right{text-align:right;}
+.footer-socials{display:flex;justify-content:flex-end;gap:20px;margin-bottom:20px;}
+.footer-socials a{font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;cursor:none;}
+.footer-socials a:hover{color:var(--gold);}
+.footer-copy{font-family:var(--fm);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+
+/* KEYFRAMES */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scrollP{0%,100%{opacity:.4;}50%{opacity:1;}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:22px 28px;}
+  .nav-links{display:none;}
+  .nav-mobile-btn{display:block;}
+  section,.home-preview,.work-hero-section,.manifesto-section,.contact-left,.contact-right{padding:64px 28px;}
+  .hero,.page-hero{padding:0 28px 56px;}
+  .hero-stats,.hero-line{display:none;}
+  .hero-bottom{flex-direction:column;gap:32px;align-items:flex-start;}
+  .preview-grid,.about-grid{grid-template-columns:1fr;gap:40px;}
+  .preview-grid.reverse{direction:ltr;}
+  .div-card-inner{grid-template-columns:1fr;}
+  .grid2,.grid3,.grid4,.concepts-grid,.contact-grid,.four-feelings{grid-template-columns:1fr;}
+  footer{grid-template-columns:1fr;gap:32px;}
+  .footer-right{text-align:left;}
+  .footer-socials{justify-content:flex-start;}
+  .home-cta{padding:80px 28px;}
+  .cta-actions{flex-direction:column;}
+}
+@media(max-width:640px){
+  .home-cta-heading{font-size:clamp(40px,11vw,70px);}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#" onclick="goTo('home');return false;">MY<span class="a">A</span>MI</a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="goTo('home');return false;" data-page="home">Home</a></li>
+    <li><a href="#" onclick="goTo('about');return false;" data-page="about">About</a></li>
+    <li><a href="#" onclick="goTo('divisions');return false;" data-page="divisions">Divisions</a></li>
+    <li><a href="#" onclick="goTo('work');return false;" data-page="work">Work</a></li>
+    <li><a href="#" onclick="goTo('manifesto');return false;" data-page="manifesto">Manifesto</a></li>
+  </ul>
+  <a class="nav-cta" href="#" onclick="goTo('contact');return false;">Work With Us</a>
+  <button class="nav-mobile-btn" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
+</nav>
+
+
+<!-- ═══════════════════════════════════
+     HOME PAGE
+═══════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-line"></div>
+    <div class="hero-eyebrow">Technology. Media. Culture.</div>
+    <h1 class="hero-title">BUILD<br/><span class="outline">WHAT'S</span><br/><span class="gold">NEXT.</span></h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">A modern digital and entertainment company <em>elevating brands</em> through technology, media, and cultural influence.</p>
+      <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-n">4</div><div class="hero-stat-l">Divisions</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">1</div><div class="hero-stat-l">Vision</div></div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item">MYAMI TECH <span>✦</span></div>
+      <div class="marquee-item">MYAMI MEDIA <span>✦</span></div>
+      <div class="marquee-item">MYAMI ENTERTAINMENT <span>✦</span></div>
+      <div class="marquee-item">MYAMI WEAR <span>✦</span></div>
+      <div class="marquee-item">WEB DEVELOPMENT <span>✦</span></div>
+      <div class="marquee-item">BRAND STRATEGY <span>✦</span></div>
+      <div class="marquee-item">EVENT PROMOTION <span>✦</span></div>
+      <div class="marquee-item">DIGITAL MEDIA <span>✦</span></div>
+      <div class="marquee-item">MYAMI TECH <span>✦</span></div>
+      <div class="marquee-item">MYAMI MEDIA <span>✦</span></div>
+      <div class="marquee-item">MYAMI ENTERTAINMENT <span>✦</span></div>
+      <div class="marquee-item">MYAMI WEAR <span>✦</span></div>
+      <div class="marquee-item">WEB DEVELOPMENT <span>✦</span></div>
+      <div class="marquee-item">BRAND STRATEGY <span>✦</span></div>
+      <div class="marquee-item">EVENT PROMOTION <span>✦</span></div>
+      <div class="marquee-item">DIGITAL MEDIA <span>✦</span></div>
+    </div>
+  </div>
+
+  <!-- ABOUT PREVIEW -->
+  <div class="home-preview reveal">
+    <div class="preview-grid">
+      <div>
+        <div class="sec-label">Who We Are</div>
+        <div class="preview-num">01</div>
+        <h2 class="preview-heading">Built at the intersection of <span class="gold">technology</span> and culture.</h2>
+        <p class="preview-text">MYAMI is built on a simple belief: <strong>talent deserves infrastructure.</strong> Too many brands with real potential stay invisible because they lack the tools, strategy, and creative execution to break through. We exist to close that gap.</p>
+        <a class="page-link" href="#" onclick="goTo('about');return false;">Explore About</a>
+      </div>
+      <div class="preview-visual reveal">
+        <div class="preview-visual-inner">
+          <div class="sec-label" style="margin-bottom:0;">Our belief</div>
+          <div style="font-family:var(--fs);font-size:clamp(24px,3vw,38px);font-style:italic;font-weight:300;color:var(--linen);line-height:1.3;">"Talent deserves <span style="color:var(--gold);font-style:normal;font-weight:500;">infrastructure.</span>"</div>
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.25em;color:var(--muted);text-transform:uppercase;">— The MYAMI Manifesto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DIVISIONS PREVIEW -->
+  <div class="home-preview reveal">
+    <div class="preview-grid reverse">
+      <div>
+        <div class="sec-label">What We Do</div>
+        <div class="preview-num">02</div>
+        <h2 class="preview-heading">Four divisions. <span class="gold">One world.</span></h2>
+        <p class="preview-text">Tech. Media. Entertainment. Wear. Each a distinct expression of the same conviction — operating across every space where modern brands live, grow, and make their mark.</p>
+        <a class="page-link" href="#" onclick="goTo('divisions');return false;">Explore Divisions</a>
+      </div>
+      <div class="preview-visual reveal">
+        <div class="div-mini-grid">
+          <div class="div-mini"><div class="div-mini-num">01</div><div class="div-mini-name">MY<span class="a">A</span>MI</div><div class="div-mini-sub">Tech</div></div>
+          <div class="div-mini"><div class="div-mini-num">02</div><div class="div-mini-name">MY<span class="a">A</span>MI</div><div class="div-mini-sub">Media</div></div>
+          <div class="div-mini"><div class="div-mini-num">03</div><div class="div-mini-name">MY<span class="a">A</span>MI</div><div class="div-mini-sub">Entertainment</div></div>
+          <div class="div-mini"><div class="div-mini-num">04</div><div class="div-mini-name">MY<span class="a">A</span>MI</div><div class="div-mini-sub">Wear</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WORK PREVIEW -->
+  <div class="home-preview reveal">
+    <div class="preview-grid">
+      <div>
+        <div class="sec-label">Our Work</div>
+        <div class="preview-num">03</div>
+        <h2 class="preview-heading">Work that <span class="gold">speaks</span> for itself.</h2>
+        <p class="preview-text">Client projects are incoming. In the meantime — explore the concepts, visions, and projects MYAMI is building toward. The work defines the brand more than anything else we can say about it.</p>
+        <a class="page-link" href="#" onclick="goTo('work');return false;">Explore Work</a>
+      </div>
+      <div class="work-preview-visual reveal">
+        <div class="work-coming">COMING</div>
+        <div class="work-coming">SOON</div>
+        <div class="work-sub">@myami_official</div>
+        <div class="work-dots"><div class="work-dot"></div><div class="work-dot"></div><div class="work-dot"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MANIFESTO PREVIEW -->
+  <div class="home-preview reveal">
+    <div class="preview-grid reverse">
+      <div>
+        <div class="sec-label">The Manifesto</div>
+        <div class="preview-num">04</div>
+        <h2 class="preview-heading">This is what <span class="gold">we believe.</span></h2>
+        <p class="preview-text">Not a mission statement. Not a pitch. A declaration — of what MYAMI sees, what it stands for, what it's against, and who it exists to serve. Read it once and you'll know if MYAMI is for you.</p>
+        <a class="page-link" href="#" onclick="goTo('manifesto');return false;">Read the Manifesto</a>
+      </div>
+      <div class="manifesto-preview-visual reveal">
+        <div class="manifesto-quote-preview">"Most brands in our space are underfunded, underdesigned, and invisible. <em>MYAMI exists to change that.</em>"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOME CTA -->
+  <div class="home-cta reveal">
+    <div class="home-cta-bg"></div>
+    <div class="home-cta-wm">MYAMI</div>
+    <p class="home-cta-label">Ready to Build</p>
+    <h2 class="home-cta-heading">LET'S<br/><span class="outline">CREATE</span><br/>TOGETHER.</h2>
+    <div class="cta-actions">
+      <a class="btn-p" href="#" onclick="goTo('contact');return false;">Start a Project</a>
+      <a class="btn-s" href="#" onclick="goTo('divisions');return false;">Explore Divisions</a>
+    </div>
+  </div>
+
+  <footer>
+    <div><div class="footer-logo">MY<span class="a">A</span>MI</div><p class="footer-tag">Technology. Media. Culture.<br/>Building what's next.</p></div>
+    <div class="footer-links">
+      <a href="#" onclick="goTo('about');return false;">About</a>
+      <a href="#" onclick="goTo('divisions');return false;">Divisions</a>
+      <a href="#" onclick="goTo('work');return false;">Work</a>
+      <a href="#" onclick="goTo('manifesto');return false;">Manifesto</a>
+      <a href="#" onclick="goTo('contact');return false;">Contact</a>
+    </div>
+    <div class="footer-right">
+      <div class="footer-socials"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Twitter</a><a href="#">LinkedIn</a></div>
+      <p class="footer-copy">© 2025 MYAMI. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     ABOUT PAGE
+═══════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-eyebrow">Who We Are</div>
+    <h1 class="page-hero-title">ABOUT<br/><span class="gold">MY</span><span class="outline">AMI</span></h1>
+    <p class="page-hero-desc">The belief, the story, the people, and the four feelings that define everything MYAMI builds.</p>
+  </div>
+
+  <section class="reveal">
+    <div class="sec-label">The Story</div>
+    <div class="about-grid">
+      <div>
+        <h2 class="about-heading">Where <em>technology</em> meets culture and creativity meets <em>strategy.</em></h2>
+      </div>
+      <div>
+        <p class="body">MYAMI is built on a simple belief: <strong>talent deserves infrastructure.</strong> Too many brands with real potential stay invisible because they lack the tools, strategy, and creative execution to break through.</p>
+        <p class="body">We bridge that gap. Across four divisions, we deliver <strong>creative and strategic solutions</strong> that drive visibility, engagement, and growth — for businesses and creatives who are building something that matters.</p>
+        <p class="body">We are not a traditional agency. We are a <strong>creative and cultural company</strong> that builds brands, creates experiences, tells stories, and develops systems with genuine conviction about quality and craft.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="reveal">
+    <div class="sec-label">The Core Belief</div>
+    <div class="statement">Talent has never been the problem. <em>Infrastructure</em> is.</div>
+    <p class="body">The world is full of people with something real to offer — artists who move culture, builders who solve real problems, creatives who see things others can't. What they often lack is the infrastructure to match: the branding that commands respect, the digital presence that converts, the strategy that scales.</p>
+    <div style="margin:48px 0;">
+      <div class="belief-item"><div class="belief-mark">We believe</div><div class="belief-text"><strong>Quality is not a luxury.</strong> Premium creative execution should not be gatekept by budget or connection.</div></div>
+      <div class="belief-item"><div class="belief-mark">We believe</div><div class="belief-text"><strong>Culture is worth taking seriously.</strong> What comes from the streets and the youth carries real value.</div></div>
+      <div class="belief-item"><div class="belief-mark">We believe</div><div class="belief-text"><strong>Versatility is a strength.</strong> The future belongs to brands that move across spaces without losing coherence.</div></div>
+      <div class="belief-item"><div class="belief-mark">We believe</div><div class="belief-text"><strong>Execution is everything.</strong> The distance between a great idea and a great brand is built with skill and consistency.</div></div>
+      <div class="belief-item"><div class="belief-mark">We believe</div><div class="belief-text"><strong>The work speaks loudest.</strong> Not the announcement. Not the branding. What gets built, delivered, and felt.</div></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="reveal">
+    <div class="sec-label">The Four Feelings</div>
+    <h2>What MYAMI feels like.</h2>
+    <p class="body">Every touchpoint — every post, every website, every proposal, every project — should give off four simultaneous feelings. These are not contradictions. They are layers.</p>
+    <div class="four-feelings">
+      <div class="feeling-card"><div class="feeling-num">01</div><div class="feeling-name">Established</div><p class="feeling-desc">Like we've been here. The confidence of an institution from day one. Certainty in how we show up.</p></div>
+      <div class="feeling-card"><div class="feeling-num">02</div><div class="feeling-name">Disruptive</div><p class="feeling-desc">Like nothing else out there. An edge that makes MYAMI impossible to ignore or easily categorize.</p></div>
+      <div class="feeling-card"><div class="feeling-num">03</div><div class="feeling-name">Premium</div><p class="feeling-desc">Like it costs more than it does. Every touchpoint considered, crafted, and intentional. No shortcuts.</p></div>
+      <div class="feeling-card"><div class="feeling-num">04</div><div class="feeling-name">Cultural</div><p class="feeling-desc">Like it comes from somewhere real. MYAMI is not performing culture — it is rooted in it.</p></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="reveal" style="text-align:center;position:relative;overflow:hidden;padding:96px 56px;">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--fd);font-size:clamp(80px,14vw,180px);font-weight:800;color:rgba(200,168,75,.03);white-space:nowrap;pointer-events:none;">MYAMI</div>
+    <div class="sec-label" style="justify-content:center;">Ready?</div>
+    <div class="statement" style="margin:0 auto 40px;text-align:center;">"If you are building something that matters — <em>this is for you.</em>"</div>
+    <div class="cta-actions">
+      <a class="btn-p" href="#" onclick="goTo('contact');return false;">Start a Project</a>
+      <a class="btn-s" href="#" onclick="goTo('divisions');return false;">Our Divisions</a>
+    </div>
+  </section>
+
+  <footer>
+    <div><div class="footer-logo">MY<span class="a">A</span>MI</div><p class="footer-tag">Technology. Media. Culture.<br/>Building what's next.</p></div>
+    <div class="footer-links">
+      <a href="#" onclick="goTo('home');return false;">Home</a>
+      <a href="#" onclick="goTo('divisions');return false;">Divisions</a>
+      <a href="#" onclick="goTo('work');return false;">Work</a>
+      <a href="#" onclick="goTo('manifesto');return false;">Manifesto</a>
+      <a href="#" onclick="goTo('contact');return false;">Contact</a>
+    </div>
+    <div class="footer-right">
+      <div class="footer-socials"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Twitter</a><a href="#">LinkedIn</a></div>
+      <p class="footer-copy">© 2025 MYAMI. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     DIVISIONS PAGE
+═══════════════════════════════════ -->
+<div class="page" id="page-divisions">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-eyebrow">What We Do</div>
+    <h1 class="page-hero-title">OUR<br/><span class="outline">DIVISIONS</span></h1>
+    <p class="page-hero-desc">Four arms. One world. Each division is a distinct expression of the same conviction operating across a different industry.</p>
+  </div>
+
+  <div style="border-top:1px solid var(--ash);">
+    <div class="div-card reveal">
+      <div class="div-card-inner">
+        <div class="div-card-left">
+          <div class="div-card-num">Division 01</div>
+          <div class="div-card-name">MY<span class="a">A</span>MI</div>
+          <div class="div-card-arm">Tech</div>
+          <div class="div-card-role">The Infrastructure Arm</div>
+        </div>
+        <div>
+          <p class="div-card-desc">We build the digital systems that modern brands run on. From custom websites to software solutions — technology built with precision and intention. MYAMI Tech is where code becomes the invisible backbone of a brand's presence in the world.</p>
+          <p class="div-card-desc" style="margin-top:16px;">Every brand needs infrastructure. We build it right.</p>
+        </div>
+        <div class="div-card-services">
+          <div class="div-service">Web Development</div>
+          <div class="div-service">Software Solutions</div>
+          <div class="div-service">Digital Systems</div>
+          <div class="div-service">UI / UX Design</div>
+          <div class="div-service">E-Commerce</div>
+          <div class="div-service">Web Applications</div>
+        </div>
+      </div>
+      <div class="div-card-big-num">01</div>
+    </div>
+
+    <div class="div-card reveal">
+      <div class="div-card-inner">
+        <div class="div-card-left">
+          <div class="div-card-num">Division 02</div>
+          <div class="div-card-name">MY<span class="a">A</span>MI</div>
+          <div class="div-card-arm">Media</div>
+          <div class="div-card-role">The Voice Arm</div>
+        </div>
+        <div>
+          <p class="div-card-desc">We craft stories that move culture. Brand identities, content strategies, and digital narratives that make people feel something about a brand before they've even interacted with a product.</p>
+          <p class="div-card-desc" style="margin-top:16px;">Stories are not decoration. They are infrastructure.</p>
+        </div>
+        <div class="div-card-services">
+          <div class="div-service">Content Creation</div>
+          <div class="div-service">Brand Identity</div>
+          <div class="div-service">Digital Storytelling</div>
+          <div class="div-service">Social Media Strategy</div>
+          <div class="div-service">Copywriting</div>
+          <div class="div-service">Visual Direction</div>
+        </div>
+      </div>
+      <div class="div-card-big-num">02</div>
+    </div>
+
+    <div class="div-card reveal">
+      <div class="div-card-inner">
+        <div class="div-card-left">
+          <div class="div-card-num">Division 03</div>
+          <div class="div-card-name">MY<span class="a">A</span>MI</div>
+          <div class="div-card-arm">Entertainment</div>
+          <div class="div-card-role">The Experience Arm</div>
+        </div>
+        <div>
+          <p class="div-card-desc">We create moments that live in memory. Event promotion, creative experiences, and culture-driven projects that bring people together and build the kind of shared experience that no algorithm can manufacture.</p>
+          <p class="div-card-desc" style="margin-top:16px;">Culture happens in rooms. We build the rooms.</p>
+        </div>
+        <div class="div-card-services">
+          <div class="div-service">Event Promotion</div>
+          <div class="div-service">Creative Experiences</div>
+          <div class="div-service">Culture Projects</div>
+          <div class="div-service">Event Branding</div>
+          <div class="div-service">Talent Coordination</div>
+          <div class="div-service">Community Building</div>
+        </div>
+      </div>
+      <div class="div-card-big-num">03</div>
+    </div>
+
+    <div class="div-card reveal">
+      <div class="div-card-inner">
+        <div class="div-card-left">
+          <div class="div-card-num">Division 04</div>
+          <div class="div-card-name">MY<span class="a">A</span>MI</div>
+          <div class="div-card-arm">Wear</div>
+          <div class="div-card-role">The Identity Arm</div>
+        </div>
+        <div>
+          <p class="div-card-desc">Culture made wearable. Lifestyle and fashion branding that extends the MYAMI world into the physical — into the everyday, the tangible, the thing you reach for when you want to say something about who you are without words.</p>
+          <p class="div-card-desc" style="margin-top:16px;">Identity is not just digital. We make it wearable.</p>
+        </div>
+        <div class="div-card-services">
+          <div class="div-service">Lifestyle Branding</div>
+          <div class="div-service">Fashion Identity</div>
+          <div class="div-service">Product Drops</div>
+          <div class="div-service">Brand Merchandise</div>
+          <div class="div-service">Collaboration Pieces</div>
+          <div class="div-service">Cultural Campaigns</div>
+        </div>
+      </div>
+      <div class="div-card-big-num">04</div>
+    </div>
+  </div>
+
+  <section class="reveal" style="text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--fd);font-size:clamp(60px,12vw,160px);font-weight:800;color:rgba(200,168,75,.03);white-space:nowrap;pointer-events:none;">MYAMI</div>
+    <div class="sec-label" style="justify-content:center;">One Company</div>
+    <div class="statement" style="margin:0 auto 40px;text-align:center;">"Four doors into the same world. Whichever one you enter through — <em>you arrive at MYAMI.</em>"</div>
+    <div class="cta-actions">
+      <a class="btn-p" href="#" onclick="goTo('contact');return false;">Start a Project</a>
+      <a class="btn-s" href="#" onclick="goTo('work');return false;">See Our Work</a>
+    </div>
+  </section>
+
+  <footer>
+    <div><div class="footer-logo">MY<span class="a">A</span>MI</div><p class="footer-tag">Technology. Media. Culture.<br/>Building what's next.</p></div>
+    <div class="footer-links">
+      <a href="#" onclick="goTo('home');return false;">Home</a>
+      <a href="#" onclick="goTo('about');return false;">About</a>
+      <a href="#" onclick="goTo('work');return false;">Work</a>
+      <a href="#" onclick="goTo('manifesto');return false;">Manifesto</a>
+      <a href="#" onclick="goTo('contact');return false;">Contact</a>
+    </div>
+    <div class="footer-right">
+      <div class="footer-socials"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Twitter</a><a href="#">LinkedIn</a></div>
+      <p class="footer-copy">© 2025 MYAMI. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     WORK PAGE
+═══════════════════════════════════ -->
+<div class="page" id="page-work">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-eyebrow">Our Work</div>
+    <h1 class="page-hero-title">THE<br/><span class="gold">WORK</span></h1>
+    <p class="page-hero-desc">Client projects are on the way. In the meantime — the concepts, visions, and builds MYAMI is working toward.</p>
+  </div>
+
+  <div class="work-hero-section">
+    <div class="work-hero-top reveal">
+      <div>
+        <div class="sec-label">Portfolio Status</div>
+        <h2>Projects incoming.<br/>Vision already clear.</h2>
+        <p class="body">MYAMI is in its foundation phase. The first client projects are being landed right now. This page will grow into a full portfolio of case studies — each one documented, designed, and presented with the same level of craft as the work itself.</p>
+        <p class="body">Until then — below are the kinds of projects MYAMI is building toward. The concepts that define the ambition.</p>
+      </div>
+      <div class="work-status reveal">
+        <div class="work-status-label">Current Status</div>
+        <div class="work-status-text">"Foundation phase. First projects underway. Portfolio launching soon."</div>
+        <div class="work-status-sub">@myami_official — Follow the build</div>
+      </div>
+    </div>
+
+    <div class="work-concept-label">Vision Projects — What MYAMI Is Building Toward</div>
+
+    <div class="concepts-grid">
+      <div class="concept-card reveal">
+        <div class="concept-tag">Concept</div>
+        <div class="concept-name">Artist Brand Identity System</div>
+        <div class="concept-div">MYAMI Media</div>
+        <p class="concept-desc">A complete visual and brand identity for an emerging recording artist — logo, color system, typography, social presence, press kit, and digital world-building from the ground up.</p>
+        <div class="concept-status">In Vision</div>
+      </div>
+
+      <div class="concept-card reveal">
+        <div class="concept-tag">Concept</div>
+        <div class="concept-name">Cultural Event Series</div>
+        <div class="concept-div">MYAMI Entertainment</div>
+        <p class="concept-desc">A recurring event property produced and branded entirely by MYAMI — connecting music, fashion, and digital culture under one roof. MYAMI's own footprint in the physical world.</p>
+        <div class="concept-status">In Vision</div>
+      </div>
+
+      <div class="concept-card reveal">
+        <div class="concept-tag">Concept</div>
+        <div class="concept-name">Independent Business Web Presence</div>
+        <div class="concept-div">MYAMI Tech</div>
+        <p class="concept-desc">A full digital transformation for a local business with no online presence — website, SEO foundation, social setup, and content strategy. The complete package, delivered properly.</p>
+        <div class="concept-status">Actively Pitching</div>
+      </div>
+
+      <div class="concept-card reveal">
+        <div class="concept-tag">Concept</div>
+        <div class="concept-name">MYAMI Wear — First Drop</div>
+        <div class="concept-div">MYAMI Wear</div>
+        <p class="concept-desc">The first MYAMI Wear collection. Limited. Deliberate. Each piece an artifact of the culture MYAMI is building — not trend-chasing, but identity-making. The physical extension of the brand.</p>
+        <div class="concept-status">Phase 2</div>
+      </div>
+
+      <div class="concept-card reveal">
+        <div class="concept-tag">Concept</div>
+        <div class="concept-name">Promoter Brand & Digital Package</div>
+        <div class="concept-div">MYAMI Media + Entertainment</div>
+        <p class="concept-desc">A full brand and digital package for an event promoter — visual identity, flyer templates, social assets, website, and event promotion strategy. The complete infrastructure for someone running events properly.</p>
+        <div class="concept-status">Actively Pitching</div>
+      </div>
+
+      <div class="concept-card reveal">
+        <div class="concept-tag">Concept</div>
+        <div class="concept-name">Creative Talent Platform</div>
+        <div class="concept-div">MYAMI Media + Tech</div>
+        <p class="concept-desc">A digital home for MYAMI's talent roster — models, creatives, dancers, actors — built as a media platform that showcases talent, documents their stories, and connects them to opportunities.</p>
+        <div class="concept-status">Phase 2–3</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="work-cta-section reveal">
+    <div class="sec-label" style="justify-content:center;">Your Project</div>
+    <div class="work-cta-text">"Have something you want to build? <em>Let's talk.</em>"</div>
+    <div class="cta-actions">
+      <a class="btn-p" href="#" onclick="goTo('contact');return false;">Start a Project</a>
+      <a class="btn-s" href="#" onclick="goTo('divisions');return false;">Our Divisions</a>
+    </div>
+  </div>
+
+  <footer>
+    <div><div class="footer-logo">MY<span class="a">A</span>MI</div><p class="footer-tag">Technology. Media. Culture.<br/>Building what's next.</p></div>
+    <div class="footer-links">
+      <a href="#" onclick="goTo('home');return false;">Home</a>
+      <a href="#" onclick="goTo('about');return false;">About</a>
+      <a href="#" onclick="goTo('divisions');return false;">Divisions</a>
+      <a href="#" onclick="goTo('manifesto');return false;">Manifesto</a>
+      <a href="#" onclick="goTo('contact');return false;">Contact</a>
+    </div>
+    <div class="footer-right">
+      <div class="footer-socials"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Twitter</a><a href="#">LinkedIn</a></div>
+      <p class="footer-copy">© 2025 MYAMI. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     MANIFESTO PAGE
+═══════════════════════════════════ -->
+<div class="page" id="page-manifesto">
+  <div class="page-hero" style="min-height:50vh;">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-eyebrow">The MYAMI Manifesto</div>
+    <h1 class="page-hero-title">WE SEE<br/>WHAT THE<br/>WORLD <span class="gold">COULD BE.</span></h1>
+    <p class="page-hero-desc">This is not a mission statement. This is what we believe — stated plainly, without apology.</p>
+  </div>
+
+  <div style="padding:0 56px;">
+    <div class="manifesto-section reveal">
+      <div class="m-num">01 — The Seeing</div>
+      <div class="m-statement">We see talent everywhere.<br/>We see infrastructure <em>almost nowhere.</em></div>
+      <p class="m-body">Look around. The world is full of people with something real to offer — artists who move culture, builders who solve real problems, creatives who see things others can't. The talent has never been the problem.</p>
+      <p class="m-body">The problem is everything around it. The brand that doesn't communicate the value inside it. The website that makes a serious business look like an afterthought. The strategy that doesn't exist. The story that never gets told.</p>
+      <div class="m-pull">"Talent without infrastructure is a voice that never got heard. A movement that never became a company. <em>A brand that stayed invisible.</em>"</div>
+      <p class="m-body"><strong>That gap is where MYAMI lives. And it is the gap we have committed our work to closing.</strong></p>
+    </div>
+
+    <div class="manifesto-section reveal">
+      <div class="m-num">02 — The Belief</div>
+      <div class="m-display">TALENT DESERVES<br/><span class="gold">INFRASTRUCTURE.</span></div>
+      <p class="m-body">This is not a slogan. It is a diagnosis and a commitment. We repeat it not for effect — but because it is the sentence that every decision MYAMI makes will be held against.</p>
+      <div style="margin:40px 0;">
+        <div class="belief-item"><div class="belief-mark">We believe</div><div class="belief-text"><strong>Quality is not a luxury.</strong> Premium execution should not be gatekept by budget or connection.</div></div>
+        <div class="belief-item"><div class="belief-mark">We believe</div><div class="belief-text"><strong>Culture is worth taking seriously.</strong> What comes from the streets and the youth carries real value.</div></div>
+        <div class="belief-item"><div class="belief-mark">We believe</div><div class="belief-text"><strong>Versatility is a strength.</strong> Single-lane thinking is a ceiling. Culture is multidimensional — the brands that shape it must be too.</div></div>
+        <div class="belief-item"><div class="belief-mark">We believe</div><div class="belief-text"><strong>Execution is everything.</strong> The distance between a great idea and a great brand is built with skill, consistency, and relentless execution.</div></div>
+        <div class="belief-item"><div class="belief-mark">We believe</div><div class="belief-text"><strong>The work speaks loudest.</strong> Not the announcement. Not the branding. What gets built, delivered, and felt by the people it reaches.</div></div>
+      </div>
+    </div>
+
+    <div class="manifesto-section reveal">
+      <div class="m-num">03 — The Enemy</div>
+      <div class="m-statement">MYAMI is against specific things.<br/><em>Let us name them.</em></div>
+      <div style="margin:40px 0;">
+        <div class="enemy-item"><div class="enemy-x">✕ 01</div><div class="enemy-text"><strong>Invisibility by default.</strong> Real talent going unseen not because the world rejected it — but because the infrastructure to surface it was never built.</div></div>
+        <div class="enemy-item"><div class="enemy-x">✕ 02</div><div class="enemy-text"><strong>Mediocrity wearing the mask of good enough.</strong> The template flyer. The generic website. Work produced without conviction.</div></div>
+        <div class="enemy-item"><div class="enemy-x">✕ 03</div><div class="enemy-text"><strong>The gatekeeping of quality.</strong> The assumption that world-class execution is reserved for those with big budgets or the right connections.</div></div>
+        <div class="enemy-item"><div class="enemy-x">✕ 04</div><div class="enemy-text"><strong>Single-lane thinking.</strong> Brands that pick one thing and call it a vision. Culture is multidimensional — so is MYAMI.</div></div>
+        <div class="enemy-item"><div class="enemy-x">✕ 05</div><div class="enemy-text"><strong>Potential that stays potential.</strong> The idea in a notes app. The brand that exists only in its founder's head. Vision without infrastructure.</div></div>
+      </div>
+    </div>
+
+    <div class="manifesto-section reveal">
+      <div class="m-num">04 — The World We're Building</div>
+      <div class="m-statement">Four divisions.<br/>One <em>world.</em></div>
+      <p class="m-body">MYAMI Tech is the infrastructure arm. We build the digital systems that modern brands run on. MYAMI Media is the voice arm. We craft stories that move culture. MYAMI Entertainment is the experience arm. We create moments that live in memory. MYAMI Wear is the identity arm. Culture made wearable.</p>
+      <div class="m-pull">"Four doors into the same world. Whichever one you enter through — <em>you arrive at MYAMI.</em>"</div>
+    </div>
+
+    <div class="manifesto-section reveal">
+      <div class="m-num">05 — To Those We're Building For</div>
+      <div class="m-statement">If you are building something that matters — <em>this is for you.</em></div>
+      <p class="m-body">You are not waiting to be discovered. You are building. Every day, with whatever you have, toward something you believe in — even when the infrastructure around you doesn't yet reflect the scale of what you're trying to create.</p>
+      <p class="m-body"><strong>You deserve infrastructure that matches your ambition. That is exactly what we're here to build.</strong></p>
+    </div>
+  </div>
+
+  <div class="manifesto-close reveal">
+    <div class="manifesto-close-wm">MYAMI</div>
+    <div class="sec-label" style="justify-content:center;position:relative;z-index:1;">The Declaration</div>
+    <p class="manifesto-close-q">"Established. Disruptive. Premium. Cultural.<br/><em>All four. Always. Without apology.</em>"</p>
+    <div class="manifesto-close-logo">MY<span>A</span>MI</div>
+    <div style="font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:10px;position:relative;z-index:1;">Technology · Media · Culture · 2025</div>
+    <div class="cta-actions" style="margin-top:48px;">
+      <a class="btn-p" href="#" onclick="goTo('contact');return false;">Work With Us</a>
+      <a class="btn-s" href="#" onclick="goTo('about');return false;">About MYAMI</a>
+    </div>
+  </div>
+
+  <footer>
+    <div><div class="footer-logo">MY<span class="a">A</span>MI</div><p class="footer-tag">Technology. Media. Culture.<br/>Building what's next.</p></div>
+    <div class="footer-links">
+      <a href="#" onclick="goTo('home');return false;">Home</a>
+      <a href="#" onclick="goTo('about');return false;">About</a>
+      <a href="#" onclick="goTo('divisions');return false;">Divisions</a>
+      <a href="#" onclick="goTo('work');return false;">Work</a>
+      <a href="#" onclick="goTo('contact');return false;">Contact</a>
+    </div>
+    <div class="footer-right">
+      <div class="footer-socials"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Twitter</a><a href="#">LinkedIn</a></div>
+      <p class="footer-copy">© 2025 MYAMI. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     CONTACT PAGE
+═══════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-eyebrow">Get In Touch</div>
+    <h1 class="page-hero-title">LET'S<br/><span class="gold">BUILD</span><br/><span class="outline">SOMETHING.</span></h1>
+    <p class="page-hero-desc">Have a project in mind? Ready to establish your brand? We want to hear about it.</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <div class="sec-label">MYAMI</div>
+      <h2>The right partner for brands that mean business.</h2>
+      <p class="body">We don't take every project. We take the ones where we can do something worth doing — where the work will be genuinely excellent and the client is serious about building something that matters.</p>
+      <p class="body">If that sounds like you, start a conversation.</p>
+
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <div class="contact-info-label">Email</div>
+          <div class="contact-info-val"><a href="mailto:hello@myami.co">hello@myami.co</a></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-label">Website</div>
+          <div class="contact-info-val"><a href="#">myami.co</a></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-label">Social</div>
+          <div class="contact-info-val">@myami_official</div>
+        </div>
+      </div>
+
+      <div class="divisions-contact">
+        <div class="sec-label">Services</div>
+        <div class="div-contact-item">MYAMI Tech — Web & Digital Systems</div>
+        <div class="div-contact-item">MYAMI Media — Brand & Content</div>
+        <div class="div-contact-item">MYAMI Entertainment — Events & Culture</div>
+        <div class="div-contact-item">MYAMI Wear — Lifestyle & Identity</div>
+      </div>
+
+      <div class="contact-socials">
+        <a class="contact-social" href="#">Instagram</a>
+        <a class="contact-social" href="#">TikTok</a>
+        <a class="contact-social" href="#">Twitter</a>
+        <a class="contact-social" href="#">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="contact-right reveal">
+      <div class="sec-label">Start a Project</div>
+      <h2>Tell us what you're building.</h2>
+
+      <div style="margin-top:40px;">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" type="text" placeholder="Full name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="your@email.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company / Brand Name</label>
+          <input class="form-input" type="text" placeholder="Your brand or company"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Division</label>
+          <select class="form-select">
+            <option value="" disabled selected>Which division are you interested in?</option>
+            <option>MYAMI Tech — Web & Digital</option>
+            <option>MYAMI Media — Brand & Content</option>
+            <option>MYAMI Entertainment — Events & Culture</option>
+            <option>MYAMI Wear — Lifestyle & Identity</option>
+            <option>Multiple Divisions</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tell Us About Your Project</label>
+          <textarea class="form-textarea" placeholder="What are you building? What do you need? What does success look like?"></textarea>
+        </div>
+        <button class="form-btn" type="button">Send Message →</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div><div class="footer-logo">MY<span class="a">A</span>MI</div><p class="footer-tag">Technology. Media. Culture.<br/>Building what's next.</p></div>
+    <div class="footer-links">
+      <a href="#" onclick="goTo('home');return false;">Home</a>
+      <a href="#" onclick="goTo('about');return false;">About</a>
+      <a href="#" onclick="goTo('divisions');return false;">Divisions</a>
+      <a href="#" onclick="goTo('work');return false;">Work</a>
+      <a href="#" onclick="goTo('manifesto');return false;">Manifesto</a>
+    </div>
+    <div class="footer-right">
+      <div class="footer-socials"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Twitter</a><a href="#">LinkedIn</a></div>
+      <p class="footer-copy">© 2025 MYAMI. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+
+<script>
+// ── CURSOR ──
+const cur = document.getElementById('cur');
+const curR = document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animR(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(animR);})();
+document.querySelectorAll('a,button,input,select,textarea').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';curR.style.width='56px';curR.style.height='56px';curR.style.borderColor='rgba(200,168,75,.7)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';curR.style.width='36px';curR.style.height='36px';curR.style.borderColor='rgba(200,168,75,.4)';});
+});
+
+// ── NAVIGATION ──
+function goTo(pageId){
+  document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');});
+  document.querySelectorAll('[data-page]').forEach(a=>{a.classList.remove('active');});
+  const pg=document.getElementById('page-'+pageId);
+  if(pg){
+    pg.classList.add('active');
+    setTimeout(()=>{window.scrollTo({top:0,behavior:'smooth'});},50);
+  }
+  const link=document.querySelector('[data-page="'+pageId+'"]');
+  if(link)link.classList.add('active');
+  initReveal();
+}
+
+// ── MOBILE NAV ──
+function toggleMobileNav(){
+  const links=document.querySelector('.nav-links');
+  links.style.display=links.style.display==='flex'?'none':'flex';
+  links.style.flexDirection='column';
+  links.style.position='fixed';
+  links.style.top='70px';
+  links.style.left='0';
+  links.style.right='0';
+  links.style.background='rgba(9,9,10,.97)';
+  links.style.padding='24px';
+  links.style.gap='16px';
+  links.style.zIndex='99';
+}
+
+// ── SCROLL REVEAL ──
+function initReveal(){
+  setTimeout(()=>{
+    const reveals=document.querySelectorAll('.page.active .reveal');
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+    },{threshold:.08});
+    reveals.forEach(el=>{el.classList.remove('visible');obs.observe(el);});
+  },100);
+}
+
+// Init
+initReveal();
+goTo('home');
+</script>
+
+</body>
+</html>
