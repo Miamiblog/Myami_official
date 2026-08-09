@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>MYAMI — Corporate Profile</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+
+<style>
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --black:#09090A;
+  --warm:#141210;
+  --ash:#252220;
+  --ash-mid:#332F2A;
+
+  --gold:#C8A84B;
+  --gold-lt:#E8C96A;
+  --gold-dk:#7A6225;
+
+  --linen:#F2EDE4;
+  --cream:#DDD5C3;
+  --muted:#6B6357;
+  --muted-lt:#8A8077;
+
+  --fd:'Syne',sans-serif;
+  --fs:'Cormorant Garamond',serif;
+  --fm:'DM Mono',monospace;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--black);
+  color:var(--linen);
+  font-family:var(--fs);
+  overflow-x:hidden;
+}
+
+/* FILM GRAIN */
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9000;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:220px;
+  background:var(--warm);
+  border-right:1px solid var(--ash);
+  padding:40px 0;
+  z-index:100;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+}
+
+.sidebar-logo{
+  font-family:var(--fd);
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.18em;
+  color:var(--linen);
+  padding:0 28px 28px;
+  border-bottom:1px solid var(--ash);
+  margin-bottom:24px;
+}
+
+.sidebar-logo .a{
+  color:var(--gold);
+}
+
+.sidebar-doc{
+  font-family:var(--fm);
+  font-size:7px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:block;
+  margin-top:5px;
+}
+
+.nav-group{
+  margin-bottom:18px;
+}
+
+.nav-group-label{
+  font-family:var(--fm);
+  font-size:7px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold-dk);
+  padding:0 28px 8px;
+  display:block;
+}
+
+.sidebar a{
+  display:block;
+  font-family:var(--fm);
+  font-size:10px;
+  letter-spacing:.1em;
+  color:var(--muted);
+  text-decoration:none;
+  padding:8px 28px;
+  border-left:2px solid transparent;
+  transition:.25s;
+  line-height:1.4;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+  color:var(--linen);
+  background:rgba(200,168,75,.05);
+  border-left-color:var(--gold);
+}
+
+.sidebar-footer{
+  margin-top:auto;
+  padding:20px 28px 0;
+  border-top:1px solid var(--ash);
+  font-family:var(--fm);
+  font-size:7px;
+  letter-spacing:.12em;
+  color:var(--muted);
+  line-height:2;
+}
+
+/* MAIN */
+
+.main{
+  margin-left:220px;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  padding:64px 80px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid var(--ash);
+}
+
+.hero-glow{
+  position:absolute;
+  width:750px;
+  height:750px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(200,168,75,.09) 0%,
+    transparent 68%
+  );
+  top:-300px;
+  right:-180px;
+}
+
+.hero-grid{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(200,168,75,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,168,75,.025) 1px,transparent 1px);
+  background-size:56px 56px;
+}
+
+.hero-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  position:relative;
+  z-index:2;
+}
+
+.badge{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold);
+  border:1px solid var(--gold-dk);
+  padding:7px 15px;
+}
+
+.hero-ref{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.15em;
+  color:var(--muted);
+  text-align:right;
+  line-height:2;
+}
+
+.hero-center{
+  position:relative;
+  z-index:2;
+}
+
+.eyebrow{
+  font-family:var(--fm);
+  font-size:9px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:28px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.eyebrow::before{
+  content:'';
+  width:25px;
+  height:1px;
+  background:var(--gold);
+}
+
+.wordmark{
+  font-family:var(--fd);
+  font-size:clamp(80px,11vw,155px);
+  font-weight:800;
+  letter-spacing:.06em;
+  line-height:.88;
+  margin-bottom:32px;
+}
+
+.wordmark .a{
+  color:var(--gold);
+}
+
+.hero-title{
+  font-family:var(--fs);
+  font-size:clamp(25px,3vw,40px);
+  line-height:1.25;
+  font-weight:300;
+  font-style:italic;
+  color:var(--linen);
+  max-width:850px;
+}
+
+.hero-title em{
+  color:var(--gold);
+  font-style:normal;
+  font-weight:500;
+}
+
+.hero-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  position:relative;
+  z-index:2;
+}
+
+.hero-description{
+  max-width:590px;
+  border-left:2px solid var(--gold-dk);
+  padding-left:22px;
+  font-family:var(--fs);
+  font-size:17px;
+  line-height:1.85;
+  color:var(--muted-lt);
+}
+
+.hero-meta{
+  font-family:var(--fm);
+  font-size:8px;
+  line-height:2;
+  letter-spacing:.12em;
+  color:var(--muted);
+  text-align:right;
+}
+
+/* SECTIONS */
+
+.section{
+  padding:90px 80px;
+  border-bottom:1px solid var(--ash);
+}
+
+.section-label{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:40px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.section-label::before{
+  content:'';
+  width:20px;
+  height:1px;
+  background:var(--gold);
+}
+
+h2{
+  font-family:var(--fd);
+  font-size:clamp(28px,3.5vw,46px);
+  font-weight:800;
+  letter-spacing:.02em;
+  line-height:1.05;
+  color:var(--linen);
+  margin-bottom:28px;
+}
+
+h3{
+  font-family:var(--fd);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:16px;
+  margin-top:45px;
+}
+
+.body-copy{
+  max-width:730px;
+  font-family:var(--fs);
+  font-size:18px;
+  line-height:1.9;
+  color:var(--muted-lt);
+  margin-bottom:22px;
+}
+
+.body-copy strong{
+  color:var(--linen);
+  font-weight:500;
+}
+
+/* STATEMENT */
+
+.statement{
+  font-family:var(--fs);
+  font-size:clamp(28px,4vw,52px);
+  line-height:1.2;
+  font-style:italic;
+  font-weight:300;
+  max-width:850px;
+  margin:40px 0;
+  color:var(--linen);
+}
+
+.statement em{
+  color:var(--gold);
+  font-style:normal;
+  font-weight:500;
+}
+
+/* CALLOUT */
+
+.callout{
+  max-width:760px;
+  background:var(--warm);
+  border-left:3px solid var(--gold);
+  padding:30px 35px;
+  margin:38px 0;
+}
+
+.callout p{
+  font-family:var(--fs);
+  font-size:21px;
+  font-style:italic;
+  line-height:1.5;
+  color:var(--linen);
+}
+
+.callout em{
+  color:var(--gold);
+  font-style:normal;
+}
+
+/* CARDS */
+
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+  margin-top:45px;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  margin-top:45px;
+}
+
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2px;
+  margin-top:45px;
+}
+
+.card{
+  background:var(--warm);
+  padding:34px;
+  min-height:210px;
+  position:relative;
+  overflow:hidden;
+}
+
+.card::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:2px;
+  background:var(--gold);
+  transition:.4s;
+}
+
+.card:hover::after{
+  width:100%;
+}
+
+.card-label{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+
+.card-title{
+  font-family:var(--fd);
+  font-size:19px;
+  font-weight:700;
+  color:var(--linen);
+  margin-bottom:13px;
+}
+
+.card p{
+  font-family:var(--fs);
+  font-size:14px;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+/* VALUES */
+
+.value-number{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.2em;
+  color:var(--gold-dk);
+  margin-bottom:25px;
+}
+
+/* DIVISIONS */
+
+.division{
+  background:var(--warm);
+  margin-top:3px;
+  padding:42px;
+  display:grid;
+  grid-template-columns:180px 1fr 230px;
+  gap:40px;
+  align-items:start;
+  position:relative;
+  overflow:hidden;
+}
+
+.division-number{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.25em;
+  color:var(--gold-dk);
+}
+
+.division-name{
+  font-family:var(--fd);
+  font-size:30px;
+  font-weight:800;
+  letter-spacing:.06em;
+  color:var(--linen);
+  line-height:1;
+}
+
+.division-name .a{
+  color:var(--gold);
+}
+
+.division-type{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-top:8px;
+}
+
+.division-description{
+  font-family:var(--fs);
+  font-size:16px;
+  line-height:1.8;
+  color:var(--muted-lt);
+}
+
+.division-services{
+  display:flex;
+  flex-direction:column;
+}
+
+.service{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.1em;
+  color:var(--muted);
+  padding:9px 0;
+  border-bottom:1px solid var(--ash);
+}
+
+.service:first-child{
+  border-top:1px solid var(--ash);
+}
+
+/* POSITIONING */
+
+.position-box{
+  margin-top:45px;
+  border:1px solid var(--ash);
+  background:var(--warm);
+  padding:50px;
+  text-align:center;
+}
+
+.position-box .large{
+  font-family:var(--fd);
+  font-size:clamp(30px,4vw,58px);
+  font-weight:800;
+  line-height:1.1;
+  color:var(--linen);
+}
+
+.position-box .large span{
+  color:var(--gold);
+}
+
+/* AUDIENCE */
+
+.audience{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  margin-top:45px;
+}
+
+.audience-card{
+  background:var(--warm);
+  padding:35px;
+}
+
+.audience-card h4{
+  font-family:var(--fd);
+  font-size:17px;
+  color:var(--linen);
+  margin-bottom:12px;
+}
+
+.audience-card p{
+  font-family:var(--fs);
+  font-size:14px;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+/* ECOSYSTEM */
+
+.ecosystem{
+  margin-top:50px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.eco-center{
+  width:190px;
+  height:190px;
+  border:1px solid var(--gold-dk);
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:var(--warm);
+  position:relative;
+  z-index:2;
+}
+
+.eco-center-name{
+  font-family:var(--fd);
+  font-size:27px;
+  font-weight:800;
+  letter-spacing:.1em;
+}
+
+.eco-center-name span{
+  color:var(--gold);
+}
+
+.eco-center-sub{
+  font-family:var(--fm);
+  font-size:7px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:8px;
+}
+
+.eco-line{
+  width:1px;
+  height:55px;
+  background:var(--gold-dk);
+}
+
+.eco-divisions{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2px;
+}
+
+.eco-card{
+  background:var(--warm);
+  padding:28px 20px;
+  text-align:center;
+}
+
+.eco-card-name{
+  font-family:var(--fd);
+  font-size:15px;
+  font-weight:700;
+  color:var(--linen);
+  margin-bottom:6px;
+}
+
+.eco-card p{
+  font-family:var(--fs);
+  font-size:12px;
+  line-height:1.6;
+  color:var(--muted);
+}
+
+/* CULTURE */
+
+.culture-grid{
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:2px;
+  margin-top:45px;
+}
+
+.culture-main{
+  background:var(--warm);
+  padding:50px;
+}
+
+.culture-main h3{
+  margin-top:0;
+}
+
+.culture-side{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.culture-small{
+  flex:1;
+  background:var(--warm);
+  padding:30px;
+}
+
+.culture-small h4{
+  font-family:var(--fd);
+  color:var(--linen);
+  font-size:15px;
+  margin-bottom:8px;
+}
+
+.culture-small p{
+  font-family:var(--fs);
+  font-size:13px;
+  line-height:1.7;
+  color:var(--muted);
+}
+
+/* FOUNDER */
+
+.founder{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:55px;
+  margin-top:45px;
+}
+
+.founder-mark{
+  background:var(--warm);
+  min-height:280px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.founder-mark::before{
+  content:'M';
+  font-family:var(--fd);
+  font-size:150px;
+  font-weight:800;
+  color:rgba(200,168,75,.07);
+}
+
+.founder-info{
+  padding-top:10px;
+}
+
+.founder-role{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+
+.founder-name{
+  font-family:var(--fd);
+  font-size:35px;
+  font-weight:800;
+  color:var(--linen);
+  margin-bottom:20px;
+}
+
+/* DIRECTION */
+
+.direction{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  margin-top:45px;
+}
+
+.direction-card{
+  background:var(--warm);
+  padding:40px 30px;
+  border-top:2px solid var(--gold-dk);
+}
+
+.direction-card:nth-child(2){
+  border-top-color:var(--gold);
+}
+
+.direction-card:nth-child(3){
+  border-top-color:var(--gold-lt);
+}
+
+.direction-card .period{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.2em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.direction-card h4{
+  font-family:var(--fd);
+  font-size:20px;
+  color:var(--linen);
+  margin-bottom:12px;
+}
+
+.direction-card p{
+  font-family:var(--fs);
+  font-size:14px;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+/* CLOSING */
+
+.closing{
+  min-height:70vh;
+  padding:110px 80px;
+  background:var(--warm);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.closing-watermark{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  font-family:var(--fd);
+  font-size:clamp(100px,17vw,230px);
+  font-weight:800;
+  letter-spacing:.05em;
+  color:rgba(200,168,75,.035);
+  white-space:nowrap;
+}
+
+.closing-label{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:32px;
+  position:relative;
+  z-index:1;
+}
+
+.closing-statement{
+  max-width:850px;
+  font-family:var(--fs);
+  font-size:clamp(30px,4.5vw,58px);
+  line-height:1.2;
+  font-style:italic;
+  font-weight:300;
+  color:var(--linen);
+  position:relative;
+  z-index:1;
+}
+
+.closing-statement em{
+  color:var(--gold);
+  font-style:normal;
+}
+
+.closing-logo{
+  margin-top:55px;
+  font-family:var(--fd);
+  font-size:30px;
+  font-weight:800;
+  letter-spacing:.2em;
+  position:relative;
+  z-index:1;
+}
+
+.closing-logo span{
+  color:var(--gold);
+}
+
+.closing-meta{
+  margin-top:10px;
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.25em;
+  color:var(--muted);
+  text-transform:uppercase;
+  position:relative;
+  z-index:1;
+}
+
+/* REVEAL */
+
+.reveal{
+  opacity:0;
+  transform:translateY(25px);
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:1050px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .hero,
+  .section,
+  .closing{
+    padding:55px 28px;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .audience,
+  .direction,
+  .eco-divisions{
+    grid-template-columns:1fr;
+  }
+
+  .division{
+    grid-template-columns:1fr;
+    gap:22px;
+  }
+
+  .culture-grid{
+    grid-template-columns:1fr;
+  }
+
+  .founder{
+    grid-template-columns:1fr;
+  }
+
+  .hero-bottom{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:35px;
+  }
+
+  .hero-meta{
+    text-align:left;
+  }
+
+  .eco-center{
+    width:150px;
+    height:150px;
+  }
+}
+
+@media(max-width:600px){
+
+  .hero{
+    min-height:100svh;
+  }
+
+  .hero-top{
+    flex-direction:column;
+    gap:20px;
+  }
+
+  .hero-ref{
+    text-align:left;
+  }
+
+  .wordmark{
+    font-size:68px;
+  }
+
+  .statement{
+    font-size:31px;
+  }
+
+  .position-box{
+    padding:30px 20px;
+  }
+
+  .culture-main{
+    padding:32px;
+  }
+
+  .founder-mark{
+    min-height:200px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<nav class="sidebar">
+
+  <div class="sidebar-logo">
+    MY<span class="a">A</span>MI
+    <span class="sidebar-doc">Corporate Profile</span>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-label">Company</span>
+    <a href="#overview">Overview</a>
+    <a href="#story">Our Story</a>
+    <a href="#mission">Mission & Vision</a>
+    <a href="#philosophy">Philosophy</a>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-label">Business</span>
+    <a href="#what-we-do">What We Do</a>
+    <a href="#divisions">Divisions</a>
+    <a href="#ecosystem">Ecosystem</a>
+    <a href="#market">Market</a>
+    <a href="#positioning">Positioning</a>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-label">Identity</span>
+    <a href="#culture">Culture</a>
+    <a href="#founder">Leadership</a>
+    <a href="#direction">Direction</a>
+  </div>
+
+  <div class="nav-group">
+    <span class="nav-group-label">Close</span>
+    <a href="#closing">Statement</a>
+  </div>
+
+  <div class="sidebar-footer">
+    MYAMI CORPORATE PROFILE<br/>
+    Company Document<br/>
+    2026 · Confidential
+  </div>
+
+</nav>
+
+
+<main class="main">
+
+<!-- HERO -->
+
+<section class="hero" id="overview">
+
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-top">
+
+    <div class="badge">
+      Company Profile
+    </div>
+
+    <div class="hero-ref">
+      MYAMI-CORP-001<br/>
+      Established · Building
+    </div>
+
+  </div>
+
+  <div class="hero-center">
+
+    <div class="eyebrow">
+      About MYAMI
+    </div>
+
+    <div class="wordmark">
+      MY<span class="a">A</span>MI
+    </div>
+
+    <div class="hero-title">
+      A <em>digital and entertainment company</em>
+      building at the intersection of technology,
+      media, culture, and identity.
+    </div>
+
+  </div>
+
+  <div class="hero-bottom">
+
+    <div class="hero-description">
+      MYAMI is a modern creative and technology company
+      built to help ambitious people, brands, creators,
+      and cultural projects move from potential to presence.
+      We build the infrastructure, identity, experiences,
+      and products that allow ideas to exist more powerfully
+      in the real world.
+    </div>
+
+    <div class="hero-meta">
+      TECHNOLOGY · MEDIA · CULTURE<br/>
+      FOUR DIVISIONS · ONE WORLD<br/>
+      COMPANY PROFILE · 2026
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- OUR STORY -->
+
+<section class="section reveal" id="story">
+
+  <div class="section-label">
+    01 · Our Story
+  </div>
+
+  <div class="statement">
+    MYAMI began with a simple observation:
+    <em>too much potential remains unseen.</em>
+  </div>
+
+  <p class="body-copy">
+    The company was born from the intersection of technology,
+    creativity, entrepreneurship, and culture. Rather than
+    treating those disciplines as separate worlds, MYAMI was
+    created around the idea that they become more powerful
+    when they operate together.
+  </p>
+
+  <p class="body-copy">
+    What started as individual creative and technical work
+    evolved into a broader company vision — one capable of
+    building digital products, shaping brands, creating media,
+    producing experiences, and eventually creating physical
+    products that people can identify with.
+  </p>
+
+  <p class="body-copy">
+    <strong>MYAMI is being built as a world, not simply a service.</strong>
+    Every division contributes to that world while remaining
+    capable of standing independently.
+  </p>
+
+  <div class="callout">
+    <p>
+      "We are not trying to become everything.
+      We are building <em>one ecosystem</em> where the
+      right things reinforce each other."
+    </p>
+  </div>
+
+</section>
+
+
+<!-- MISSION -->
+
+<section class="section reveal" id="mission">
+
+  <div class="section-label">
+    02 · Mission & Vision
+  </div>
+
+  <h2>
+    What MYAMI exists to do.
+  </h2>
+
+  <h3>Mission</h3>
+
+  <p class="body-copy">
+    To build high-quality technology, media, experiences,
+    and cultural products that give ambitious people and
+    brands the infrastructure they need to be seen,
+    remembered, and taken seriously.
+  </p>
+
+  <h3>Vision</h3>
+
+  <p class="body-copy">
+    To become a globally recognized African-born company
+    operating at the intersection of technology, creativity,
+    entertainment, and culture.
+  </p>
+
+  <div class="grid-2">
+
+    <div class="card">
+      <div class="card-label">Short Term</div>
+      <div class="card-title">Build Credibility</div>
+      <p>
+        Deliver exceptional work, build a strong portfolio,
+        establish recurring revenue, and become trusted within
+        the markets MYAMI enters first.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Long Term</div>
+      <div class="card-title">Build Influence</div>
+      <p>
+        Grow beyond services into products, experiences,
+        intellectual property, partnerships, and a recognizable
+        cultural ecosystem.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PHILOSOPHY -->
+
+<section class="section reveal" id="philosophy">
+
+  <div class="section-label">
+    03 · Philosophy
+  </div>
+
+  <h2>
+    The principles behind the company.
+  </h2>
+
+  <p class="body-copy">
+    MYAMI's philosophy is simple enough to remember and
+    demanding enough to guide difficult decisions.
+  </p>
+
+  <div class="grid-4">
+
+    <div class="card">
+      <div class="value-number">01</div>
+      <div class="card-title">Quality</div>
+      <p>
+        We believe quality should be visible in the details,
+        not merely claimed in the presentation.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="value-number">02</div>
+      <div class="card-title">Execution</div>
+      <p>
+        Ideas have value only when someone has the discipline
+        to turn them into something real.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="value-number">03</div>
+      <div class="card-title">Culture</div>
+      <p>
+        We believe culture is not decoration. It is an asset,
+        a language, and a source of long-term influence.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="value-number">04</div>
+      <div class="card-title">Long Game</div>
+      <p>
+        MYAMI is being built for compounding value rather
+        than short-term attention.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="position-box">
+    <div class="large">
+      TALENT DESERVES<br/>
+      <span>INFRASTRUCTURE.</span>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- WHAT WE DO -->
+
+<section class="section reveal" id="what-we-do">
+
+  <div class="section-label">
+    04 · What We Do
+  </div>
+
+  <h2>
+    We build what brands,
+    people, and culture need to move.
+  </h2>
+
+  <p class="body-copy">
+    MYAMI combines technical capability with creative
+    direction. Our work can begin with a website, a brand,
+    an event, a campaign, or a product — but the objective
+    remains the same: create something useful, distinctive,
+    and capable of creating real-world value.
+  </p>
+
+  <div class="grid-3">
+
+    <div class="card">
+      <div class="card-label">Technology</div>
+      <div class="card-title">Digital Infrastructure</div>
+      <p>
+        Websites, applications, digital systems, e-commerce,
+        interfaces, and software solutions.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Creative</div>
+      <div class="card-title">Brand & Media</div>
+      <p>
+        Identity systems, content, storytelling, social
+        strategy, photography direction, and creative assets.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Culture</div>
+      <div class="card-title">Experiences & Products</div>
+      <p>
+        Events, cultural projects, collaborations, lifestyle
+        products, merchandise, and community-driven experiences.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DIVISIONS -->
+
+<section class="section reveal" id="divisions">
+
+  <div class="section-label">
+    05 · Division Architecture
+  </div>
+
+  <h2>
+    Four divisions.
+    One company.
+  </h2>
+
+  <p class="body-copy">
+    Each MYAMI division has a distinct commercial role while
+    contributing to the same larger ecosystem.
+  </p>
+
+
+  <div class="division">
+
+    <div>
+      <div class="division-number">DIVISION 01</div>
+      <div class="division-name">
+        MY<span class="a">A</span>MI
+      </div>
+      <div class="division-type">
+        Tech · Infrastructure
+      </div>
+    </div>
+
+    <div>
+      <p class="division-description">
+        MYAMI Tech builds the digital infrastructure that
+        modern businesses and creators operate on. It is
+        the company's technical foundation and an important
+        early-stage revenue engine.
+      </p>
+    </div>
+
+    <div class="division-services">
+      <div class="service">Web Development</div>
+      <div class="service">Software Solutions</div>
+      <div class="service">Digital Systems</div>
+      <div class="service">UI / UX</div>
+      <div class="service">E-Commerce</div>
+    </div>
+
+  </div>
+
+
+  <div class="division">
+
+    <div>
+      <div class="division-number">DIVISION 02</div>
+      <div class="division-name">
+        MY<span class="a">A</span>MI
+      </div>
+      <div class="division-type">
+        Media · Voice
+      </div>
+    </div>
+
+    <div>
+      <p class="division-description">
+        MYAMI Media shapes how brands communicate and how
+        people experience them. It operates across content,
+        identity, storytelling, social media, and visual direction.
+      </p>
+    </div>
+
+    <div class="division-services">
+      <div class="service">Content Creation</div>
+      <div class="service">Brand Identity</div>
+      <div class="service">Storytelling</div>
+      <div class="service">Social Strategy</div>
+      <div class="service">Photography Direction</div>
+    </div>
+
+  </div>
+
+
+  <div class="division">
+
+    <div>
+      <div class="division-number">DIVISION 03</div>
+      <div class="division-name">
+        MY<span class="a">A</span>MI
+      </div>
+      <div class="division-type">
+        Entertainment · Experience
+      </div>
+    </div>
+
+    <div>
+      <p class="division-description">
+        MYAMI Entertainment brings the company into physical
+        spaces through events, creative experiences, cultural
+        projects, partnerships, and community-building.
+      </p>
+    </div>
+
+    <div class="division-services">
+      <div class="service">Event Promotion</div>
+      <div class="service">Creative Experiences</div>
+      <div class="service">Event Branding</div>
+      <div class="service">Culture Projects</div>
+      <div class="service">Community Building</div>
+    </div>
+
+  </div>
+
+
+  <div class="division">
+
+    <div>
+      <div class="division-number">DIVISION 04</div>
+      <div class="division-name">
+        MY<span class="a">A</span>MI
+      </div>
+      <div class="division-type">
+        Wear · Identity
+      </div>
+    </div>
+
+    <div>
+      <p class="division-description">
+        MYAMI Wear translates the company's identity into
+        physical products. It is the lifestyle and fashion
+        extension of the MYAMI world, designed to grow with
+        the recognition of the parent brand.
+      </p>
+    </div>
+
+    <div class="division-services">
+      <div class="service">Lifestyle Branding</div>
+      <div class="service">Fashion Identity</div>
+      <div class="service">Product Drops</div>
+      <div class="service">Merchandise</div>
+      <div class="service">Collaborations</div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ECOSYSTEM -->
+
+<section class="section reveal" id="ecosystem">
+
+  <div class="section-label">
+    06 · The Ecosystem
+  </div>
+
+  <h2>
+    The divisions are designed
+    to reinforce one another.
+  </h2>
+
+  <p class="body-copy">
+    A client can enter MYAMI through technology and later
+    need media. An event can generate content. A media
+    audience can become a Wear customer. A Wear collaboration
+    can create an Entertainment activation.
+  </p>
+
+  <p class="body-copy">
+    This interconnected model allows value created in one
+    part of the company to increase the opportunity available
+    to another.
+  </p>
+
+  <div class="ecosystem">
+
+    <div class="eco-center">
+      <div class="eco-center-name">
+        MY<span>A</span>MI
+      </div>
+      <div class="eco-center-sub">
+        Parent Brand
+      </div>
+    </div>
+
+    <div class="eco-line"></div>
+
+    <div class="eco-divisions">
+
+      <div class="eco-card">
+        <div class="eco-card-name">Tech</div>
+        <p>Build the infrastructure.</p>
+      </div>
+
+      <div class="eco-card">
+        <div class="eco-card-name">Media</div>
+        <p>Build the voice.</p>
+      </div>
+
+      <div class="eco-card">
+        <div class="eco-card-name">Entertainment</div>
+        <p>Build the experiences.</p>
+      </div>
+
+      <div class="eco-card">
+        <div class="eco-card-name">Wear</div>
+        <p>Build the identity.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- MARKET -->
+
+<section class="section reveal" id="market">
+
+  <div class="section-label">
+    07 · Market
+  </div>
+
+  <h2>
+    Built close to the people
+    creating the next culture.
+  </h2>
+
+  <p class="body-copy">
+    MYAMI's initial market is young African creators,
+    entrepreneurs, businesses, event organizers, artists,
+    communities, and emerging brands that are building
+    their presence in an increasingly digital economy.
+  </p>
+
+  <p class="body-copy">
+    The company begins where it has proximity and
+    understanding, then expands as its reputation,
+    capabilities, and network grow.
+  </p>
+
+  <div class="audience">
+
+    <div class="audience-card">
+      <h4>Emerging Brands</h4>
+      <p>
+        Businesses that need stronger digital presence,
+        identity, positioning, and creative execution.
+      </p>
+    </div>
+
+    <div class="audience-card">
+      <h4>Creators & Artists</h4>
+      <p>
+        Individuals with talent and an audience who need
+        infrastructure, media, branding, and growth support.
+      </p>
+    </div>
+
+    <div class="audience-card">
+      <h4>Cultural Projects</h4>
+      <p>
+        Events, communities, entertainment projects, and
+        experiences that require creative and technical support.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- POSITIONING -->
+
+<section class="section reveal" id="positioning">
+
+  <div class="section-label">
+    08 · Positioning
+  </div>
+
+  <h2>
+    We are not positioning
+    MYAMI as another agency.
+  </h2>
+
+  <p class="body-copy">
+    Traditional agencies often operate around a narrow
+    service category. MYAMI is designed differently.
+  </p>
+
+  <p class="body-copy">
+    The company combines technical execution, creative
+    direction, media, entertainment, and physical identity
+    under one parent brand.
+  </p>
+
+  <div class="position-box">
+
+    <div class="large">
+      FROM DIGITAL<br/>
+      <span>TO CULTURAL.</span>
+    </div>
+
+  </div>
+
+  <div class="grid-3">
+
+    <div class="card">
+      <div class="card-label">Traditional Model</div>
+      <div class="card-title">One Service</div>
+      <p>
+        A company is usually known primarily for one
+        category of work.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">MYAMI Model</div>
+      <div class="card-title">Connected Capabilities</div>
+      <p>
+        Multiple capabilities operate independently but
+        create opportunities for one another.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Long Term</div>
+      <div class="card-title">A Recognizable World</div>
+      <p>
+        The ultimate objective is a company with products,
+        experiences, media, and technology people recognize.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CULTURE -->
+
+<section class="section reveal" id="culture">
+
+  <div class="section-label">
+    09 · Company Culture
+  </div>
+
+  <h2>
+    How MYAMI operates internally
+    matters as much as what it sells.
+  </h2>
+
+  <div class="culture-grid">
+
+    <div class="culture-main">
+
+      <h3>Our Standard</h3>
+
+      <p class="body-copy">
+        MYAMI is built around ownership. People working
+        within the company are expected to think beyond
+        their immediate task and understand the larger
+        objective.
+      </p>
+
+      <p class="body-copy">
+        We value initiative, competence, curiosity,
+        discipline, honesty, and the willingness to learn.
+        We want people who can build — not simply people
+        who can wait for instructions.
+      </p>
+
+      <p class="body-copy">
+        The culture should remain ambitious without becoming
+        performative. Confidence comes from competence,
+        preparation, and consistent execution.
+      </p>
+
+    </div>
+
+    <div class="culture-side">
+
+      <div class="culture-small">
+        <h4>Ownership</h4>
+        <p>
+          Take responsibility for the outcome, not merely
+          the assigned task.
+        </p>
+      </div>
+
+      <div class="culture-small">
+        <h4>Precision</h4>
+        <p>
+          Details matter because details communicate
+          standards.
+        </p>
+      </div>
+
+      <div class="culture-small">
+        <h4>Growth</h4>
+        <p>
+          Skills, systems, relationships, and reputation
+          should compound over time.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FOUNDER -->
+
+<section class="section reveal" id="founder">
+
+  <div class="section-label">
+    10 · Leadership
+  </div>
+
+  <h2>
+    Founder-led by design.
+  </h2>
+
+  <div class="founder">
+
+    <div class="founder-mark"></div>
+
+    <div class="founder-info">
+
+      <div class="founder-role">
+        Founder · Creative & Strategic Direction
+      </div>
+
+      <div class="founder-name">
+        Miami
+      </div>
+
+      <p class="body-copy">
+        MYAMI is founder-led, with the company's early
+        direction shaped around a combination of technology,
+        design, business, creativity, and cultural awareness.
+      </p>
+
+      <p class="body-copy">
+        The founder's role is not simply to execute work.
+        It is to establish the company's standards, identify
+        opportunities, build systems, develop relationships,
+        and maintain the larger vision as MYAMI grows.
+      </p>
+
+      <p class="body-copy">
+        As the company develops, individual divisions and
+        functions will transition toward dedicated specialists
+        and leaders while remaining aligned with the parent
+        company's core philosophy.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DIRECTION -->
+
+<section class="section reveal" id="direction">
+
+  <div class="section-label">
+    11 · Growth Direction
+  </div>
+
+  <h2>
+    Build. Prove. Expand.
+  </h2>
+
+  <p class="body-copy">
+    MYAMI's growth is intended to happen in stages.
+    The company will earn the right to expand by building
+    strong foundations first.
+  </p>
+
+  <div class="direction">
+
+    <div class="direction-card">
+
+      <div class="period">
+        Stage 01
+      </div>
+
+      <h4>Build</h4>
+
+      <p>
+        Establish the company publicly. Build the portfolio,
+        acquire clients, develop systems, generate revenue,
+        and create repeatable delivery processes.
+      </p>
+
+    </div>
+
+
+    <div class="direction-card">
+
+      <div class="period">
+        Stage 02
+      </div>
+
+      <h4>Prove</h4>
+
+      <p>
+        Demonstrate consistent quality and commercial
+        performance. Strengthen the team, increase recurring
+        revenue, deepen partnerships, and activate more
+        divisions.
+      </p>
+
+    </div>
+
+
+    <div class="direction-card">
+
+      <div class="period">
+        Stage 03
+      </div>
+
+      <h4>Expand</h4>
+
+      <p>
+        Scale beyond the initial market through products,
+        partnerships, technology, media, entertainment,
+        fashion, and cultural projects.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="callout">
+    <p>
+      "The objective is not to look big.
+      The objective is to become <em>big enough to matter.</em>"
+    </p>
+  </div>
+
+</section>
+
+
+<!-- CLOSING -->
+
+<section class="closing reveal" id="closing">
+
+  <div class="closing-watermark">
+    MYAMI
+  </div>
+
+  <div class="closing-label">
+    MYAMI · Corporate Profile
+  </div>
+
+  <div class="closing-statement">
+    "We are building a company that
+    <em>creates infrastructure for possibility.</em>"
+  </div>
+
+  <div class="closing-logo">
+    MY<span>A</span>MI
+  </div>
+
+  <div class="closing-meta">
+    Technology · Media · Entertainment · Wear
+  </div>
+
+</section>
+
+</main>
+
+
+<script>
+
+/* REVEAL ON SCROLL */
+
+const revealObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  },
+  {
+    threshold:.08
+  }
+);
+
+document
+  .querySelectorAll('.reveal')
+  .forEach(el => revealObserver.observe(el));
+
+
+/* ACTIVE SIDEBAR */
+
+const sections =
+  document.querySelectorAll('[id]');
+
+const links =
+  document.querySelectorAll('.sidebar a');
+
+const sectionObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+          links.forEach(link =>
+            link.classList.remove('active')
+          );
+
+          const active =
+            document.querySelector(
+              `.sidebar a[href="#${entry.target.id}"]`
+            );
+
+          if(active){
+            active.classList.add('active');
+          }
+
+        }
+
+      });
+
+    },
+    {
+      threshold:.35
+    }
+  );
+
+sections.forEach(section =>
+  sectionObserver.observe(section)
+);
+
+</script>
+
+</body>
+</html>
