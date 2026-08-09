@@ -1,0 +1,3506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>MYAMI — Marketing Playbook</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+
+<style>
+*,*::before,*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --black:#09090A;
+  --warm:#141210;
+  --warm-2:#181512;
+  --ash:#252220;
+  --ash-mid:#332F2A;
+
+  --gold:#C8A84B;
+  --gold-lt:#E8C96A;
+  --gold-dk:#7A6225;
+
+  --linen:#F2EDE4;
+  --cream:#DDD5C3;
+
+  --muted:#6B6357;
+  --muted-lt:#8A8077;
+
+  --fd:'Syne',sans-serif;
+  --fs:'Cormorant Garamond',serif;
+  --fm:'DM Mono',monospace;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--black);
+  color:var(--linen);
+  font-family:var(--fs);
+  overflow-x:hidden;
+}
+
+/* GRAIN */
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9000;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:230px;
+
+  background:var(--warm);
+  border-right:1px solid var(--ash);
+
+  padding:40px 0;
+
+  z-index:100;
+
+  overflow-y:auto;
+
+  display:flex;
+  flex-direction:column;
+}
+
+.sidebar-logo{
+  font-family:var(--fd);
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.18em;
+
+  color:var(--linen);
+
+  padding:0 28px 28px;
+
+  border-bottom:1px solid var(--ash);
+
+  margin-bottom:24px;
+}
+
+.sidebar-logo .a{
+  color:var(--gold);
+}
+
+.sidebar-doc{
+  display:block;
+
+  font-family:var(--fm);
+  font-size:7px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+  margin-top:5px;
+}
+
+.nav-grp-label{
+  font-family:var(--fm);
+  font-size:7px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+
+  color:var(--gold-dk);
+
+  padding:0 28px 8px;
+
+  margin-top:12px;
+
+  display:block;
+}
+
+.sidebar a{
+  display:block;
+
+  font-family:var(--fm);
+  font-size:10px;
+  letter-spacing:.08em;
+
+  color:var(--muted);
+
+  text-decoration:none;
+
+  padding:8px 28px;
+
+  border-left:2px solid transparent;
+
+  transition:all .2s;
+
+  line-height:1.4;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+  color:var(--linen);
+
+  background:rgba(200,168,75,.05);
+
+  border-left-color:var(--gold);
+}
+
+.sidebar-footer{
+  margin-top:auto;
+
+  padding:20px 28px 0;
+
+  border-top:1px solid var(--ash);
+
+  font-family:var(--fm);
+  font-size:7px;
+  letter-spacing:.12em;
+
+  color:var(--muted);
+
+  line-height:2;
+}
+
+/* MAIN */
+
+.main{
+  margin-left:230px;
+}
+
+/* COVER */
+
+.cover{
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  padding:64px 80px;
+
+  position:relative;
+  overflow:hidden;
+
+  border-bottom:1px solid var(--ash);
+}
+
+.cover-glow{
+  position:absolute;
+
+  width:700px;
+  height:700px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(200,168,75,.09) 0%,
+      transparent 65%
+    );
+
+  top:-200px;
+  right:-100px;
+
+  pointer-events:none;
+}
+
+.cover-grid{
+  position:absolute;
+  inset:0;
+
+  background-image:
+    linear-gradient(
+      rgba(200,168,75,.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(200,168,75,.03) 1px,
+      transparent 1px
+    );
+
+  background-size:56px 56px;
+
+  pointer-events:none;
+}
+
+.cover-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+
+  position:relative;
+  z-index:1;
+}
+
+.cover-badge{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+  border:1px solid var(--gold-dk);
+
+  padding:6px 16px;
+}
+
+.cover-ref{
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:.15em;
+
+  color:var(--muted);
+
+  text-align:right;
+
+  line-height:2;
+}
+
+.cover-center{
+  position:relative;
+  z-index:1;
+}
+
+.cover-eyebrow{
+  font-family:var(--fm);
+  font-size:9px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+  margin-bottom:28px;
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.cover-eyebrow::before{
+  content:'';
+
+  display:block;
+
+  width:24px;
+  height:1px;
+
+  background:var(--gold);
+}
+
+.cover-wordmark{
+  font-family:var(--fd);
+
+  font-size:clamp(70px,10vw,140px);
+
+  font-weight:800;
+
+  letter-spacing:.06em;
+
+  line-height:.9;
+
+  margin-bottom:32px;
+}
+
+.cover-wordmark .a{
+  color:var(--gold);
+}
+
+.cover-wordmark .outline{
+  -webkit-text-stroke:1.5px rgba(242,237,228,.18);
+  color:transparent;
+}
+
+.cover-title{
+  font-family:var(--fs);
+
+  font-size:22px;
+
+  font-style:italic;
+
+  font-weight:300;
+
+  color:var(--muted-lt);
+
+  margin-bottom:40px;
+}
+
+.cover-title em{
+  color:var(--gold);
+
+  font-style:normal;
+
+  font-weight:500;
+}
+
+.cover-summary{
+  font-family:var(--fs);
+
+  font-size:17px;
+
+  line-height:1.85;
+
+  color:var(--muted-lt);
+
+  max-width:620px;
+
+  border-left:2px solid var(--gold-dk);
+
+  padding-left:22px;
+}
+
+.cover-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+
+  position:relative;
+  z-index:1;
+}
+
+.cover-stats{
+  display:flex;
+  gap:2px;
+}
+
+.cover-stat{
+  background:var(--warm);
+
+  border:1px solid var(--ash);
+
+  padding:16px 20px;
+
+  text-align:center;
+}
+
+.cover-stat-num{
+  font-family:var(--fd);
+
+  font-size:24px;
+
+  font-weight:800;
+
+  color:var(--gold);
+
+  line-height:1;
+}
+
+.cover-stat-label{
+  font-family:var(--fm);
+
+  font-size:7px;
+
+  letter-spacing:.2em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+  margin-top:4px;
+}
+
+.cover-prepared{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.15em;
+
+  color:var(--muted);
+
+  text-align:right;
+
+  line-height:2;
+}
+
+/* SECTIONS */
+
+.sec{
+  padding:80px;
+
+  border-bottom:1px solid var(--ash);
+}
+
+.sec:last-child{
+  border-bottom:none;
+}
+
+.sec-label{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.32em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+  margin-bottom:40px;
+
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+}
+
+.sec-label::before{
+  content:'';
+
+  display:block;
+
+  width:20px;
+  height:1px;
+
+  background:var(--gold);
+}
+
+h2{
+  font-family:var(--fd);
+
+  font-size:clamp(26px,3.2vw,40px);
+
+  font-weight:800;
+
+  letter-spacing:.03em;
+
+  color:var(--linen);
+
+  margin-bottom:24px;
+}
+
+h3{
+  font-family:var(--fd);
+
+  font-size:13px;
+
+  font-weight:700;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+  margin-bottom:16px;
+
+  margin-top:48px;
+}
+
+h3:first-child{
+  margin-top:0;
+}
+
+p.bd{
+  font-family:var(--fs);
+
+  font-size:17px;
+
+  line-height:1.9;
+
+  color:var(--muted-lt);
+
+  margin-bottom:20px;
+
+  max-width:720px;
+}
+
+p.bd strong{
+  color:var(--linen);
+
+  font-weight:500;
+}
+
+.statement{
+  font-family:var(--fs);
+
+  font-size:clamp(24px,3vw,40px);
+
+  font-style:italic;
+
+  font-weight:300;
+
+  line-height:1.25;
+
+  color:var(--linen);
+
+  margin:36px 0;
+
+  max-width:760px;
+}
+
+.statement em{
+  font-style:normal;
+
+  color:var(--gold);
+
+  font-weight:500;
+}
+
+/* CALLOUT */
+
+.callout{
+  background:var(--warm);
+
+  border-left:3px solid var(--gold);
+
+  padding:26px 32px;
+
+  margin:32px 0;
+
+  max-width:760px;
+}
+
+.callout p{
+  font-family:var(--fs);
+
+  font-size:19px;
+
+  font-style:italic;
+
+  color:var(--linen);
+
+  margin:0;
+}
+
+.callout p em{
+  color:var(--gold);
+
+  font-style:normal;
+
+  font-weight:500;
+}
+
+/* GRIDS */
+
+.g2{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:2px;
+
+  margin:32px 0;
+}
+
+.g3{
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:2px;
+
+  margin:32px 0;
+}
+
+.g4{
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:2px;
+
+  margin:32px 0;
+}
+
+.card{
+  background:var(--warm);
+
+  padding:32px;
+}
+
+.card-label{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.22em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+  margin-bottom:10px;
+}
+
+.card-title{
+  font-family:var(--fd);
+
+  font-size:17px;
+
+  font-weight:700;
+
+  letter-spacing:.04em;
+
+  color:var(--linen);
+
+  margin-bottom:10px;
+}
+
+.card p{
+  font-family:var(--fs);
+
+  font-size:13px;
+
+  line-height:1.75;
+
+  color:var(--muted);
+
+  margin:0;
+}
+
+/* AUDIENCE */
+
+.audience{
+  background:var(--warm);
+
+  margin:4px 0;
+
+  padding:34px;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.audience-grid{
+  display:grid;
+
+  grid-template-columns:150px 1fr 220px;
+
+  gap:40px;
+
+  align-items:start;
+}
+
+.audience-num{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.25em;
+
+  color:var(--gold-dk);
+}
+
+.audience-name{
+  font-family:var(--fd);
+
+  font-size:25px;
+
+  font-weight:800;
+
+  letter-spacing:.04em;
+
+  color:var(--linen);
+
+  margin-bottom:8px;
+}
+
+.audience-role{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+}
+
+.audience-desc{
+  font-family:var(--fs);
+
+  font-size:15px;
+
+  line-height:1.8;
+
+  color:var(--muted-lt);
+}
+
+.audience-traits{
+  display:flex;
+
+  flex-direction:column;
+}
+
+.trait{
+  font-family:var(--fm);
+
+  font-size:9px;
+
+  color:var(--muted);
+
+  padding:8px 0;
+
+  border-bottom:1px solid var(--ash);
+}
+
+.trait:first-child{
+  border-top:1px solid var(--ash);
+}
+
+/* FUNNEL */
+
+.funnel{
+  margin:40px 0;
+
+  display:grid;
+
+  grid-template-columns:repeat(5,1fr);
+
+  gap:2px;
+}
+
+.funnel-step{
+  background:var(--warm);
+
+  padding:30px 22px;
+
+  position:relative;
+}
+
+.funnel-step::after{
+  content:'→';
+
+  position:absolute;
+
+  right:-14px;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  color:var(--gold);
+
+  font-family:var(--fm);
+
+  font-size:12px;
+
+  z-index:2;
+}
+
+.funnel-step:last-child::after{
+  display:none;
+}
+
+.funnel-num{
+  font-family:var(--fm);
+
+  font-size:7px;
+
+  letter-spacing:.2em;
+
+  color:var(--gold-dk);
+
+  margin-bottom:14px;
+}
+
+.funnel-name{
+  font-family:var(--fd);
+
+  font-size:15px;
+
+  font-weight:800;
+
+  color:var(--linen);
+
+  margin-bottom:8px;
+}
+
+.funnel-desc{
+  font-family:var(--fs);
+
+  font-size:12px;
+
+  line-height:1.7;
+
+  color:var(--muted);
+}
+
+/* CONTENT PILLARS */
+
+.pillar{
+  background:var(--warm);
+
+  padding:34px;
+
+  border-top:2px solid var(--gold-dk);
+}
+
+.pillar-num{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  color:var(--gold);
+
+  letter-spacing:.2em;
+
+  margin-bottom:14px;
+}
+
+.pillar-title{
+  font-family:var(--fd);
+
+  font-size:20px;
+
+  font-weight:800;
+
+  color:var(--linen);
+
+  margin-bottom:12px;
+}
+
+.pillar-share{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+  margin-bottom:16px;
+}
+
+.pillar p{
+  font-family:var(--fs);
+
+  font-size:13px;
+
+  line-height:1.75;
+
+  color:var(--muted-lt);
+}
+
+/* CHANNELS */
+
+.channel{
+  background:var(--warm);
+
+  padding:32px;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.channel-title{
+  font-family:var(--fd);
+
+  font-size:20px;
+
+  font-weight:800;
+
+  color:var(--linen);
+
+  margin-bottom:5px;
+}
+
+.channel-role{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.2em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+  margin-bottom:18px;
+}
+
+.channel p{
+  font-family:var(--fs);
+
+  font-size:13px;
+
+  line-height:1.75;
+
+  color:var(--muted-lt);
+
+  margin-bottom:18px;
+}
+
+.channel-list{
+  border-top:1px solid var(--ash);
+}
+
+.channel-item{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.08em;
+
+  color:var(--muted);
+
+  padding:9px 0;
+
+  border-bottom:1px solid var(--ash);
+}
+
+/* CAMPAIGN SYSTEM */
+
+.campaign{
+  background:var(--warm);
+
+  padding:38px;
+
+  margin:2px 0;
+
+  display:grid;
+
+  grid-template-columns:180px 1fr;
+
+  gap:40px;
+}
+
+.campaign-label{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.2em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+}
+
+.campaign-name{
+  font-family:var(--fd);
+
+  font-size:25px;
+
+  font-weight:800;
+
+  color:var(--linen);
+
+  margin-bottom:8px;
+}
+
+.campaign p{
+  font-family:var(--fs);
+
+  font-size:15px;
+
+  line-height:1.8;
+
+  color:var(--muted-lt);
+
+  max-width:680px;
+}
+
+.campaign-tags{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+  margin-top:18px;
+}
+
+.tag{
+  font-family:var(--fm);
+
+  font-size:7px;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+  border:1px solid var(--ash-mid);
+
+  padding:6px 9px;
+}
+
+/* WEEKLY ENGINE */
+
+.week{
+  background:var(--warm);
+
+  padding:30px;
+
+  border-top:1px solid var(--ash-mid);
+}
+
+.week-day{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.2em;
+
+  color:var(--gold);
+
+  text-transform:uppercase;
+
+  margin-bottom:10px;
+}
+
+.week-title{
+  font-family:var(--fd);
+
+  font-size:18px;
+
+  font-weight:800;
+
+  color:var(--linen);
+
+  margin-bottom:10px;
+}
+
+.week p{
+  font-family:var(--fs);
+
+  font-size:13px;
+
+  line-height:1.7;
+
+  color:var(--muted);
+}
+
+/* METRICS */
+
+.metrics{
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:2px;
+
+  margin:32px 0;
+}
+
+.metric{
+  background:var(--warm);
+
+  padding:32px 22px;
+
+  text-align:center;
+}
+
+.metric-number{
+  font-family:var(--fd);
+
+  font-size:34px;
+
+  font-weight:800;
+
+  color:var(--gold);
+
+  line-height:1;
+
+  margin-bottom:7px;
+}
+
+.metric-name{
+  font-family:var(--fm);
+
+  font-size:7px;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+}
+
+.metric-desc{
+  font-family:var(--fs);
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  font-style:italic;
+
+  margin-top:7px;
+
+  line-height:1.5;
+}
+
+/* RULES */
+
+.rules{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:2px;
+
+  margin:32px 0;
+}
+
+.rules-col{
+  background:var(--warm);
+
+  padding:34px;
+}
+
+.rules-header{
+  font-family:var(--fd);
+
+  font-size:17px;
+
+  font-weight:800;
+
+  margin-bottom:18px;
+
+  padding-bottom:14px;
+
+  border-bottom:1px solid var(--ash);
+}
+
+.rules-header.yes{
+  color:var(--gold);
+}
+
+.rules-header.no{
+  color:var(--linen);
+}
+
+.rule{
+  font-family:var(--fs);
+
+  font-size:14px;
+
+  line-height:1.6;
+
+  color:var(--muted-lt);
+
+  padding:12px 0;
+
+  border-bottom:1px solid rgba(37,34,32,.6);
+
+  display:flex;
+
+  gap:12px;
+}
+
+.rule::before{
+  font-family:var(--fm);
+
+  font-size:9px;
+
+  margin-top:4px;
+}
+
+.rules-col:first-child .rule::before{
+  content:'✓';
+
+  color:var(--gold);
+}
+
+.rules-col:last-child .rule::before{
+  content:'×';
+
+  color:var(--muted);
+}
+
+/* ROADMAP */
+
+.phases{
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:2px;
+
+  margin:32px 0;
+}
+
+.phase{
+  background:var(--warm);
+
+  padding:36px 28px;
+
+  position:relative;
+}
+
+.phase::before{
+  content:'';
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:3px;
+
+  background:var(--gold-dk);
+}
+
+.phase:nth-child(2)::before{
+  background:var(--gold);
+}
+
+.phase:nth-child(3)::before{
+  background:var(--gold-lt);
+}
+
+.phase-tag{
+  font-family:var(--fm);
+
+  font-size:7px;
+
+  letter-spacing:.22em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+  margin-bottom:10px;
+}
+
+.phase-name{
+  font-family:var(--fd);
+
+  font-size:20px;
+
+  font-weight:800;
+
+  color:var(--linen);
+
+  margin-bottom:6px;
+}
+
+.phase-period{
+  font-family:var(--fm);
+
+  font-size:9px;
+
+  letter-spacing:.15em;
+
+  color:var(--gold);
+
+  margin-bottom:20px;
+}
+
+.phase p{
+  font-family:var(--fs);
+
+  font-size:13px;
+
+  line-height:1.75;
+
+  color:var(--muted-lt);
+}
+
+/* CLOSER */
+
+.closer{
+  min-height:70vh;
+
+  padding:100px 80px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
+
+  text-align:center;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:var(--warm);
+}
+
+.closer-wm{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  font-family:var(--fd);
+
+  font-size:clamp(80px,14vw,180px);
+
+  font-weight:800;
+
+  color:rgba(200,168,75,.04);
+
+  white-space:nowrap;
+
+  pointer-events:none;
+}
+
+.closer-label{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.32em;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+  margin-bottom:28px;
+
+  position:relative;
+  z-index:1;
+}
+
+.closer-statement{
+  font-family:var(--fs);
+
+  font-size:clamp(26px,3.5vw,46px);
+
+  font-style:italic;
+
+  font-weight:300;
+
+  color:var(--linen);
+
+  max-width:720px;
+
+  margin:0 auto 40px;
+
+  line-height:1.3;
+
+  position:relative;
+  z-index:1;
+}
+
+.closer-statement em{
+  font-style:normal;
+
+  color:var(--gold);
+
+  font-weight:500;
+}
+
+.closer-logo{
+  font-family:var(--fd);
+
+  font-size:28px;
+
+  font-weight:800;
+
+  letter-spacing:.2em;
+
+  color:var(--linen);
+
+  position:relative;
+  z-index:1;
+}
+
+.closer-logo span{
+  color:var(--gold);
+}
+
+.closer-sub{
+  font-family:var(--fm);
+
+  font-size:8px;
+
+  letter-spacing:.25em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+  margin-top:8px;
+
+  position:relative;
+  z-index:1;
+}
+
+.disclaimer{
+  font-family:var(--fm);
+
+  font-size:7px;
+
+  letter-spacing:.08em;
+
+  color:var(--muted);
+
+  line-height:1.8;
+
+  max-width:650px;
+
+  margin-top:32px;
+
+  opacity:.6;
+
+  position:relative;
+  z-index:1;
+}
+
+/* REVEAL */
+
+.reveal{
+  opacity:0;
+
+  transform:translateY(28px);
+
+  transition:
+    opacity .85s ease,
+    transform .85s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+
+  transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:1050px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .cover,
+  .sec,
+  .closer{
+    padding:48px 28px;
+  }
+
+  .cover-bottom{
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:28px;
+  }
+
+  .cover-stats{
+    flex-wrap:wrap;
+  }
+
+  .cover-prepared{
+    text-align:left;
+  }
+
+  .g2,
+  .g3,
+  .g4,
+  .phases,
+  .metrics,
+  .rules{
+    grid-template-columns:1fr;
+  }
+
+  .audience-grid{
+    grid-template-columns:1fr;
+
+    gap:20px;
+  }
+
+  .funnel{
+    grid-template-columns:1fr;
+  }
+
+  .funnel-step::after{
+    content:'↓';
+
+    right:auto;
+
+    left:50%;
+
+    top:auto;
+
+    bottom:-18px;
+
+    transform:translateX(-50%);
+  }
+
+  .campaign{
+    grid-template-columns:1fr;
+
+    gap:20px;
+  }
+}
+
+@media(max-width:650px){
+
+  .cover-wordmark{
+    font-size:68px;
+  }
+
+  .cover-stats{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    width:100%;
+  }
+
+  .cover-stat{
+    padding:14px;
+  }
+
+  .sec{
+    padding:60px 22px;
+  }
+
+  .audience,
+  .campaign{
+    padding:28px 22px;
+  }
+
+  .rules-col{
+    padding:28px 22px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════════════ -->
+
+<nav class="sidebar">
+
+  <div class="sidebar-logo">
+    MY<span class="a">A</span>MI
+
+    <span class="sidebar-doc">
+      Marketing Playbook
+    </span>
+  </div>
+
+  <span class="nav-grp-label">
+    Foundation
+  </span>
+
+  <a href="#cover">Cover</a>
+  <a href="#purpose">Marketing Purpose</a>
+  <a href="#positioning">Positioning</a>
+
+  <span class="nav-grp-label">
+    Audience
+  </span>
+
+  <a href="#audience">Audience</a>
+  <a href="#funnel">Customer Journey</a>
+
+  <span class="nav-grp-label">
+    Content
+  </span>
+
+  <a href="#pillars">Content Pillars</a>
+  <a href="#channels">Channels</a>
+  <a href="#campaigns">Campaign System</a>
+
+  <span class="nav-grp-label">
+    Execution
+  </span>
+
+  <a href="#weekly">Marketing Engine</a>
+  <a href="#conversion">Conversion</a>
+  <a href="#metrics">Metrics</a>
+
+  <span class="nav-grp-label">
+    Standards
+  </span>
+
+  <a href="#rules">Marketing Rules</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#closing">Closing</a>
+
+  <div class="sidebar-footer">
+    MYAMI Marketing Playbook<br/>
+    Internal Strategy Document<br/>
+    Version 1.0 · 2026
+  </div>
+
+</nav>
+
+
+<main class="main">
+
+
+<!-- ═══════════════════════════════════════════════
+     COVER
+════════════════════════════════════════════════ -->
+
+<section class="cover" id="cover">
+
+  <div class="cover-glow"></div>
+  <div class="cover-grid"></div>
+
+  <div class="cover-top">
+
+    <div class="cover-badge">
+      Internal Strategy Document
+    </div>
+
+    <div class="cover-ref">
+      MYAMI-MKT-001<br/>
+      Version 1.0<br/>
+      2026
+    </div>
+
+  </div>
+
+
+  <div class="cover-center">
+
+    <div class="cover-eyebrow">
+      Marketing Playbook
+    </div>
+
+    <div class="cover-wordmark">
+      MY<span class="a">A</span><span class="outline">MI</span>
+    </div>
+
+    <div class="cover-title">
+      The system for turning
+      <em>attention into culture,
+      culture into community,
+      and community into growth.</em>
+    </div>
+
+    <p class="cover-summary">
+      This playbook defines how MYAMI attracts attention,
+      communicates value, builds audience, creates demand,
+      converts interest into customers, and compounds
+      recognition across Technology, Media, Entertainment,
+      and Wear.
+    </p>
+
+  </div>
+
+
+  <div class="cover-bottom">
+
+    <div class="cover-stats">
+
+      <div class="cover-stat">
+        <div class="cover-stat-num">4</div>
+        <div class="cover-stat-label">Divisions</div>
+      </div>
+
+      <div class="cover-stat">
+        <div class="cover-stat-num">5</div>
+        <div class="cover-stat-label">Content Pillars</div>
+      </div>
+
+      <div class="cover-stat">
+        <div class="cover-stat-num">1</div>
+        <div class="cover-stat-label">Voice</div>
+      </div>
+
+      <div class="cover-stat">
+        <div class="cover-stat-num">∞</div>
+        <div class="cover-stat-label">Possibility</div>
+      </div>
+
+    </div>
+
+    <div class="cover-prepared">
+      MYAMI<br/>
+      Technology · Media · Culture<br/>
+      Internal Use
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     PURPOSE
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="purpose">
+
+  <div class="sec-label">
+    Chapter 01 · Foundation
+  </div>
+
+  <div class="statement">
+    Marketing is not about
+    <em>making noise.</em>
+    It is about making MYAMI impossible to ignore.
+  </div>
+
+  <p class="bd">
+    MYAMI marketing exists to create recognition,
+    establish authority, attract the right people,
+    generate demand for the company's services,
+    and build a cultural identity that compounds
+    over time.
+  </p>
+
+  <p class="bd">
+    The objective is not simply to get followers.
+    The objective is to create a world people want
+    to enter — and then give them a reason to stay.
+  </p>
+
+
+  <div class="callout">
+    <p>
+      "We do not chase attention.
+      <em>We build something worth paying attention to.</em>"
+    </p>
+  </div>
+
+
+  <div class="g3">
+
+    <div class="card">
+      <div class="card-label">Objective 01</div>
+      <div class="card-title">Recognition</div>
+
+      <p>
+        Make MYAMI visually and culturally recognizable
+        before the audience even reads the name.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <div class="card-label">Objective 02</div>
+      <div class="card-title">Demand</div>
+
+      <p>
+        Turn expertise, work, proof, and storytelling
+        into genuine demand for MYAMI services.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <div class="card-label">Objective 03</div>
+      <div class="card-title">Community</div>
+
+      <p>
+        Build a network of clients, creatives,
+        collaborators, supporters, and people
+        who identify with the MYAMI world.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     POSITIONING
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="positioning">
+
+  <div class="sec-label">
+    Chapter 02 · Positioning
+  </div>
+
+  <h2>
+    Market MYAMI as a world,
+    not a collection of services.
+  </h2>
+
+  <p class="bd">
+    MYAMI must never look like another freelancer
+    offering websites, flyers, logos, or social media
+    management.
+  </p>
+
+  <p class="bd">
+    Those are deliverables.
+    <strong>
+      MYAMI sells transformation, identity,
+      infrastructure, visibility, and cultural relevance.
+    </strong>
+  </p>
+
+
+  <div class="g2">
+
+    <div class="card">
+
+      <div class="card-label">
+        Weak Positioning
+      </div>
+
+      <div class="card-title">
+        "We build websites."
+      </div>
+
+      <p>
+        Commodity language makes MYAMI compete on
+        price, speed, and availability.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-label">
+        MYAMI Positioning
+      </div>
+
+      <div class="card-title">
+        "We build the infrastructure behind ambitious brands."
+      </div>
+
+      <p>
+        This frames the company as a strategic partner,
+        not simply a service provider.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <h3>
+    Positioning Principles
+  </h3>
+
+
+  <div class="g4">
+
+    <div class="card">
+      <div class="card-label">01</div>
+      <div class="card-title">Premium</div>
+      <p>
+        Never communicate desperation.
+        MYAMI should look valuable before discussing price.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <div class="card-label">02</div>
+      <div class="card-title">Cultural</div>
+      <p>
+        Speak with awareness of the people,
+        places, movements, and culture around us.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <div class="card-label">03</div>
+      <div class="card-title">Confident</div>
+      <p>
+        Say what MYAMI believes.
+        Avoid apologetic or uncertain communication.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <div class="card-label">04</div>
+      <div class="card-title">Useful</div>
+      <p>
+        Marketing should teach, inspire,
+        demonstrate, prove, or invite.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     AUDIENCE
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="audience">
+
+  <div class="sec-label">
+    Chapter 03 · Audience
+  </div>
+
+  <h2>
+    Speak to people with ambition.
+  </h2>
+
+  <p class="bd">
+    MYAMI should not attempt to market to everyone.
+    The strongest audience is made up of people who
+    already have something they want to build,
+    but need stronger infrastructure, presentation,
+    visibility, or execution.
+  </p>
+
+
+  <div class="audience">
+
+    <div class="audience-grid">
+
+      <div>
+        <div class="audience-num">
+          Audience 01
+        </div>
+
+        <div class="audience-name">
+          Creators
+        </div>
+
+        <div class="audience-role">
+          Artists · Personal Brands
+        </div>
+      </div>
+
+
+      <div class="audience-desc">
+        Musicians, photographers, designers, influencers,
+        filmmakers, writers, and emerging personalities
+        who need professional infrastructure around
+        their talent.
+      </div>
+
+
+      <div class="audience-traits">
+        <div class="trait">Ambitious</div>
+        <div class="trait">Visibility-driven</div>
+        <div class="trait">Culture-aware</div>
+        <div class="trait">Identity-conscious</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="audience">
+
+    <div class="audience-grid">
+
+      <div>
+        <div class="audience-num">
+          Audience 02
+        </div>
+
+        <div class="audience-name">
+          Entrepreneurs
+        </div>
+
+        <div class="audience-role">
+          Startups · SMEs · Founders
+        </div>
+      </div>
+
+
+      <div class="audience-desc">
+        Founders and business owners who understand
+        that perception, technology, and positioning
+        directly affect growth.
+      </div>
+
+
+      <div class="audience-traits">
+        <div class="trait">Growth-focused</div>
+        <div class="trait">Decision-makers</div>
+        <div class="trait">Value-conscious</div>
+        <div class="trait">Long-term thinkers</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="audience">
+
+    <div class="audience-grid">
+
+      <div>
+        <div class="audience-num">
+          Audience 03
+        </div>
+
+        <div class="audience-name">
+          Brands
+        </div>
+
+        <div class="audience-role">
+          Companies · Organizations
+        </div>
+      </div>
+
+
+      <div class="audience-desc">
+        Existing businesses that need stronger digital
+        presence, content, identity, campaigns,
+        websites, or technology.
+      </div>
+
+
+      <div class="audience-traits">
+        <div class="trait">Established</div>
+        <div class="trait">Professional</div>
+        <div class="trait">Scalable</div>
+        <div class="trait">Repeat potential</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="audience">
+
+    <div class="audience-grid">
+
+      <div>
+        <div class="audience-num">
+          Audience 04
+        </div>
+
+        <div class="audience-name">
+          Culture
+        </div>
+
+        <div class="audience-role">
+          Events · Communities · Movements
+        </div>
+      </div>
+
+
+      <div class="audience-desc">
+        Event organizers, student communities,
+        cultural movements, entertainment projects,
+        and organizations that need attention and
+        audience participation.
+      </div>
+
+
+      <div class="audience-traits">
+        <div class="trait">Community-driven</div>
+        <div class="trait">Fast-moving</div>
+        <div class="trait">Experience-led</div>
+        <div class="trait">Network-rich</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CUSTOMER JOURNEY
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="funnel">
+
+  <div class="sec-label">
+    Chapter 04 · Customer Journey
+  </div>
+
+  <h2>
+    Attention is only the beginning.
+  </h2>
+
+  <p class="bd">
+    MYAMI's marketing funnel moves people from
+    unfamiliarity to recognition, from recognition
+    to trust, and from trust to action.
+  </p>
+
+
+  <div class="funnel">
+
+    <div class="funnel-step">
+
+      <div class="funnel-num">
+        01 · DISCOVER
+      </div>
+
+      <div class="funnel-name">
+        Attention
+      </div>
+
+      <div class="funnel-desc">
+        They see a post, project, campaign,
+        event, recommendation, or piece of content.
+      </div>
+
+    </div>
+
+
+    <div class="funnel-step">
+
+      <div class="funnel-num">
+        02 · RECOGNIZE
+      </div>
+
+      <div class="funnel-name">
+        Identity
+      </div>
+
+      <div class="funnel-desc">
+        Repeated exposure makes the MYAMI visual
+        and cultural language familiar.
+      </div>
+
+    </div>
+
+
+    <div class="funnel-step">
+
+      <div class="funnel-num">
+        03 · TRUST
+      </div>
+
+      <div class="funnel-name">
+        Proof
+      </div>
+
+      <div class="funnel-desc">
+        Case studies, results, expertise,
+        testimonials, and visible execution
+        reduce uncertainty.
+      </div>
+
+    </div>
+
+
+    <div class="funnel-step">
+
+      <div class="funnel-num">
+        04 · ENGAGE
+      </div>
+
+      <div class="funnel-name">
+        Conversation
+      </div>
+
+      <div class="funnel-desc">
+        They reply, DM, visit the website,
+        attend an event, or ask about a service.
+      </div>
+
+    </div>
+
+
+    <div class="funnel-step">
+
+      <div class="funnel-num">
+        05 · CONVERT
+      </div>
+
+      <div class="funnel-name">
+        Partnership
+      </div>
+
+      <div class="funnel-desc">
+        The relationship becomes a project,
+        retainer, collaboration, or long-term account.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="callout">
+    <p>
+      "The goal is not to make someone buy today.
+      <em>The goal is to make MYAMI the obvious choice when they're ready.</em>"
+    </p>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CONTENT PILLARS
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="pillars">
+
+  <div class="sec-label">
+    Chapter 05 · Content
+  </div>
+
+  <h2>
+    Five pillars create the MYAMI content universe.
+  </h2>
+
+  <p class="bd">
+    Every piece of content should have a reason to exist.
+    These pillars prevent the brand from becoming repetitive,
+    overly promotional, or disconnected from its identity.
+  </p>
+
+
+  <div class="g2">
+
+    <div class="pillar">
+
+      <div class="pillar-num">
+        PILLAR 01
+      </div>
+
+      <div class="pillar-title">
+        SHOW THE WORK
+      </div>
+
+      <div class="pillar-share">
+        Proof · Portfolio · Process
+      </div>
+
+      <p>
+        Show what MYAMI actually builds.
+        Websites, identities, campaigns, event work,
+        photography, systems, designs, and transformations.
+
+        The work is the strongest advertisement.
+      </p>
+
+    </div>
+
+
+    <div class="pillar">
+
+      <div class="pillar-num">
+        PILLAR 02
+      </div>
+
+      <div class="pillar-title">
+        TEACH THE WORLD
+      </div>
+
+      <div class="pillar-share">
+        Education · Expertise · Insight
+      </div>
+
+      <p>
+        Teach audiences about branding, websites,
+        technology, content, marketing, design,
+        business, and culture.
+
+        Expertise creates authority before the sales conversation.
+      </p>
+
+    </div>
+
+
+    <div class="pillar">
+
+      <div class="pillar-num">
+        PILLAR 03
+      </div>
+
+      <div class="pillar-title">
+        BUILD THE WORLD
+      </div>
+
+      <div class="pillar-share">
+        Culture · Vision · Identity
+      </div>
+
+      <p>
+        Communicate what MYAMI believes, where it is going,
+        what it stands for, and the kind of culture it wants
+        to participate in creating.
+      </p>
+
+    </div>
+
+
+    <div class="pillar">
+
+      <div class="pillar-num">
+        PILLAR 04
+      </div>
+
+      <div class="pillar-title">
+        SHOW THE PEOPLE
+      </div>
+
+      <div class="pillar-share">
+        Founder · Team · Community
+      </div>
+
+      <p>
+        Humanize the company.
+
+        Show the founder journey, collaborators,
+        clients, behind-the-scenes moments,
+        events, meetings, failures, wins, and progress.
+      </p>
+
+    </div>
+
+
+    <div class="pillar">
+
+      <div class="pillar-num">
+        PILLAR 05
+      </div>
+
+      <div class="pillar-title">
+        MAKE THE INVITATION
+      </div>
+
+      <div class="pillar-share">
+        Offers · Projects · Events
+      </div>
+
+      <p>
+        Tell people what they can actually do with MYAMI.
+
+        Book a service. Start a project.
+        Attend an event. Collaborate.
+        Buy a drop. Join the world.
+      </p>
+
+    </div>
+
+
+    <div class="pillar">
+
+      <div class="pillar-num">
+        THE RULE
+      </div>
+
+      <div class="pillar-title">
+        NEVER SELL EVERYTHING
+      </div>
+
+      <div class="pillar-share">
+        Value before promotion
+      </div>
+
+      <p>
+        Promotional content should exist,
+        but MYAMI should never feel like a billboard.
+
+        Build desire first.
+        Make the offer second.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CHANNELS
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="channels">
+
+  <div class="sec-label">
+    Chapter 06 · Channels
+  </div>
+
+  <h2>
+    Every platform has a job.
+  </h2>
+
+  <p class="bd">
+    MYAMI should not copy and paste the same content
+    everywhere. The visual identity remains consistent,
+    but each channel has a different strategic role.
+  </p>
+
+
+  <div class="g2">
+
+    <div class="channel">
+
+      <div class="channel-title">
+        Instagram
+      </div>
+
+      <div class="channel-role">
+        Visual Authority
+      </div>
+
+      <p>
+        The primary visual showroom.
+        Instagram should make someone understand
+        MYAMI's aesthetic and quality within seconds.
+      </p>
+
+      <div class="channel-list">
+        <div class="channel-item">Portfolio</div>
+        <div class="channel-item">Reels</div>
+        <div class="channel-item">Carousels</div>
+        <div class="channel-item">Stories</div>
+        <div class="channel-item">Campaigns</div>
+      </div>
+
+    </div>
+
+
+    <div class="channel">
+
+      <div class="channel-title">
+        TikTok
+      </div>
+
+      <div class="channel-role">
+        Reach & Discovery
+      </div>
+
+      <p>
+        The discovery engine.
+        More personality, process, education,
+        founder content, culture, and short-form storytelling.
+      </p>
+
+      <div class="channel-list">
+        <div class="channel-item">Founder POV</div>
+        <div class="channel-item">Behind The Scenes</div>
+        <div class="channel-item">Quick Lessons</div>
+        <div class="channel-item">Culture</div>
+        <div class="channel-item">Experiments</div>
+      </div>
+
+    </div>
+
+
+    <div class="channel">
+
+      <div class="channel-title">
+        X / Twitter
+      </div>
+
+      <div class="channel-role">
+        Ideas & Authority
+      </div>
+
+      <p>
+        A place for thinking.
+        Opinions, observations, business lessons,
+        technology, branding, culture, and the journey
+        of building MYAMI.
+      </p>
+
+      <div class="channel-list">
+        <div class="channel-item">Ideas</div>
+        <div class="channel-item">Threads</div>
+        <div class="channel-item">Build In Public</div>
+        <div class="channel-item">Industry Commentary</div>
+      </div>
+
+    </div>
+
+
+    <div class="channel">
+
+      <div class="channel-title">
+        LinkedIn
+      </div>
+
+      <div class="channel-role">
+        Business Credibility
+      </div>
+
+      <p>
+        The professional layer of the brand.
+        Case studies, company milestones,
+        partnerships, founder lessons,
+        technology, and business results.
+      </p>
+
+      <div class="channel-list">
+        <div class="channel-item">Case Studies</div>
+        <div class="channel-item">Milestones</div>
+        <div class="channel-item">Business Insights</div>
+        <div class="channel-item">Partnerships</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="callout">
+    <p>
+      "Same world.
+      <em>Different doorway.</em>"
+    </p>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CAMPAIGN SYSTEM
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="campaigns">
+
+  <div class="sec-label">
+    Chapter 07 · Campaigns
+  </div>
+
+  <h2>
+    Campaigns give the marketing system momentum.
+  </h2>
+
+  <p class="bd">
+    Individual posts create presence.
+    Campaigns create movement.
+  </p>
+
+  <p class="bd">
+    MYAMI campaigns should run around a specific
+    objective and create multiple pieces of content
+    from one central idea.
+  </p>
+
+
+  <div class="campaign">
+
+    <div>
+      <div class="campaign-label">
+        Campaign Type 01
+      </div>
+    </div>
+
+    <div>
+
+      <div class="campaign-name">
+        THE WORK
+      </div>
+
+      <p>
+        A recurring showcase of MYAMI projects.
+        Each project becomes a story rather than
+        a simple portfolio upload.
+      </p>
+
+      <div class="campaign-tags">
+        <span class="tag">Before / After</span>
+        <span class="tag">Process</span>
+        <span class="tag">Final Work</span>
+        <span class="tag">Client Story</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="campaign">
+
+    <div>
+      <div class="campaign-label">
+        Campaign Type 02
+      </div>
+    </div>
+
+    <div>
+
+      <div class="campaign-name">
+        BUILDING MYAMI
+      </div>
+
+      <p>
+        Document the actual company journey.
+        Wins, setbacks, strategy, new equipment,
+        projects, lessons, team growth, and milestones.
+      </p>
+
+      <div class="campaign-tags">
+        <span class="tag">Founder</span>
+        <span class="tag">Behind Scenes</span>
+        <span class="tag">Progress</span>
+        <span class="tag">Lessons</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="campaign">
+
+    <div>
+      <div class="campaign-label">
+        Campaign Type 03
+      </div>
+    </div>
+
+    <div>
+
+      <div class="campaign-name">
+        TALENT DESERVES INFRASTRUCTURE
+      </div>
+
+      <p>
+        The flagship MYAMI belief campaign.
+        Stories of creators, founders, artists,
+        businesses, and cultural projects that
+        deserve stronger infrastructure.
+      </p>
+
+      <div class="campaign-tags">
+        <span class="tag">Creators</span>
+        <span class="tag">Stories</span>
+        <span class="tag">Culture</span>
+        <span class="tag">Manifesto</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="campaign">
+
+    <div>
+      <div class="campaign-label">
+        Campaign Type 04
+      </div>
+    </div>
+
+    <div>
+
+      <div class="campaign-name">
+        MYAMI DROPS
+      </div>
+
+      <p>
+        Reserved for Wear, special creative assets,
+        collaborations, products, announcements,
+        or limited cultural releases.
+      </p>
+
+      <div class="campaign-tags">
+        <span class="tag">Limited</span>
+        <span class="tag">Product</span>
+        <span class="tag">Culture</span>
+        <span class="tag">Community</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     WEEKLY ENGINE
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="weekly">
+
+  <div class="sec-label">
+    Chapter 08 · Marketing Engine
+  </div>
+
+  <h2>
+    Consistency beats inspiration.
+  </h2>
+
+  <p class="bd">
+    MYAMI marketing should operate from a repeatable
+    system rather than waiting for someone to feel creative.
+  </p>
+
+
+  <div class="g2">
+
+    <div class="week">
+
+      <div class="week-day">
+        Monday
+      </div>
+
+      <div class="week-title">
+        Insight
+      </div>
+
+      <p>
+        Start the week with a strong idea:
+        branding lesson, business observation,
+        technology insight, or cultural thought.
+      </p>
+
+    </div>
+
+
+    <div class="week">
+
+      <div class="week-day">
+        Tuesday
+      </div>
+
+      <div class="week-title">
+        The Work
+      </div>
+
+      <p>
+        Show a project, design, website,
+        campaign, photograph, or piece
+        of completed work.
+      </p>
+
+    </div>
+
+
+    <div class="week">
+
+      <div class="week-day">
+        Wednesday
+      </div>
+
+      <div class="week-title">
+        Build In Public
+      </div>
+
+      <p>
+        Show the company journey.
+        Behind the scenes, planning,
+        progress, challenges, or wins.
+      </p>
+
+    </div>
+
+
+    <div class="week">
+
+      <div class="week-day">
+        Thursday
+      </div>
+
+      <div class="week-title">
+        Education
+      </div>
+
+      <p>
+        Teach something useful enough
+        that someone would save the post
+        or send it to another person.
+      </p>
+
+    </div>
+
+
+    <div class="week">
+
+      <div class="week-day">
+        Friday
+      </div>
+
+      <div class="week-title">
+        Culture
+      </div>
+
+      <p>
+        Talk about culture, people,
+        creativity, entertainment,
+        lifestyle, or the MYAMI worldview.
+      </p>
+
+    </div>
+
+
+    <div class="week">
+
+      <div class="week-day">
+        Weekend
+      </div>
+
+      <div class="week-title">
+        Invitation
+      </div>
+
+      <p>
+        Promote a service, event, project,
+        collaboration, drop, or opportunity.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="callout">
+    <p>
+      "The calendar removes the question:
+      <em>What should we post today?</em>"
+    </p>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CONVERSION
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="conversion">
+
+  <div class="sec-label">
+    Chapter 09 · Conversion
+  </div>
+
+  <h2>
+    Attention must eventually become action.
+  </h2>
+
+  <p class="bd">
+    Marketing has no business value if there is no path
+    from attention to conversation and conversation to
+    revenue.
+  </p>
+
+
+  <div class="g3">
+
+    <div class="card">
+
+      <div class="card-label">
+        Entry
+      </div>
+
+      <div class="card-title">
+        Low Friction
+      </div>
+
+      <p>
+        Follow, save, share, comment,
+        attend, download, or simply
+        explore MYAMI.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-label">
+        Middle
+      </div>
+
+      <div class="card-title">
+        Engagement
+      </div>
+
+      <p>
+        DM conversations, consultations,
+        project enquiries, event participation,
+        or collaboration discussions.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-label">
+        Conversion
+      </div>
+
+      <div class="card-title">
+        Partnership
+      </div>
+
+      <p>
+        Proposal, project,
+        retainer, collaboration,
+        sponsorship, or purchase.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <h3>
+    Every Offer Needs Three Things
+  </h3>
+
+
+  <div class="g3">
+
+    <div class="card">
+      <div class="card-label">01</div>
+      <div class="card-title">Clear Problem</div>
+      <p>
+        What problem does this solve?
+        State it in language the customer understands.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <div class="card-label">02</div>
+      <div class="card-title">Clear Outcome</div>
+      <p>
+        What becomes different after working with MYAMI?
+      </p>
+    </div>
+
+
+    <div class="card">
+      <div class="card-label">03</div>
+      <div class="card-title">Clear Next Step</div>
+      <p>
+        Tell the audience exactly what to do next.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     METRICS
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="metrics">
+
+  <div class="sec-label">
+    Chapter 10 · Measurement
+  </div>
+
+  <h2>
+    Measure what moves the business.
+  </h2>
+
+  <p class="bd">
+    Vanity metrics can be useful signals,
+    but they cannot become the strategy.
+    MYAMI measures attention, trust, conversion,
+    and business impact.
+  </p>
+
+
+  <div class="metrics">
+
+    <div class="metric">
+      <div class="metric-number">01</div>
+      <div class="metric-name">
+        Reach
+      </div>
+      <div class="metric-desc">
+        Are more relevant people discovering MYAMI?
+      </div>
+    </div>
+
+
+    <div class="metric">
+      <div class="metric-number">02</div>
+      <div class="metric-name">
+        Engagement
+      </div>
+      <div class="metric-desc">
+        Are people responding to the ideas and work?
+      </div>
+    </div>
+
+
+    <div class="metric">
+      <div class="metric-number">03</div>
+      <div class="metric-name">
+        Leads
+      </div>
+      <div class="metric-desc">
+        Are conversations turning into real opportunities?
+      </div>
+    </div>
+
+
+    <div class="metric">
+      <div class="metric-number">04</div>
+      <div class="metric-name">
+        Revenue
+      </div>
+      <div class="metric-desc">
+        Is marketing contributing to actual business growth?
+      </div>
+    </div>
+
+  </div>
+
+
+  <h3>
+    Monthly Marketing Review
+  </h3>
+
+
+  <div class="g2">
+
+    <div class="card">
+      <div class="card-label">
+        Keep
+      </div>
+
+      <div class="card-title">
+        What worked?
+      </div>
+
+      <p>
+        Identify posts, campaigns, offers,
+        channels, and messages that generated
+        meaningful results.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <div class="card-label">
+        Kill
+      </div>
+
+      <div class="card-title">
+        What did not work?
+      </div>
+
+      <p>
+        Remove content patterns that consume
+        effort without creating attention,
+        trust, or business value.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <div class="card-label">
+        Double Down
+      </div>
+
+      <div class="card-title">
+        What deserves more?
+      </div>
+
+      <p>
+        Scale formats, ideas, campaigns,
+        and channels that demonstrate
+        repeatable traction.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <div class="card-label">
+        Experiment
+      </div>
+
+      <div class="card-title">
+        What should we test?
+      </div>
+
+      <p>
+        Introduce new ideas deliberately.
+        Marketing stays alive through controlled experimentation.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     RULES
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="rules">
+
+  <div class="sec-label">
+    Chapter 11 · Standards
+  </div>
+
+  <h2>
+    The marketing non-negotiables.
+  </h2>
+
+  <p class="bd">
+    These rules protect the MYAMI brand from becoming
+    inconsistent, desperate, generic, or forgettable.
+  </p>
+
+
+  <div class="rules">
+
+    <div class="rules-col">
+
+      <div class="rules-header yes">
+        Always
+      </div>
+
+      <div class="rule">
+        Lead with value before promotion.
+      </div>
+
+      <div class="rule">
+        Show real work whenever possible.
+      </div>
+
+      <div class="rule">
+        Maintain the MYAMI visual language.
+      </div>
+
+      <div class="rule">
+        Keep the gold A sacred.
+      </div>
+
+      <div class="rule">
+        Write with confidence and clarity.
+      </div>
+
+      <div class="rule">
+        Document the journey.
+      </div>
+
+      <div class="rule">
+        Build relationships, not just followers.
+      </div>
+
+      <div class="rule">
+        Make every campaign feel intentional.
+      </div>
+
+      <div class="rule">
+        Turn successful content into repeatable systems.
+      </div>
+
+    </div>
+
+
+    <div class="rules-col">
+
+      <div class="rules-header no">
+        Never
+      </div>
+
+      <div class="rule">
+        Beg for engagement.
+      </div>
+
+      <div class="rule">
+        Copy competitors blindly.
+      </div>
+
+      <div class="rule">
+        Post simply because the calendar says to.
+      </div>
+
+      <div class="rule">
+        Sacrifice quality for volume.
+      </div>
+
+      <div class="rule">
+        Use generic motivational content without purpose.
+      </div>
+
+      <div class="rule">
+        Pretend to have results that do not exist.
+      </div>
+
+      <div class="rule">
+        Make every post a sales pitch.
+      </div>
+
+      <div class="rule">
+        Chase every trend.
+      </div>
+
+      <div class="rule">
+        Let the brand become silent.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="callout">
+
+    <p>
+      "If the content could belong to any other company,
+      <em>it is not MYAMI content yet.</em>"
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     ROADMAP
+════════════════════════════════════════════════ -->
+
+<section class="sec reveal" id="roadmap">
+
+  <div class="sec-label">
+    Chapter 12 · Growth Roadmap
+  </div>
+
+  <h2>
+    Marketing evolves with the company.
+  </h2>
+
+  <p class="bd">
+    The marketing system should become more sophisticated
+    as MYAMI moves from foundation to growth to scale.
+  </p>
+
+
+  <div class="phases">
+
+    <div class="phase">
+
+      <div class="phase-tag">
+        Phase One
+      </div>
+
+      <div class="phase-name">
+        Foundation
+      </div>
+
+      <div class="phase-period">
+        BUILD RECOGNITION
+      </div>
+
+      <p>
+        Establish the visual identity.
+        Build the audience.
+        Show the work.
+        Document the founder journey.
+        Land the first clients.
+        Create proof.
+      </p>
+
+    </div>
+
+
+    <div class="phase">
+
+      <div class="phase-tag">
+        Phase Two
+      </div>
+
+      <div class="phase-name">
+        Growth
+      </div>
+
+      <div class="phase-period">
+        BUILD DEMAND
+      </div>
+
+      <p>
+        Increase publishing consistency.
+        Develop recurring campaigns.
+        Expand collaborations.
+        Build stronger community.
+        Increase retainers and repeat business.
+      </p>
+
+    </div>
+
+
+    <div class="phase">
+
+      <div class="phase-tag">
+        Phase Three
+      </div>
+
+      <div class="phase-name">
+        Scale
+      </div>
+
+      <div class="phase-period">
+        BUILD CULTURE
+      </div>
+
+      <p>
+        MYAMI becomes a recognizable cultural brand.
+        Marketing becomes a full operational function
+        supported by specialists, partnerships,
+        campaigns, events, and media.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="callout">
+    <p>
+      "First we build the audience.
+      Then we build the community.
+      Then the community
+      <em>builds the brand with us.</em>"
+    </p>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CLOSING
+════════════════════════════════════════════════ -->
+
+<section class="closer reveal" id="closing">
+
+  <div class="closer-wm">
+    MYAMI
+  </div>
+
+  <div class="closer-label">
+    Marketing Playbook · End
+  </div>
+
+  <div class="closer-statement">
+    "Don't market MYAMI like
+    <em>another company.</em><br/>
+    Build the world people wish existed."
+  </div>
+
+  <div class="closer-logo">
+    MY<span>A</span>MI
+  </div>
+
+  <div class="closer-sub">
+    Technology · Media · Entertainment · Wear
+  </div>
+
+  <p class="disclaimer">
+    MYAMI Marketing Playbook · Version 1.0 · 2026<br/>
+    Internal strategic document · Confidential
+  </p>
+
+</section>
+
+
+</main>
+
+
+<script>
+
+/* ═══════════════════════════════════════════════
+   SCROLL REVEAL
+════════════════════════════════════════════════ */
+
+const revealObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+          entry.target.classList.add('visible');
+
+        }
+
+      });
+
+    },
+    {
+      threshold:.07
+    }
+  );
+
+
+document
+  .querySelectorAll('.reveal')
+  .forEach(el => revealObserver.observe(el));
+
+
+/* ═══════════════════════════════════════════════
+   ACTIVE SIDEBAR
+════════════════════════════════════════════════ */
+
+const sections =
+  document.querySelectorAll('[id]');
+
+const links =
+  document.querySelectorAll('.sidebar a');
+
+
+const sectionObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+          links.forEach(link => {
+
+            link.classList.remove('active');
+
+          });
+
+          const active =
+            document.querySelector(
+              `.sidebar a[href="#${entry.target.id}"]`
+            );
+
+          if(active){
+
+            active.classList.add('active');
+
+          }
+
+        }
+
+      });
+
+    },
+    {
+      threshold:.35
+    }
+  );
+
+
+sections.forEach(section => {
+
+  sectionObserver.observe(section);
+
+});
+
+</script>
+
+</body>
+</html>
